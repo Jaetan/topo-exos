@@ -1,0 +1,188 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{3}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $m, n \in \mathbb{Z}_+$. Let $X \neq \varnothing$.
+  \begin{enumerate}[(a)]
+  \item If $m \leq n$, find an injective map $f : X^m \to X^n$.
+  \item Find a bijective map $g : X^m \times X^n \to X^{m + n}$.
+  \item Find an injective map $h : X^n \to X^\omega$.
+  \item Find a bijective map $k : X^n \times X^\omega \to X^\omega$.
+  \item Find a bijective map $l : X^\omega \times X^\omega \to X^\omega$.
+  \item If $A \subset B$, find an ijective map $m : (A^\omega)^n \to B^\omega$.
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Since $X \neq \varnothing$, let $x_0 \in X$, and define
+    \begin{align*}
+      f : X^m &\to X^n \\
+      (x_1, x_2, \dotsc, x_m) &\mapsto (y_1, y_2, \dotsc, y_n)
+    \end{align*}
+    with
+    \begin{equation*}
+      \forall i \in \{ 1, 2, \dotsc, n \}, \; \begin{cases}
+        y_i = x_i \quad& \text{ if } \quad 1 \leq i \leq m \\
+        y_i = x_0 \quad& \text{ if } \quad m + 1 \leq i \leq n
+      \end{cases}
+    \end{equation*}
+    Let
+    \begin{align*}
+      (y_1, y_2, \dotsc, y_n) &= f (x_1, x_2, \dotsc x_m) \quad\text{and} \\
+      (y'_1, y'_2, \dotsc, y'_n) &= f (x'_1, x'_2, \dotsc, x'_m)
+    \end{align*}
+    and suppose that $(y_1, y_2, \dotsc, y_n) = (y'_1, y'_2, \dotsc, y'_n)$.
+    Then by definition of $f$, $y_i = x_0 = y'_i$ for all $i$ such that $m + 1 \leq i \leq n$,
+    and $y_i = x_i = y'_i = x'_i$ for all $i$ such that $1 \leq i \leq m$. From this we deduce that
+    $\forall i, \; 1 \leq i \leq m \implies x_i = x'_i$, so that $f$ is injective.
+
+  \item Define
+    \begin{align*}
+      g : X^m \times X^n &\to X^{m + n} \\
+      (x, y) &\mapsto (z_1, z_2, \dotsc, z_{m + n})
+    \end{align*}
+    with
+    \begin{equation*}
+      \forall i \in \{ 1, 2, \dotsc, m + n \}, \; \begin{cases}
+        z_i = x_i \quad& \text{if} \quad 1 \leq i \leq m \\
+        z_i = y_i \quad& \text{if} \quad m + 1 \leq i \leq m + n
+      \end{cases}
+    \end{equation*}
+    Let
+    \begin{align*}
+      z = (z_1, z_2, \dotsc, z_{m + n}) &= g ((x_1, x_2, \dotsc, x_m), (y_1, y_2, \dotsc, y_n)) \\
+      z' = (z'_1, z'_2, \dotsc, z'_{m + n}) &= g ((x'_1, x'_2, \dotsc, x'_m), (y'_1, y'_2, \dotsc, y'_n))
+    \end{align*}
+    and suppose that $z = z'$.
+    Then for all $i$ such that $1 \leq i \leq m$, $z_i = x_i = z'_i = x'_i$,
+    and for all $i$ such that $m + 1 \leq i \leq m + n$, $z_i = y_i = z'_i = y'_i$,
+    from which we deduce that $g$ is injective.
+    Let now $z = (z_1, z_2, \dotsc, z_{m + n}) \in X^{m + n}$, and define
+    \begin{align*}
+      x &= (z_1, z_2, \dotsc, z_m) \\
+      y &= (z_{m + 1}, z_{m + 2}, \dotsc, z_{m + n})
+    \end{align*}
+    Then $(x, y) \in X^m \times X^n$, and $g (x, y) = z$, so that $g$ is surjective.
+
+  \item Let $x_0 \in X$ and define
+    \begin{align*}
+      h : X^n &\to X^\omega \\
+      (x_1, x_2, \dotsc, x_n) &\mapsto (z_1, z_2, \dotsc)
+    \end{align*}
+    such that
+    \begin{align*}
+      z_i = x_i &\quad\text{ if } \quad 1 \leq i \leq n \\
+      z_i = x_0 &\quad\text{ if } \quad i > n
+    \end{align*}
+    Let
+    \begin{align*}
+      z = (z_1, z_2, \dotsc) &= h (x_1, x_2, \dotsc, x_n) \\
+      z' = (z'_1, z'_2, \dotsc) &= h (x'_1, x'_2, \dotsc, x'_n)
+    \end{align*}
+    and suppose that $z = z'$. Then we have
+    \begin{equation*}
+      \forall i \in \mathbb{Z}_+, \quad \begin{cases}
+        z_i = z'_i = x_0 &\quad\text{ if }\quad i > n \\
+        z_i = x_i = z'_i = x'_i &\quad\text{ if }\quad 1 \leq i \leq n
+      \end{cases}
+    \end{equation*}
+    so that $h$ is injective.
+
+  \item Let
+    \begin{align*}
+      k : X^n \times X^\omega &\to X^\omega \\
+      (x, y) &\mapsto z
+    \end{align*}
+    such that
+    \begin{equation*}
+      \forall i \in \mathbb{Z}_+, \; \begin{cases}
+        z_i = x_i &\quad\text{ if }\quad 1 \leq i \leq n \\
+        z_i = y_i &\quad\text{ if }\quad i > n
+      \end{cases}
+    \end{equation*}
+    Let
+    \begin{align*}
+      z &= (z_1, z_2, \dotsc) & x &= (x_1, x_2, \dotsc, x_n) & y &= (y_1, y_2, \dotsc) \\
+      z' &= (z'_1, z'_2, \dotsc) & x' &= (x'_1, x'_2, \dotsc, x'_n) & y' &= (y'_1, y'_2, \dotsc)
+    \end{align*}
+    and suppose that $z = k (x, y) = z' = k (x', y')$. Then,
+    \begin{equation*}
+      \forall i \in \mathbb{Z}_+, \; \begin{cases}
+        z_i = z'_i = y_i = y'_i &\quad\text{ if }\quad i > n \\
+        z_i = z'_i = x_i = x'_i &\quad\text{ if }\quad 1 \leq i \leq n
+      \end{cases}
+    \end{equation*}
+    so that $k$ is injective.
+    Next, let $z = (z_1, z_2, \dotsc) \in X^\omega$ and take $x \in X^n$ and $y \in X^\omega$ such that
+    \begin{equation*}
+      \forall i \in \mathbb{Z}_+, \; \begin{cases}
+        x_i = z_i &\quad\text{ if }\quad 1 \leq i \leq n \\
+        y_i = z_i &\quad\text{ if }\quad i > n
+      \end{cases}
+    \end{equation*}
+    Then $k (x, y) = z$, so that $k$ is surjective.
+
+  \item Let
+    \begin{align*}
+      l : X^\omega \times X^\omega &\to X^\omega \\
+      (x, y) &\mapsto z
+    \end{align*}
+    such that
+    \begin{equation*}
+      \forall i \in \mathbb{Z}_+, \; \begin{cases}
+        z_i = x_i &\quad\text{ if $i$ is even } \\
+        z_i = y_i &\quad\text{ if $i$ is odd }
+      \end{cases}
+    \end{equation*}
+    Let
+    \begin{align*}
+      z &= (z_1, z_2, \dotsc) & x &= (x_1, x_2, \dotsc) & y &= (y_1, y_2, \dotsc) \\
+      z' &= (z'_1, z'_2, \dotsc) & x' &= (x'_1, x'_2, \dotsc) & y' &= (y'_1, y'_2, \dotsc)
+    \end{align*}
+    and suppose that $z = l (x, y) = z' = l (x', y')$. Then,
+    \begin{equation*}
+      \forall i \in \mathbb{Z}, \; \begin{cases}
+        z_{2 i} = x_i = z'_{2 i} = x'_i \\
+        z_{2 i + 1} = y_i = z'_{2 i + 1} = y'_i
+      \end{cases}
+    \end{equation*}
+    so that for all $i$, $x_i = x'_i$ and $y_i = y'_i$, and $l$ is injective.
+    Next, let $z \in X^\omega$, and define $x \in X^\omega$ and $y \in X^\omega$ by
+    \begin{align*}
+      \forall i \in \mathbb{Z}_+, \; x_i = z_{2 i} \text{ and } y_i = z_{2 i + 1}
+    \end{align*}
+    Then $x$ and $y$ are elements of $X^\omega$ and $l (x, y) = z$, so that $l$ is surjective.
+
+  \item To define such a function, we need $B^\omega \neq \varnothing$, which implies $B \neq \varnothing$.
+    Let
+    \begin{align*}
+      m : (A^\omega)^n &\to B^\omega \\
+      (a_1, a_2, \dotsc, a_n) &\mapsto (a_{1, 1}, a_{1, 2}, \dotsc, a_{1, n}, a_{2, 1}, \dotsc )
+    \end{align*}
+    noting $a_i = (a_{1, i}, a_{2, i}, \dotsc)$.
+    Suppose that $a, a' \in (A^n)^\omega$ are such that $a \neq a'$. Then there exists $r \in \{ 1, 2, \dotsc, n \}$ such that $a_r \neq a'_r$,
+    which in turns implies that there exists $q \in \mathbb{Z}_+$ such that $a_{q, r} \neq a'_{q, r}$. The terms
+    $a_{q, r}$ and $a'_{q, r}$ appear in $m (a)$ and $m (a')$ at the same index $i$, so $m (a) \neq m (a')$ and $m$ is therefore injective.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

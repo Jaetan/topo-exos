@@ -1,0 +1,36 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{0}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+Show that there is a bijective correspondence of $A \times B$ with $B \times A$.
+
+\end{exercise}
+
+\begin{proof}
+
+  If either $A = \varnothing$ or $B = \varnothing$, then both $A \times B$ and $B \times A$ are empty.
+  Since there is no function with image the empty set, both $A$ and $B$ must be nonempty for a bijection between them to exist.
+
+  Suppose then that both $A$ and $B$ are nonempty, and define:
+  \begin{align*}
+    \phi : A \times B &\to B \times A &\psi : B \times A &\to A \times B \\
+    (x, y) &\mapsto (y, x) & (y, x) &\mapsto (x, y)
+  \end{align*}
+  Then $\phi \circ \psi = i_{B \times A}$ and $\psi \circ \phi = i_{A \times B}$, so $\phi$ and $\psi$ are bijections.
+
+\end{proof}
+
+\end{document}

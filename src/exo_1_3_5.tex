@@ -1,0 +1,81 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{4}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $S$ and $S'$ be the following subsets of the plane:
+  \begin{align*}
+    S &= \big\{ (x, y) \mid y = x + 1 \text{ and } 0 < x < 2 \big\} \\
+    S' &= \big\{ (x, y) \mid y - x \text{ is an integer} \big\}
+  \end{align*}
+  \begin{enumerate}[(a)]
+  \item Show that $S'$ is an equivalence relation on the real line and $S' \supset S$. Describe the equivalence classes of $S'$.
+  \item Show that given any collection of equivalence relations on a set $A$, their intersection is an equivalence relation on $A$.
+  \item Describe the equivalence relation $T$ on the real line that is the intersection of all equivalence relations on the real line
+    that contain $S$. Describe the equivalence classes of $T$.
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item
+    \begin{description}
+    \item [reflexivity] $\forall x \in \mathbb{R}, \quad x - x = 0 \in \mathbb{Z}$, so $\forall x \in \mathbb{R}, \quad x S'x$
+    \item [symmetry] Let $x, y \in \mathbb{R}$ such that $x S' y$. Then $y - x = k \in \mathbb{Z}$, so $x - y = -k \in \mathbb{Z}$. Hence $y S' x$.
+    \item [transitivity] Let $x, y, z \in \mathbb{R}$ such that $x S' y$ and $y S' z$. Then there exist $k, k' \in \mathbb{Z}$ such that $y - x = k$ and $z - y = k'$.
+      Adding these together we get $z - x = k + k' \in \mathbb{Z}$, so that $x S' z$.
+    \end{description}
+    $S'$ being reflexive, symmetric and transitive on $\mathbb{R}$ is an equivalence relation on $\mathbb{R}$. Let $x \in \mathbb{R}$, and note $\dot{x}$ the equivalence class of $x$ for $S'$.
+    Let $x + \mathbb{Z} = \big\{ x + k \text{ for all } k \in \mathbb{Z} \big\}$. Every $y \in x + \mathbb{Z}$ verifies $y S' x$, so $x + \mathbb{Z} \subset \dot{x}$.
+      Conversely, let $y \in \dot{x}$, there exists $k \in \mathbb{Z}$ such that $y - x = k$, so that $y = x + k \in x + \mathbb{Z}$, so $\dot{x} \subset x + \mathbb{Z}$.
+      From both, we conclude that $\forall x \in \mathbb{R}, \quad \dot{x} = x + \mathbb{Z}$.
+
+    \item Let $I$ be a set and $(R)_I$ be a family of equivalence relations on $A$, indexed by $I$. For each $i \in I$, $R_i \subset A \times A$, so $\cap_{i \in I} R_i \subset A \times A$, and
+      therefore $R = \cap_{i \in I} R_i$ is a relation on $A$.
+      \begin{description}
+      \item [reflexivity] $\forall x \in A, \quad \forall i \in I, \quad x R_i x$, from which we conclude $\forall x \in A, x R x$. In particular, $R$ is not empty.
+      \item [symmetry] Let $x, y \in A$ such that $x R y$. Then $\forall i \in I, \quad x R_i y$, from which we conclude $\forall i \in I, y R_i x$ by symmetry of all $R_i$.
+        This last proposition implies that $y R x$, so that $R$ is symmetric.
+      \item [transitivity] Let $x, y, z \in A$ such that $x R y$ and $y R z$. Then $\forall i \in I, \quad x R_i y$ and $y R_i z$, so that $\forall i \in I, x R_i z$ by transitivity of all $R_i$.
+        The last proposition implies that $x R z$, so that $R$ is transitive.
+      \end{description}
+      From the above, $R$ is an equivalence relation on $A$.
+
+    \item Let $R$ be an equivalence relation on $\mathbb{R}$ that contains $S$. For all $x \in (0,2)$, we have $x R (x + 1)$, and by symmetry of $R$, $(x + 1) R x$.
+      Also, for all $x \in (0,1)$, $x + 1 \in (1, 2)$, so $(x + 1) S (x + 2)$ and therefore we must have $(x + 1) R (x + 2)$. This implies by transitivity that $x R (x + 2)$.
+      For all $x \in (1, 2)$, $x - 1 \in (0, 1)$ so $x - 1$ was already accounted for in the previous cases.
+      The case $x = 1$ gives only $1 S 2$, from which we deduce $1 R 2$  and $2 R 1$.
+      Finally, $R$ being defined on all $\mathbb{R}$ must be reflexive and thus $\forall x \in ({-\infty}, 0] \cup [3, {+\infty})$ we have $x R x$.
+
+      All the conditions above are necessary to any equivalence relation containing $S$; since $R$ defined in this way is an equivalence relation, we deduce that $T = R$.
+
+      The equivalence classes for $T$ are:
+      \begin {align*}
+        \overline{x} &= \{ x \} \text{ if } x \leq 0 \text{ or } x \geq 3 \\
+        \overline{x} &= \{ (x, x), (x, x + 1), (x, x + 2), \\
+        &(x + 1, x), (x + 1, x + 1), (x + 1, x + 2), \\
+        &(x + 2, x), (x + 2, x + 1), (x + 2, x + 2) \} \text{ for } x \in (0, 1) \\
+        \overline{x} &= \overline{x - 1} \text{ if } x \in (1, 2) \\
+        \overline{x} &= \overline{x - 2} \text{ if } x \in (2, 3) \\
+      \end{align*}
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

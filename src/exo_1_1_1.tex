@@ -1,0 +1,77 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{0}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+Check the distributive laws for $\cap$ and $\cup$ and the DeMorgan laws.
+\end{exercise}
+
+\begin{proof}\hfill
+  \begin{itemize}
+  \item $\forall A, B, C$ subsets of $X$, $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$.
+    Let $x \in A \cap (B \cup C)$. By definition of $\cap$ we have $x \in A$ and $x \in B \cup C$.
+    By definition of $\cup$ we have $x \in B$ or $x \in C$. If $x \in B$ then we have $x \in A \cap B$.
+    Otherwise, $x \in C$ and then we have $x \in A \cap C$. Combining the previous 2 results, we get $x \in (A \cap B) \cup (A \cap C)$.
+    This shows that $A \cap (B \cup C) \subset (A \cap B) \cup (A \cap C)$.
+
+    Conversely, let us take $x \in (A \cap B) \cup (A \cap C)$. If $x \in A \cap B$, then because $B \subset (B \cup C)$, we have $x \in (B \cup C)$.
+    Otherwise, we have $x \in A \cap C$, and because $C \subset (B \cup C)$, we have $x \in (B \cup C)$.
+    Combining the two previous results, we find that $x \in A \cap (B \cup C)$, so $(A \cap B) \cup (A \cap C) \subset A \cap (B \cup C)$.
+
+    Since we have both inclusions, we deduce that $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$.
+
+  \item $\forall A, B, C$ subsets of $X$, $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$.
+    Let $x \in A \cup (B \cap C)$. If $x \in A$, then because $A \subset A \cup B$ and $A \subset A \cup C$, we have $x \in (A \cup B) \cap (A \cup C)$.
+    Otherwise, $x \in B \cap C$. Since $B \cap C \subset B$ and $B \subset A \cup B$, we have $x \in A \cup B$.
+    Since $B \cap C \subset C$ and $C \subset A \cup C$, we also have $x \in A \cup C$.
+    Combining these two results we get $x \in (A \cup B) \cap (A \cup C)$, which shows that $A \cup (B \cap C) \subset (A \cup B) \cap (A \cup C)$.
+
+    Conversely, let us take $x \in (A \cup B) \cap (A \cup C)$. Then $x \in (A \cup B)$ and $x \in (A \cup C)$.
+    If $x \in A$, then because $A \subset A \cup (B \cap C)$, we have $x \in A \cup (B \cap C)$.
+    Otherwise $x \in B$ since $x \in A \cup B$ and $x \notin A$; and $x \in C$ since $x \in A \cup C$ and $x \notin A$.
+    From this we conclude that $x \in B \cap C$. Since $B \cap C \subset A \cup (B \cap C)$, we have $x \in A \cup (B \cap C)$, hence $(A \cup B) \cap (A \cup C) \subset A \cup (B \cap C)$.
+
+    Since we have both inclusions, we deduce that $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$.
+
+  \item $\forall A, B, C$ subsets of $X$, $A - (B \cap C) = (A - B) \cup (A - C)$.
+    Let $x \in A - (B \cap C)$. Then $x \in A$ and $x \notin B \cap C$. From this we deduce that $x \in A$ and:
+    \begin{itemize}
+    \item either $x \notin C$, in which case we have $x \in A - C$
+    \item $x \notin B$, in which case we have $x \in A - B$
+    \end{itemize}
+    So we conclude that $A - (B \cap C) \subset (A - B) \cup (A - C)$
+
+    Conversely, let us take $x \in (A - B) \cup (A - C)$.
+    If $x \in A - B$, then $x \in A$ and $x \notin B$. Since $B \cap C \subset B$, we deduce that $x \notin B \cap C$, and so that $x \in A - (B \cap C)$.
+    Otherwise, $x \in A - C$, and then $x \in A$ and $x \notin C$. Since $B \cap C \subset C$, we deduce that $x \notin B \cap C$, and so that $x \in A - (B \cap C)$.
+
+    Since we have both inclusions, we deduce that $A - (B \cap C) = (A - B) \cup (A - C)$.
+
+  \item $\forall A, B, C$ subsets of $X$, $A - (B \cup C) = (A - B) \cap (A - C)$.
+    Let $x \in A - (B \cup C)$. Then $x \in A$ and $x \notin B \cup C$. From this we deduce that $x \notin B$ and $x \notin C$.
+    This gives us both:
+    \begin{itemize}
+    \item $x \in A$ and $x \notin B$, which is by definition $x \in A - B$
+    \item $x \in A$ and $x \notin C$, which is by definition $x \in A - C$
+    \end{itemize}
+    From the above, we deduce that $x \in (A - B) \cap (A - C)$, which gives us $A - (B \cup C) \subset (A - B) \cap (A - C)$
+
+    Conversely, let us take $x \in (A - B) \cap (A - C)$. Then $x \in A$ and $x \notin B$ and $x \notin C$.
+    From the last two, we deduce that $x \notin B \cup C$, since $B \subset B \cup C$ and $C \subset B \cup C$.
+    Since we also have $x \in A$, we deduce that $x \in A - (B \cup C)$.
+
+    Since we have both inclusions, we conclude that $A - (B \cup C) = (A - B) \cap (A - C)$.
+  \end{itemize}
+\end{proof}
+
+\end{document}

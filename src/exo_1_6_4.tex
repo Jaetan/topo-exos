@@ -1,0 +1,74 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{3}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $A$ be a nonempty finite simply ordered set.
+  \begin{enumerate}[(a)]
+  \item Show that $A$ has a largest element. [Hint: proceed by induction on the cardinality of $A$.]
+  \item Show that $A$ has the order type of a section of the positive integers.
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Let $n$ be the cardinality of $A$. Since $A$ is nonempty, we have $n \geq 1$.
+    Suppose that $n = 1$. Then $A = \{ a \}$, and since the element $a$ is the only element of $A$, it is also its largest element.
+    The subset $\mathscr{A}$ of $\mathbb{Z}_+$ of elements $n$ such that any nonempty finite simply ordered set of cardinality $n$ has a largest element,
+    is nonempty since $1 \in \mathscr{A}$.
+
+    Suppose that $n \in \mathscr{A}$ and let $A$ be a nonempty finite simply ordered set of cardinality $n + 1$
+    (such sets exist: for example consider the section $S_n$ of positive integers).
+    Let $a_0 \in A$. The set $B = A - \{ a_0 \}$ is nonempty (since $n \geq 1$), finite (since it is a proper subset of a finite set),
+    simply ordered (since elements of $B$ can be compared as elements of $A$). From this and $n \in \mathscr{A}$ we deduce that $B$ has a largest element $b_0$.
+    As elements of $A$, $a_0$ and $b_0$ are comparable, and
+    \begin{itemize}
+    \item either $b_0 < a_0$, in which case $a_0$ is the largest element of $A$
+    \item or $a_0 < b_0$, in which case $b_0$ is the largest elements of $A$
+    \end{itemize}
+    In both cases, we conclude to the existence of a largest element in $A$, so that $n + 1 \in \mathscr{A}$.
+    As a nonempty inductive subset of $\mathbb{Z}_+$,  $\mathscr{A} = \mathbb{Z}_+$ and the result is proved.
+
+  \item Suppose that $A$ has the same order type as a section $S_n$ of the positive integers.
+    Then there exists a bijection $f : A \to S_n$ which respects order. Since $S_n$ is finite, we conclude that
+    $A$ has the cardinality of $S_n$. Therefore when supposing that $A$ has the order type of a section of the positive integers,
+    it is enough to consider the section of positive integers with the same cardinality as $A$.
+
+    Suppose that $A$ has cardinality $1$, then there is a bijection $f : A \to \{ 1 \}$, and $f$ necessarily respects order.
+    So $A$ has the order type of the section of the positive integers $S_0 = \{ 1 \}$.
+
+    Suppose now that the result is true for any $A$ of cardinality $n$,
+    and let $A$ be a nonempty finite simply ordered set of cardinality $n + 1$.
+    From the previous point, $A$ has a largest element $a_0$. Then $B = A - \{ a_0 \}$ is a nonempty finite simply ordered set of cardinality $n$,
+    so by hypothesis, it has the same order type as the section of positive integers $S_{n - 1} = \{ 1, 2, \dotsc, n \}$.
+    Let $f : B \to \{ 1, 2, \dotsc, n \}$ be a bijection that respects order, and let
+    \begin{align*}
+      g : A &\to \{ 1, 2, \dotsc, n + 1 \} \\
+      x &\mapsto \begin{cases}
+        f (x) &\quad\text{ if }\quad x \in B \\
+        n + 1 &\quad\text{ if }\quad x = a_0
+    \end{cases}
+    \end{align*}
+    Then $g$ is bijective, since $f$ is bijective and $a_0 \notin B$ has a different image by $g$ than any element of $B$.
+    Further we have $\forall x \in B$, $f (x) < f (a_0) = n + 1$ so $g$ respects the order of $A$, so that $A$ and $S_n$ have the same order type.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

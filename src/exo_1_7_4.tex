@@ -1,0 +1,68 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{3}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item A real number $a$ is said to be \emph{algebraic} (over the rationals) if it satisfies some polynomial equation of positive degree
+    \begin{equation*}
+      x^n + a_{n - 1} x^{n - 1} + \dotsb + a_1 x_1 + a_0 = 0
+    \end{equation*}
+    with rational coefficients $a_i$. Assuming that each polynomial equation has only finitely many roots,
+    show that the set of algebraic numbers is countable.
+
+  \item A real number is said to be \emph{transcendental} if it is not algebraic. Assuming the reals are uncountable,
+    show that the transcendental numbers are uncountable. (It is a somewhat surprising fact that only two transcendental numbers
+    are familiar to us: $e$ and $\pi$. Even proving these numbers transcendental is highly nontrivial.)
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Let $\mathscr{P}$ be the set of polynomials of the form $X^n + a_{n - 1} X^{n - 1} + \dotsb + a_0$ for some $n \in \mathbb{Z}_+$
+    and $a_0, a_1, \dotsc, a_{n - 1} \in \mathbb{Q}$. Let $Q = \cup_{i \in \mathbb{Z}_+} \mathbb{Q}^n$, and let
+    \begin{align*}
+      \phi : \mathscr{P} &\to Q \\
+      X^n + a_{n - 1} X^{n - 1} + \dotsb + a_0 &\mapsto (a_0, a_1, \dotsc, a_{n - 1})
+    \end{align*}
+    Let $S, T \in \mathscr{P}$ such that $\phi (S) = \phi (T)$, and note
+    \begin{align*}
+        \phi (S) &= s = (s_1, s_2, \dotsc, s_n) \\
+        \phi (T) &= t = (t_1, t_2, \dotsc, t_m)
+    \end{align*}
+    For all $p \in \mathbb{Z}_+$, $\mathbb{Q}^p$ is the set of functions $\{ 1, \dotsc, p \} \to \mathbb{Q}$, so for $s$ and $t$ to be equal,
+    they must have the same domain, and therefore $m = n$. From this and $\phi (S) = \phi (T)$ we deduce that $s_i = t_i$ for all $i \in \{ 1, \dotsc, n \}$,
+    and $S (X) = X^n + s_{n - 1} X^{n - 1} + \dotsb + s_0 = X^n + t_{n - 1} X^{n - 1} + \dotsb + t_0 = T (X)$, so $\phi$ is injective.
+    Since $\mathbb{Q}$ is countable, the finite product $\mathbb{Q}^n$ is countable for all $n$, and the countable union $Q$ of countable sets is also countable.
+    From this we deduce that $\mathscr{P}$ is countable.
+
+    Let $\mathscr{A} \subset \mathbb{R}$ be the set of algebraic numbers over $\mathbb{Q}$. For all $P \in \mathscr{P}$,
+    let $R_P = \{ x \in \mathbb{R} \mid P (x) = 0 \}$ be the set of real roots of $P$. Then $\mathscr{A} = \cup_{P \in \mathscr{P}} R_P$.
+    Since $R_P$ is finite, and $\mathscr{P}$ is countable, $\mathscr{A}$ is the countable union of finite sets, and hence countable.
+
+  \item Let $x \in \mathbb{R}$, $\mathscr{A}$ be the set of algebraic numbers, and $\mathscr{T}$ be the set of transcendental numbers.
+    We have $\mathbb{R} = \mathscr{A} \cup \mathscr{T}$. If $\mathscr{T}$ were countable, then $\mathbb{R}$ would be the union of two countable sets,
+    and therefore countable, which is impossible. Therefore, $\mathscr{T}$ is uncountable.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

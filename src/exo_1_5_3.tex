@@ -1,0 +1,81 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{2}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $A = A_1 \times A_2 \times \dotsb$ and $B = B_1 \times B_2 \times \dotsb$.
+  \begin{enumerate}[(a)]
+  \item \label{item:a} Show that if $B_i \subset A_i$ for all $i$, then $B \subset A$. (Strictly speaking,
+    if we are given a function mapping the index set $\mathbb{Z}_+$ into the union of the sets $B_i$,
+    we must change its range before it can be considered as a function mapping $\mathbb{Z}_+$ into
+    the union of the sets $A_i$. We shall ignore this technicality when dealing with cartesian products).
+  \item Show the converse of \ref{item:a} holds if $B$ is nonempty.
+  \item Show that if $A$ is nonempty, each $A_i$ is nonempty. Does the converse hold?
+  \item What is the relation between the set $A \cup B$ and the cartesian product of the sets $A_i \cup B_i$?
+    What is the relation between the set $A \cap B$ and the cartesian product of the sets $A_i \cap B_i$?
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item For all $x \in B$, $x = (x_1, x_2, \dotsc)$ with $x_i \in B_i$ for all $i$. Since $B_i \subset A_i$, we have
+    $x_i \in A_i$, so that $(x_1, x_2, \dotsc) \in A$. Therefore $B \in A$.
+    Note that the above does not suppose the existence of \emph{some} $x$ in $B$ and remains thus true if $B = \varnothing$.
+
+  \item Suppose $B \subset A$ and $B \neq \varnothing$. Let $x = (x_1, x_2, \dotsc) \in B$. Since $B \subset A$, we have $x \in A$,
+    which by definition of the cartesian product, implies that $x_i \in A_i$ for all $i$, so that $\forall i \in \mathbb{Z}_+, \; A_i \subset B_i$.
+
+  \item Suppose that $A \neq \varnothing$ and let $x \in A$. By definition of the cartesian product, $x$ is a function with domain $\mathbb{Z}_+$
+    and image $\cup_{i \in \mathbb{Z}_+} A_i$ such that $x (i) = x_i \in A_i$ for all $i$. Suppose that for some $j \in \mathbb{Z}_+$ we have $A_j = \varnothing$.
+    Then we must have $x_j \in A_j$, which is impossible. So the function $x$ cannot be defined at $j$, which is a contradiction with $x$ having
+    the whole of $\mathbb{Z}_+$ as its domain. Therefore $\forall i \in \mathbb{Z}_+, \; A_i \neq \varnothing$.
+
+    Conversely, suppose that $\forall i \in \mathbb{Z}_+, A_i \neq \varnothing$. To build an $\omega$-tuple $(x_1, x_2, \dotsc)$ as an element of $A$,
+    we need to exhibit, for each $i \in \mathbb{Z}_+$, some $x_i \in A_i$. If we admit the axiom of choice, then we can build the required $\omega$-tuple,
+    and conclude that $A \neq \varnothing$.
+    Otherwise, we cannot justify the existence of the $\omega$-tuple, and thus cannot conclude about $A$ being nonempty.
+
+  \item For all $x \in A \cup B$, then:
+    \begin{itemize}
+    \item either $x \in A$, in which case $x = (x_1, x_2, \dotsc)$ with $x_i \in A_i \subset A_i \cup B_i$ for all $i$
+    \item or $x \in B$, in which case $x = (x_1, x_2, \dotsc)$ with $x_i \in B_i \subset A_i \cup B_i$ for all $i$
+    \end{itemize}
+    Since
+    \begin{equation*}
+      \prod_{i \in \mathbb{Z}_+} A_i \cup B_i = \big\{ (x_1, x_2, \dotsc) \mid x_i \in A_i \cup B_i \text{ for all } i \big\}
+    \end{equation*}
+    we conclude that $A \cup B \subset \prod_{i \in \mathbb{Z}_+} A_i \cup B_i$.
+    Let $A_i = \{ 2 i - 1 \}$ and $B_i = \{ 2 i \}$ for all $i \in \mathbb{Z}_+$. Then $x = (1, 2, 3, \dotsc) \in \prod_{i \in \mathbb{Z}_+} A_i \cup B_i$,
+    but $x \notin A \cup B$, since to be part of $A \cup B$, the coordinates of $x$ would need to be either all even, or all odd.
+    So the reverse inclusion is false.
+
+    For all $x \in \prod_{i \in \mathbb{Z}_+} A_i \cap B_i$, $x = (x_1, x_2, \dotsc)$ with $x_i \in A_i \cap B_i$ for all $i$, so that
+    $x_i \in A_i$ and $x_i \in B_i$ and thus $x \in A$ and $x \in B$. From this we conclude that $\prod_{i \in \mathbb{Z}_+} A_i \cap B_i \subset A \cap B$.
+    Conversely, let $x \in A \cap B$; we have
+    \begin{itemize}
+    \item $x \in A$, so that $x = (x_1, x_2, \dotsc)$ with $x_i \in A_i$ for all $i$
+    \item $x \in B$, so that $x = (y_1, y_2, \dotsc)$ with $y_i \in B_i$ for all $i$
+    \end{itemize}
+    and both expressions are equal, so that $x_i = y_i$ for all $i$. From this we deduce that $x_i \in A_i \cap B_i$ for all $i$,
+    so that $A \cap B \subset \prod_{i \in \mathbb{Z}_+} A_i \cap B_i$.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,50 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{2}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Show that if $\mathscr{A}$ is a collection of inductive sets, then the intersection of the elements of $\mathscr{A}$ is an inductive set.
+  \item Prove the basic properties of $\mathbb{Z}_+$:
+    \begin{itemize}
+    \item $\mathbb{Z}_+$ is inductive
+    \item (Principle of induction) If $A$ is an inductive set of positive integers, then $A = \mathbb{Z}_+$
+    \end{itemize}
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{itemize}[(a)]
+
+  \item Let $\mathscr{A}$ be a collection of inductive sets, let $I = \cap_{A \in \mathscr{A}} A$, and let $A_0 \in \mathscr{A}$. Then $A_0$ is inductive, from which we deduce that $1 \in A_0$.
+    The previous proposition does not depend on any specific choice of $A_0$, so $\forall A_0 \in \mathscr{A}, 1 \in A_0$, which is the definition of $1 \in I$.
+    In particular, $I \neq \varnothing$. Let then $x \in I$; we have $\forall A \in \mathscr{A}, x \in A$, and since every such $A$ is inductive,
+    $x + 1 \in A$. We have shown $\forall A \in \mathscr{A}, x + 1 \in A$, which is by definition of the intersection $x + 1 \in I$. Thus $\forall x \in I, x + 1 \in I$, and $I$ is inductive.
+
+  \item Let $\mathscr{A}$ denote the family of inductive sets of $\mathbb{R}$. By definition, $\mathbb{Z}_+ = \cap_{A \in \mathscr{A}} A$, so that $\mathbb{Z}_+$ is the intersection of inductive sets,
+    and thus inductive.
+    Let $B \in \mathscr{A}$. We have $\mathbb{Z}_+ \subset B \subset \mathbb{R}$, and since $\mathbb{Z}_+$ is inductive, $\mathbb{Z}_+ \in \mathscr{A}$.
+    Any inductive set of positive integers must therefore be a subset of $\mathbb{Z}_+$.
+    Conversely, if $A_0 = \cap_{A \in \mathscr{A}} A$, then $A_0$ is an inductive subset of $\mathbb{R}$, so that $A_0 \in \mathscr{A}$ and $\mathbb{Z}_+ \subset A$. \qedhere
+
+  \end{itemize}
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,103 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{6}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+\begin{exercise}
+
+  Prove \\
+  \emph{Theorem 8.4 (Principle of recursive definition). \quad Let $A$ be a set; let $a_0$ be an element of $A$.
+    Suppose $\rho$ is a function that assigns, to each function $f$ mapping a nonempty section of the positive integers into $A$,
+    an element of $A$. Then there exists a unique function}
+  \begin{equation*}
+    h : \mathbb{Z}_+ \to A
+  \end{equation*}
+  \emph{such that}
+  \begin{align} \label{def:h}
+    h (1) &= a_0 \notag \\
+    h (i) &= \rho ( h | \{ 1, \dotsc, i - 1 \} ) &\text{ for } i > 1.
+  \end{align}
+
+\end{exercise}
+
+Let us follow the schema that was used earlier in the section and prove the following results:
+
+\begin{lemma} \label{lemma:exists}
+  Given $n \in \mathbb{Z}_+$, there exists a function $h : \{ 1, \dotsc, n \} \to A$ that verifies \eqref{def:h} for all $i$ in its domain.
+\end{lemma}
+\begin{proof}
+  Let $B$ be the subset of $\mathbb{Z}_+$ such that the lemma is true. If $n = 1$, then \eqref{def:h} gives $h (1) = 1$, which completely
+  defines $h$, so $1 \in B$. Suppose now that the lemma is true for some $n \geq 1$, and let $h : \{ 1, \dotsc, n \} \to A$ be defined by \eqref{def:h}.
+  Let
+  \begin{align*}
+    h' : \{ 1, \dotsc, n + 1 \} &\to A \\
+    x &\mapsto \begin{cases}
+      h (x) &\text{ if } x \leq n \\
+      \rho ( h ) &\text{ otherwise }
+    \end{cases}
+  \end{align*}
+  The induction hypothesis allows us to conclude that $h'$ is well-defined for $x \in \{ 1, \dotsc, n \}$. Since $h$ is defined from $\{ 1, \dotsc, n \}$ to $A$,
+  it is in the domain of $\rho$, so $\rho (h)$ exists and is an element of $A$. Therefore $h' : \{ 1, \dotsc, n + 1 \} \to A$ is well-defined by the above formula.
+  Furthermore, we have $h' (1) = h (1) = a_0$, and for $2 \leq i \leq n$,
+  \begin{equation*}
+    h' (i) = h (i) = \rho (h | \{ 1, \dotsc, i - 1 \}) = \rho ( h' | \{ 1, \dotsc, i - 1 \} )
+  \end{equation*}
+  since $h = h'$ for $i \leq n$. Last, $h' (n + 1) = \rho (h) = \rho (h' | \{ 1, \dotsc, n \})$. From this we deduce that $h'$ verifies \eqref{def:h},
+  so $B$ is inductive, and therefore $B = \mathbb{Z}_+$.
+\end{proof}
+
+\begin{lemma} \label{lemma:unique}
+  Given $f : \{ 1, \dotsc, n \} \to A$ and $g : \{ 1, \dotsc, m \} \to A$ two functions that verify \eqref{def:h} on their domains,
+  $f (i) = g (i)$ for all $i \in \{ 1, \dotsc, n \} \cap \{ 1, \dotsc, m \}$.
+\end{lemma}
+\begin{proof}
+  Suppose that there exists $i \in \{ 1, \dotsc, n \} \cap \{ 1, \dotsc, m \}$ such that $f (i) \neq g (i)$. Then let $i_0$ be the smallest such $i$.
+  Note that \eqref{def:h} gives $f (1) = g (1) = a_0$ so $i_0 > 1$. For all $1 \leq i < i_0$,
+  we have $f (i) = g (i)$. Since $f$ and $g$ verify \eqref{def:h}, we have
+  \begin{equation*}
+    f (i_0) = \rho ( f | \{ 1, \dotsc, i_0 - 1 \} ) = \rho ( g | \{ 1, \dotsc, i_0 - 1 \} ) = g (i_0)
+  \end{equation*}
+  This contradicts our hypothesis that $f (i_0) \neq g (i_0)$, so that $i_0$ does not exist,
+  and therefore for all $i \in \{ 1, \dotsc, n \} \cap \{ 1, \dotsc, m \}$, $f (i) = g (i)$
+\end{proof}
+
+Let us now show that there exists a unique function $h : \mathbb{Z}_+ \to A$ that satisfies \eqref{def:h}.
+
+\begin{proof}
+  From lemma \ref{lemma:exists}, for all $n \in \mathbb{Z}_+$ there is a function $f_n : \{ 1, \dotsc, n \} \to A$ which verifies \eqref{def:h},
+  and from lemma \ref{lemma:unique}, this function is unique. Let us consider $R \subset \mathbb{Z}_+ \times A$ the union of the rules of $f_n$ for all $n$.
+  Let $i \in \mathbb{Z}_+$, for all $n \geq i$ and $m \geq i$, lemma \ref{lemma:unique} gives us $f_n (i) = f_m (i)$, so that there is
+  a unique tuple $\big(i, f_n (i) \big)$ in $R$ with $i$ as its first coordinate. From this we deduce that $R$ is the rule of a function
+  $h : \mathbb{Z}_+ \to A$.
+
+  Since for all $n \in \mathbb{Z}_+$, $f_n (1) = a_0$, we deduce that $h (1) = a_0$. Then, for all $n > 1$, we have
+  \begin{align*}
+    h (n + 1) &= f_{n + 1} (n + 1)  &\text{ by definition of } R \\
+    &= \rho ( f_{n + 1} | \{ 1, \dotsc, n \} ) &\text{ since } f_{n + 1} \text{ verifies \eqref{def:h} } \\
+    &= \rho ( h | \{ 1, \dotsc, n \} ) &\text{ by definition of } R
+  \end{align*}
+  so $h$ verifies \eqref{def:h}.
+
+  Last, suppose that there exist $h$ and $h'$ that satisfy \eqref{def:h} and are such that $h \neq h'$. Let $i_0$ be the smallest element of $\mathbb{Z}_+$
+  such that $h (i_0) \neq h' (i_0)$. We have $h (1) = h' (1) = a_0$ so that $i_0 > 1$. Also,
+  \begin{equation*}
+    h' (i_0) = \rho ( h' | \{ 1, \dotsc, i_0 - 1 \} ) = \rho ( h | \{ 1, \dotsc, i_0 - 1 \} ) = h (i_0)
+  \end{equation*}
+  since $h'$ and $h$ are equal for all $i < i_0$. The above equation contradicts our hypothesis on the existence of $i_0$, so $h = h'$.
+
+\end{proof}
+
+\end{document}

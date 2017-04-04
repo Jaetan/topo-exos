@@ -1,0 +1,42 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{6}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  If $A$ and $B$ are finite, show that the set of all functions $f : A \to B$ is finite.
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $D$ be the set of all functions from $A$ to $B$.
+  If $B = \varnothing$, then there is no function from $A$ to $B$, so $D$ is empty, and thus finite.
+  If $A = \varnothing$, then there is one function $f$ from $A$ to $B$ (the function whose rule of assignment is $\varnothing$),
+  so $D = \{ f \}$ and is therefore finite.
+
+  Otherwise, let
+  \begin{align*}
+    \phi : D &\to \mathscr{P} (A \times B) \\
+    f &\mapsto \big\{ \big(a, f (a) \big) \mid a \in A \big\}
+  \end{align*}
+  Let $f, g : A \to B$ be distinct functions. There exists $x \in A$ such that $f (x) \neq g (x)$, from which we deduce that
+  $\phi (f) \neq \phi (g)$, so that $\phi$ is injective.
+  Since $A$ and $B$ are finite, the cartesian product $A \times B$ is finite, and so is $\mathscr{P} (A \times B)$;
+  let $h : \mathscr{P} (A \times B) \to \{ 1, 2, \dotsc, n \}$
+  be a bijection, for some $n$. Then $h \circ \phi$ is an injection from $D$ to $\{ 1, 2, \dotsc, n \}$, so that $D$ is finite.
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,58 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{5}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Define a relation on the plane by setting:
+  \begin{equation*}
+    (x_0, y_0) < (x_1, y_1)
+  \end{equation*}
+  if either $y_0 - x_0^2 < y_1 - x_1^2$ or $y_0 - x_0^2 = y_1 - x_1^2$ and $x_0 < x_1$.
+  Show that this is an order relation on the plane, and describe it geometrically.
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{description}
+  \item [comparability] Let $(x_0, y_0)$ and $(x_1, y_1)$ in $\mathbb{R}^2$ such that $(x_0, y_0) \neq (x_1, y_1)$.
+    First suppose that $y_0 - x_0^2 = y_1 - x_1^2$. Then $x_0 \neq x_1$, for otherwise we would have $(x_0, y_0) = (x_1, y_1)$, which is contrary to our hypothesis.
+    From $x_0 \neq x_1$ we deduce that either $x_0 < x_1$ or $x_1 < x_0$. The first case leads to $(x_0, y_0) < (x_1, y_1)$ and the second to $(x_1, y_1) < (x_0, y_0)$,
+    so $(x_0, y_0)$ and $(x_1, y_1)$ are comparable.
+
+    Next, suppose that $y_0 - x_0^2 \neq y_1 - x_1^2$. Then either $y_0 - x_0^2 < y_1 - x_1^2$, which gives $(x_0, y_0) < (x_1, y_1)$,
+    or $y_1 - x_1^2 < y_0 - x_0^2$, which gives $(x_1, y_1) < (x_0, y_0)$, so $(x_0, y_0)$ and $(x_1, y_1)$ are comparable.
+
+  \item [non-reflexivity] Let $(x_0, y_0) \in \mathbb{R}^2$. Then $y_0 - x_0^2 = y_0 - x_0^2$, so to have $(x_0, y_0) < (x_0, y_0)$ we need $x_0 < x_0$, which is impossible.
+    So we never have $(x_0, y_0) < (x_0, y_0)$.
+
+  \item [transitivity] Let $(x_0, y_0), (x_1, y_1), (x_2, y_2) \in \mathbb{R}^2$, such that $(x_0, y_0) < (x_1, y_1)$ and $(x_1, y_1) < (x_2, y_2)$.
+    Suppose that $y_0 - x_0^2 < y_1 - x_1^2$. From $(x_1, y_1) < (x_2, y_2)$ we deduce that either $y_1 - x_1^2 < y_2 - x_2^2$ which implies by transitivity of the usual order
+    relation on real numbers that $y_0 - x_0^2 < y_2 - x_2^2$, so that $(x_0, y_0) < (x_2, y_2)$.
+    Otherwise, $y_1 - x_1^2 = y_2 - x_2^2$, from which we get by hypothesis $y_0 - x_0^2 < y_2 - x_2^2$, which is $(x_0, y_0) < (x_2, y_2)$.
+
+    Suppose now that $y_0 - x_0^2 = y_1 - x_1^2$ and $x_0 < x_1$. If $y_1 - x_1^2 < y_2 - x_2^2$, then $y_0 - x_0^2 < y_2 - x_2^2$ so that $(x_0, y_0) < (x_2, y_2)$.
+    Otherwise, if $y_1 - x_1^2 = y_2 - x_2^2$ and $x_1 < x_2$, we deduce that $y_0 - x_0^2 = y_2 - x_2^2$ and $x_0 < x_1 < x_2$, so that $(x_0, y_0) < (x_2 , y_2)$.
+
+  \end{description}
+
+  Let $c \in \mathbb{R}$, $y - x^2 = c$ is the equation of a parabola with focus $(0, c + 1 / 4)$ and directrix $y = c - 1 / 4$.
+  Let $(x_0, y_0)$ and $(x_1, y_1)$ in $\mathbb{R}^2$ and note $y_0 - x_0^2 = c_0$ and $y_1 - x_1^2 = c_1$. Then $(x_0, y_0) < (x_1, y_1)$ if and only if
+  either $c_0 < c_1$, in which case the parabola $y - x^2 = c_1$ is above $y - x^2 = c_0$, or $c_0 = c_1$ and $x_0 < x_1$, in which case both points are on the same parabola
+  and $(x_1, y_1)$ is to the right of $(x_0, y_0)$.
+
+\end{proof}
+
+\end{document}

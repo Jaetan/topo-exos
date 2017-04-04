@@ -1,0 +1,61 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{5}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  \begin{enumerate}[(a)]
+  \item Let $A = \{ 1, 2, \dotsc, n \}$. Show there is a bijection of $\mathscr{P} (A)$
+    with the cartesian product $X^n$, where $X$ is the two-elements set $X = \{ 0, 1 \}$.
+  \item Show that if $A$ is finite, then $\mathscr{P} (A)$ is finite.
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Let
+    \begin{align*}
+      \phi : \mathscr{P} (A) &\to X^n \\
+      B &\mapsto (x_1, x_2, \dotsc, x_n)
+    \end{align*}
+    such that
+    \begin{equation*}
+      \forall i \in \{ 1, 2, \dotsc n \}, \; x_i = \begin{cases}
+        1 &\quad\text{ if }\quad i \in B \\
+        0 &\quad\text{ otherwise }
+      \end{cases}
+    \end{equation*}
+    Let $B1, B2 \in \mathscr{P} (A)$ such that $B_1 \neq B_2$. The roles of $B_1$ and $B_2$ being symmetric in the following,
+    it is sufficient to suppose that there exists $j \in B_1 - B_2$. Then $\phi (B_1)$ and $\phi (B_2)$ have a different $j$-th
+    coordinate and so $\phi (B_1) \neq \phi (B_2)$ and $\phi$ is injective.
+
+    Let $x = (x_1, x_2, \dotsc, x_n) \in X^n$. If $x = (0, 0, \dotsc, 0)$, then $\phi (\varnothing) = x$.
+    Otherwise, let $B = \{ i \in A \mid x_i = 1 \}$. We have $\phi (B) = (y_1, y_2, \dotsc, y_n)$, with
+    $y_i = 1$ if and only if $i \in B$, which, in turns, is true if and only if $x_i = 1$, so that $\phi (B) = x$
+    and $\phi$ is surjective.
+
+  \item Let $A$ be a finite set. If $A = \varnothing$, then $\mathscr{P} (A) = \varnothing$, so $\mathscr{P} (A)$ is finite.
+    Otherwise, there is a bijection $f$ from $\mathscr{P} (A)$ to $X^n$ for some positive integer $n$.
+    Since $X$ is finite, the cartesian product $X^n$ is also finite, so there is a bijection $g$ from $X^n$ to some section
+    of positive integers $\{ 1, 2, \dotsc, m \}$. Therefore $g \circ f$ is a bijection from $\mathscr{P} (A)$ to $\{ 1, 2, \dotsc, m \}$,
+    so $\mathscr{P} (A)$ is finite.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

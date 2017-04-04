@@ -1,0 +1,55 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{8}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Check that the dictionary order is an order relation.
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{description}
+
+  \item [comparability] Let $(x_0, y_0), (x_1, y_1) \in \mathbb{R}^2$ such that $(x_0, y_0) \neq (x_1, y_1)$.
+    Then either $x_0 \neq x_1$ or $y_0 \neq y_1$. By comparability of $x_0$ with $x_1$ and $y_0$ with $y_1$ for the usual order relation $<$ on $\mathbb{R}$,
+    we deduce the following cases:
+    \begin{itemize}
+
+    \item if $x_0 < x_1$, then we have $(x_0, y_0) < (x_1, y_1)$
+    \item if $x_1 < x_0$, then we have $(x_1, y_1) < (x_0, y_0)$
+    \item if $x_0 = x_1$, then we have either $y_0 < y_1$ or $y_1 < y_0$, from which we deduce either $(x_0, y_0) < (x_1, y_1)$ or $(x_1, y_1) < (x_0, y_0)$
+
+    \end{itemize}
+
+  \item [non-reflexivity] Let $(x_0, y_0) \in \mathbb{R}$.
+    By non-reflexivity of the usual order relation $<$ on $\mathbb{R}$, we deduce that we can have neither $x_0 < x_0$ nor $y_0 < y_0$.
+    From this and the definition of the dictionary order relation, we deduce that we cannot have $(x_0, y_0) < (x_0, y_0)$.
+
+  \item [transitivity] Let $(x_0, y_0), (x_1, y_1), (x_2, y_2) \in \mathbb{R}$ such that $(x_0, y_0) < (x_1, y_1)$ and $(x_1, y_1) < (x_2, y_2)$.
+    Suppose $x_0 < x_1$. Then from $(x_1, y_1) < (x_2, y_2)$ we deduce that $(x_0, y_0) < (x_2, y_2)$.
+    Otherwise $x_0 = x_1$ and $y_1 < y_2$. From $(x_1, y_1) < (x_2, y_2)$ we deduce that:
+    \begin{itemize}
+    \item either $x_1 < x_2$, so that $(x_0, y_0) < (x_2, y_2)$
+    \item or $x_0 = x_1 = x_2$, in which case we deduce from $(x_0, y_0) < (x_1, y_1)$ that $y_0 < y_1 < y_2$, which gives us $(x_0, y_0) < (x_2, y_2)$
+    \end{itemize}
+
+    From the above we conclude that the dictionary order is an order relation on $\mathbb{R}^2$.
+
+  \end{description}
+
+\end{proof}
+
+\end{document}

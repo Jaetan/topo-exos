@@ -1,0 +1,100 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{5}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  We say that two sets $A$ and $B$ \emph{have the same cardinality} if there is a bijection of $A$ with $B$.
+
+  \begin{enumerate}[(a)]
+
+  \item Show that if $B \subset A$ and there is an injection
+    \begin{equation*}
+      f : A \to B
+    \end{equation*}
+    the $A$ and $B$ have the same cardinality. [\emph{Hint:} Define $A_1 = A$, $B_1 = B$,
+      and for $n > 1$, $A_n = f (A_{n - 1})$ and $B_n = f (B_{n - 1})$. (Recursive definition again!)
+      Note that $A_1 \supset B_1 \supset A_2 \supset B_2 \supset A_3 \supset \dotsb$. Define a bijection
+      $h : A \to B$ by the rule
+      \begin{equation*}
+        h (x) = \begin{cases}
+          f (x) &\text{ if } x \in A_n - B_n \text{ for some } n \\
+          x &\text{ otherwise.] }
+        \end{cases}
+      \end{equation*}
+
+    \item \emph{Theorem (Schr\"oder-Bernstein theorem). \quad If there are injections $f : A \to C$ and $g : C \to A$,
+    then $A$ and $C$ have the same cardinality.}
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item \label{it:a}
+    Let $A_i, B_i$ be defined as above for all $i \in \mathbb{Z}_+$, and let $\mathscr{A}$ be the subset of $\mathbb{Z}_+$
+    such that for all $n \in \mathscr{A}$, $A_n \supset B_n \supset A_{n + 1}$. Then $1 \in \mathscr{A}$: we already have
+    $B_1 = B \subset A = A_1$; from the definition of $f$, we also have $A_2 = f (A_1) = f (A) \subset B = B_1$.
+
+    Suppose now that $S_{n + 1} \subset \mathscr{A}$ for some $n$. Since $B_n \subset A_n$, we have $B_{n + 1} = f (B_n) \subset f (A_n) = A_{n + 1}$.
+    Similarly, $A_{n + 1} \subset B_n$, so $A_{n + 2} = f (A_{n + 1}) \subset f (B_n) = B_{n + 1}$. From this we deduce that $S_{n + 2} \subset \mathscr{A}$,
+    so that $\mathscr{A}$ is inductive, and finally $\mathscr{A} = \mathbb{Z}_+$.
+
+    Since $f : A \to B$ exists, we have $B \neq \varnothing$. And since $B \subset A$, we also have $A \neq \varnothing$.
+    If $A$ has only one element, then $B = A$, and $h = i_A$, which is bijective.
+
+    \begin{description}
+
+    \item[Injectivity of $h$] \hspace{0pt}\\
+      Suppose then that there are $x, y \in A$ such that $x \neq y$. If we have $h (x) = x$ and $h (y) = y$, then $h (x) \neq h (y)$.
+      Similarly, if we have $h (x) = f (x)$ and $h (y) = f (y)$, then $h (x) \neq h (y)$ since $f$ is injective.
+
+      Otherwise, we can suppose that $h (x) = f (x)$ and $h (y) = y$, possibly switching the roles of $x$ and $y$.
+      Then there exists $n$ such that $x \in A_n - B_n$, but for all $n \in \mathbb{Z}_+$, $y \notin A_n - B_n$.
+      Therefore $y \in \cup_{n \in \mathbb{Z}_+} B_n - A_{n + 1}$, but $f (x) \in f (A_n) = A_{n + 1}$, so that $h (x) \neq h (y)$.
+      From the above, we deduce that $h$ is injective.
+
+    \item[Surjectivity of $h$] \hspace{0pt}\\
+      Let $y \in B$. If $y \in \mathscr{B} = \cup_{n \in \mathbb{Z}_+} B_n - A_{n + 1}$, then $h (y) = y$.
+
+      Otherwise, there exists $n$ such that $y \in A_n - B_n$. Since we also have $y \in B$, then $n \geq 2$ and $y \in f (A)$.
+      From this we deduce that $f^{-1} ( \{ y \} ) \neq \varnothing$.
+
+      If $f^{-1} ( \{ y \} ) \cap \mathscr{B} \neq \varnothing$, then take $x$ in it.
+      There exists $m \in \mathbb{Z}_+$ such that $x \in B_m - A_{m + 1}$, so that $f (x) = y \in f (B_m - A_{m + 1})$.
+      Since $f$ is injective, we have $f (B_m - A_{m + 1}) = f (B_m) - f (A_{m + 1}) = B_{m + 1} - A_{m + 2}$.
+
+      From $y \in A_n$ and $y \in B_{m + 1}$, we deduce that $m + 1 < n$ and $m + 2 \leq n$. We must therefore have
+      $y \notin A_{m + 2} \supset A_n$. This contradicts $y \in A_n$, so $f^{-1} ( \{ y \} ) \cap \mathscr{B}$ must be empty.
+
+      So there exists $p \in \mathbb{Z}_+$ such that $x \in A_p - B_p$; in this case, we have $h (x) = f (x) = y$.
+
+    \end{description}
+
+    From the above we deduce that $h$ is bijective, so that $A$ and $B$ have the same cardinality.
+
+  \item Let $f : A \to C$ and $g : C \to A$ be injections and $B = g (C) \subset A$.
+    The function $g \circ f : A \to B$ is injective, so we are in the hypotheses of \ref{it:a}.
+    There exists a bijection $h : A \to g (C)$. Furthermore, $g$ is surjective from $C$ to $g (C)$,
+    so $k : C \to B$, $x \mapsto g (x)$ is bijective. Therefore the function $h^{-1} \circ k : C \to A$
+    is a bijection, and $A$ and $C$ have the same cardinality.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

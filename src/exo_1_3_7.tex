@@ -1,0 +1,30 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{6}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Show that the restriction of an order relation is an order relation
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  Let $A$ be a set, $C$ an order relation on $A$ and $A_0$ a subset of $A$.
+  The comparability, non-reflexivity and transitivity of $C$ on $A_0$ can be deduced by taking elements $x, y, z \in A_0$,
+  and applying the comparability, non-reflexivity, and transitivity of $C$ on $A$ since $x, y, z$ are also elements of $A$.
+
+\end{proof}
+
+\end{document}

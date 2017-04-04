@@ -1,0 +1,38 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{7}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Verify the following version of the principle of recursive definition: let $A$ be a set.
+  Let $\rho$ be a function assigning, to every function $f$ mapping a section $S_n$ of $\mathbb{Z}_+$
+  into $A$, an element $\rho (f)$ of $A$. Then there exists a unique function $h : \mathbb{Z}_+ \to A$
+  such that $h (n) = \rho ( h | S_n )$ for each $n \in \mathbb{Z}_+$.
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $\rho'$ be a function assigning, to every function $f$ mapping a nonempty section $S_{n + 1}$ of $\mathbb{Z}_+$
+  into $A$, an element $\rho' (f) = \rho (f)$, and let $a_0 = \rho ( \varnothing ) \in A$. Theorem 8.4 allows us to
+  conclude that there exists a unique function $h : \mathbb{Z}_+ \to A$ such that:
+  \begin{align*}
+    h (1) &= a_0 = \rho ( \varnothing ) \\
+    h (n) &= \rho' ( h | S_n ) = \rho ( h | S_n ) &\text{ for } n > 1
+  \end{align*}
+  which is the expected result.
+
+\end{proof}
+
+\end{document}

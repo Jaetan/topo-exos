@@ -1,0 +1,43 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{2}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $X$ be the two-element set $\{ 0, 1 \}$. Show there is a bijective correspondence
+  between the set $\mathscr{P} ( \mathbb{Z}_+ )$ and the cartesian product $X^\omega$.
+
+\end{exercise}
+
+\begin{proof}
+
+  Let
+  \begin{align*}
+    f : \mathscr{P} ( \mathbb{Z}_+ ) &\to X^\omega \\
+    A &\mapsto (x_1, x_2, \dotsc) &\text{ with } &&x_i = \begin{cases}
+      1 &\text{ if } i \in A \\
+      0 &\text{ otherwise }
+    \end{cases}
+  \end{align*}
+  Let $(x_1, x_2, \dotsc) \in X^\omega$. The expression $S = \{ i \in \mathbb{Z}_+ \mid x_i = 1 \}$ defines a subset of $\mathbb{Z}_+$.
+  If $S \neq \varnothing$, then we have $f (S) = (x_1, x_2, \dotsc)$. Otherwise, $x_i = 0$ for all $i$, and $f (\varnothing) = (0, 0, \dotsc)$.
+  From this we deduce that $f$ is surjective.
+
+  Let now $A, B$ be distinct subsets of $\mathbb{Z}_+$. By switching the roles of $A$ and $B$ if needed, we can suppose that $A \neq \varnothing$.
+  Since $A$ and $B$ are distinct, there exists $j \in A - B$. Then for $f (A) = (a_1, a_2, \dotsc, a_j, \dotsc)$ and $f (B) = (b_1, b_2, \dotsc, b_j, \dotsc)$,
+  we have $a_j = 1$ but $b_j = 0$, so $f (A) \neq f (B)$ and $f$ is injective.
+
+\end{proof}
+
+\end{document}

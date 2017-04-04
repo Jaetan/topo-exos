@@ -1,0 +1,39 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{2}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $X$ be the two-elements set $\{ 0, 1 \}$. Find a bijective correspondence between $X^\omega$
+  and a proper subset of itself.
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $A$ be the subset of $X^\omega$ of all $\omega$-tuples of elements of $X$ that start with $0$.
+  Then $A$ is a strict subset of $X^\omega$. Let
+  \begin{align*}
+    f : X^\omega &\to A \\
+    (x_1, x_2, \dotsc) &\mapsto (0, x_1, x_2, \dotsc)
+  \end{align*}
+  Let $y' = (0, y_1, y_2, \dotsc) \in A$, we have $y' = f (y_1, y_2, \dotsc)$ so that $f$ is surjective.
+  Now let $z = (z_1, z_2, \dotsc)$ and $y = (y_1, y_2, \dotsc)$ be elements of $X^\omega$, and suppose that $f (y) = f (z)$.
+  Then $(0, y_1, y_2, \dotsc) = (0, z_1, z_2, \dotsc)$, so that $\forall i \in \mathbb{Z}_+$, $y_i = z_i$ and finally $y = z$.
+  Therefore $f$ is also injective, and is thus a bijection between $X^\omega$ and its proper subset $A$.
+  This shows that $X^\omega$ is infinite.
+
+\end{proof}
+
+\end{document}

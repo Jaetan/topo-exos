@@ -1,0 +1,56 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{3}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  The \emph{Fibonacci numbers} of number theory are defined recursively by the formula
+  \begin{align*}
+    \lambda_1 &= \lambda_2 = 1 \\
+    \lambda_n &= \lambda_{n - 1} + \lambda_{n - 2} &\text{ for } n > 2.
+  \end{align*}
+  Define them rigorously by use of Theorem 8.4.
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $A = \mathbb{Z}_+$ and $\mathscr{A}$ be the set of functions mapping a nonempty section of the positive integers into $\mathbb{Z}_+$.
+  Define
+  \begin{align*}
+    \rho : \mathscr{A} &\to \mathbb{Z}_+ \\
+    f &\mapsto \begin{cases}
+      1 &\text{ if the domain of f is } \{ 1 \} \\
+      f (n) + f (n - 1) &\text{ otherwise }
+    \end{cases}
+  \end{align*}
+  In the last case, the domain of $f$ is a section $\{ 1, \dotsc, n \}$ of the positive integers with $n > 1$. Let $a_0 = 1$, and apply
+  Theorem 8.4 with these values of $a_0$ and $\rho$ to deduce the existence of a function $h$ such that:
+  \begin{align*}
+    h (1) &= a_0 = 1 \\
+    h (i) &= \rho (h | \{ 1, \dotsc, i - 1 \}) &\text{ if } i > 1
+  \end{align*}
+  For $i = 2$, we get
+  \begin{equation*}
+    h (2) = \rho ( h | \{ 1 \} ) = 1
+  \end{equation*}
+  and for $i > 2$, we get
+  \begin{equation*}
+    h (i) = \rho ( h | \{ 1, \dotsc, i - 1 \} ) = h (i - 1) + h (i - 2)
+  \end{equation*}
+  so that $h (i)$ is the $i$-th Fibonacci number.
+
+\end{proof}
+
+\end{document}

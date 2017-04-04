@@ -1,0 +1,57 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{9}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  \begin{enumerate}[(a)]
+
+  \item Show that the map $f : ({-1}, 1) \to \mathbb{R}, x \mapsto x / (1 - x^2)$ is order-preserving.
+  \item Show that the equation $g (y) = 2y \left. / \left( 1 + \left( 1 + 4y^2 \right)^{1 / 2} \right) \right.$ defines a function $g : \mathbb{R} \to ({-1}, 1)$
+    that is both a left and a right inverse for $f$.
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item The function $f$ is strictly increasing in the interval $({-1}, 1)$ and thus order-preserving.
+    Remark that $f (x) = 1 / 2 \tan \theta$ for $x = \tan ( \theta / 2 )$ and $\theta \in ({-\pi} / 2, \pi / 2)$,
+    so that $f$ is the composition of strictly increasing functions, and thus strictly increasing.
+
+  \item As a continuous and strictly increasing function on its domain $({-1}, 1)$, $f$ is bijective and has thus a unique inverse
+    (which is both a left and a right inverse). It is thus enough to verify that $f \circ g (y) = y$ for all $y$ in $\mathbb{R}$.
+    Letting $t = \sqrt{1 + 4 y^2}$, we get
+    \begin{align*}
+      1 - g^2 (y) &= 1 - \frac{t^2 - 1}{(1 + t)^2} \\
+      &= 1 - \frac{t - 1}{t + 1} = \frac{2}{t + 1} \\
+      \frac{g (y)}{1 - g^2 (y)} &= \frac{t + 1}{2} \sqrt{\frac{t - 1}{t + 1}} \\
+      &= \sqrt{\frac{t^2 - 1}{4}} = y
+    \end{align*}
+    for $y \geq 0$. Since $f (-x) = - f (x)$, $g (-y) = - g (y)$, and $y \geq 0 \iff g (y) \geq 0$,
+    we apply the above to $-y$ when $y < 0$ to get
+    \begin{align*}
+      f \circ g (-y) &= f \left( - g (y) \right) = - f \circ g (y) \\
+      &= - y
+    \end{align*}
+    which gives the expected result.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

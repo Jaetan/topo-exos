@@ -1,0 +1,42 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{12}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Prove the following:\\
+  \emph{Theorem: if an ordered set $A$ has the least upper bound property, then it has the greatest lower bound property.}
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $A$ be an ordered set. If $A = \varnothing$, then there is no nonempty subset of $A$, so the theorem is vacuously true.
+  Suppose then that $A \neq \varnothing$, and let $C$ be a nonempty subset of $A$ that is bounded below by $c \in A$.
+  Let $B$ be the set of lower bounds of $C$; we have $c \in B$ so $B$ is nonempty.
+  Since $C$ is nonempty, we can take $c_0 \in C$, and we have $\forall y \in B, \quad y \leq c_0$, so that $B$ is bounded above.
+  Since $A$ has the least upper bound property, $B$ has a lowest upper bound $u$.
+  \\
+
+  By definition, $u$ is the smallest element of the set of upper bounds of $B$ in $A$. If there exists $c_1 \in C$ such that $c_1 < u$,
+  then let $b \in B$. By definition of $B$, we have $b \leq c_1$, so that $c_1$ is an upper bound of $B$ that is smaller than $u$.
+  This is a contradiction, so $\forall c \in C, \quad u \leq c$, and $u$ is a lower bound of $C$.
+  \\
+
+  If $v \in A$ is a lower bound of $C$, then by definition of $B$, $v \in B$, so that $v \leq u$.
+  From this we deduce that $u$ is the greatest lower bound of $C$ in $A$, so that $A$ has the greatest lower bound property.\qedhere
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,54 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{8}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Show that every nonempty subset of $\mathbb{Z}$ that is bounded above has a largest element.
+  \item If $x \notin \mathbb{Z}$, show there is exacty one $n \in \mathbb{Z}$ such that $n < x < n + 1$.
+  \item If $x - y > 1$, show there is at least one $n \in \mathbb{Z}$ such that $y < n < x$.
+  \item If $y < x$, show there is a rational number $z$ such that $y < z < x$.
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Let $A$ be a nonempty subset of $\mathbb{Z}$ that is bounded above. There exists $b \in \mathbb{R}$ such that $\forall x \in A, \quad x < b$.
+    Since $\mathbb{Z}$ is unbounded, there exists $m \in \mathbb{Z}$ such that $b < m$, so the subset $B$ of $\mathbb{Z}$ containing all integer upper bounds of $A$ is nonempty.
+    Therefore $B$ has a smallest element $u$. If $u \notin A$, then the largest element in $A$ is at most $u - 1$ since $u \in \mathbb{Z}$,
+    so that $u - 1 < u$ is an upper bound for $A$, which contradicts the fact that $u$ is the smallest such upper bound; so $u$ is the largest element of $A$.
+
+  \item Let $x \in \mathbb{R} - \mathbb{Z}$. Since $\mathbb{Z}$ is unbounded, there exists $m \in \mathbb{Z}$ such that $m > x$.
+    The subset $B$ of $\mathbb{Z}$ containing all integer upper bounds of $\{ x \}$ is nonempty, and thus has a smallest element $u$.
+    Then $u > x$ since $x$ is not an integer, and $u - 1 < x$ since $u$ is the smallest element of $B$.
+
+  \item Let $x, y \in \mathbb{R}$ such that $x - y > 1$, and let $X = \{ z \in \mathbb{Z} \mid z < x \}$. Note that since $\mathbb{Z}$ is unbounded, there is an element $m \in \mathbb{Z}$
+    such that $m > -x$. Then we have $-m < x$, so that $X$ is not empty. Since $X$ is also bounded above, it has a largest element $u$, and we have $u < x$.
+    If $u < y$, then $x - u > x - y > 1$, so that $x > u + 1$, which contradicts the fact that $u$ is the largest element of $X$. So we have $y < u < x$.
+
+  \item Let $x, y \in \mathbb{R}$ such that $y < x$. The real number $1 / (x - y)$ exists, and since $\mathbb{Z}_+$ is unbounded, $A = \{ n \in \mathbb{Z}_+ \mid n > 1 / (x - y) \}$
+    is nonempty. Let $u$ be the smallest element in $A$; since $x - y > 0$, we have $u > 0$. From the definition of $u$ we deduce that $u x - u y > 1$, so that there exists an integer $d$ such that
+    $u y < d < u x$. This implies that the rational number $d / u$ verifies $y < d / u < x$.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

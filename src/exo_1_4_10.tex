@@ -1,0 +1,85 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{9}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Show that every positive number $a$ has exactly one positive square root, as follows:
+
+  \begin{enumerate}[(a)]
+
+  \item Show that if $x > 0$ and $0 \leq h < 1$, then
+    \begin{align*}
+      (x + h)^2 &\leq x^2 + h (2 x + 1) \\
+      (x - h)^2 &\geq x^2 -h (2 x)
+    \end{align*}
+
+  \item Let $x > 0$. Show that if $x^2 < a$, then $(x + h)^2 < a$ for some $h > 0$; and if $x^2 > a$, then $(x - h)^2 > a$ for some $h > 0$.
+
+  \item Given $a > 0$, let $B$ be the set of all real numbers $x$ such that $x^2 < a$. Show that $B$ is bounded above and contains at least one positive number.
+    Let $b = \sup B$; show that $b^2 = a$.
+
+  \item Show that if $b$ and $c$ are positive and $b^2 = c^2$, then $b = c$.
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Let $x > 0$ and $0 \leq h < 1$. We have $0 \leq h^2 \leq h$, so that:
+    \begin{equation*}
+      (x + h)^2 = x^2 + 2 x h + h^2 \leq x^2 + h(2 x + 1)
+    \end{equation*}
+    And since $h^2 \geq 0$, we have:
+    \begin{equation*}
+      (x - h)^2 = x^2 - 2 x h + h^2 \geq x^2 - h (2 x)
+    \end{equation*}
+
+  \item Let $x > 0$ such that $x^2 < a$, and let $0 \leq h < 1$. Since $2 x + 1 > 0$, we have:
+    \begin{align*}
+      & (x + h)^2 \geq a \\
+      \implies & x^2 + h (2 x + 1) \geq a \\
+      \implies & h \geq \frac{a - x^2}{2 x + 1} = m
+    \end{align*}
+    From $x^2 < a$ we deduce that $m > 0$. Therefore we can choose $h$ such that $0 < h < \sup \{ m, 1 \}$. By the contrapositive of the implication shown above,
+    we have, for such a choice of $h$, $(x + h)^2 < a$.
+
+    Similarly, from $h \geq 0$, we have:
+    \begin{align*}
+      & (x - h)^2 \leq a \\
+      \implies & x^2 -h (2 x) \leq a \\
+      \implies & h \geq \frac{x^2 - a}{2 x} = p
+    \end{align*}
+    From $x^2 > a$ we deduce that $p > 0$, and we can choose $h$ such that $0 < h < \sup \{ p, 1 \}$. By the contrapositive of the implication shown above,
+    we have, for such a choice of $h$, $(x - h)^2 > a$.
+
+  \item Let $a > 0$ and $B = \{ x \in \mathbb{R} \mid 0 < x^2 < a \}$. Taking $y = \sup \{ 1, a \}$, we have $y^2 \geq a$, so $B$ is bounded above by $y$.
+    If $a \geq 1$, then $0 < (1 / 2)^2 < 1$, so $1 / 2 \in B$. Otherwise, $0 < a^2 \leq a$, so that $a \in B$. Thus $B$ is nonempty.
+    From this we deduce that $b = \sup B$ exists and is positive.
+
+    Suppose that $b^2 < a$. Then there exists $h > 0$ such that $(b + h)^2 < a$, so that $b$ is not an upper bound of $B$, which is a contradiction.
+    Therefore $b^2 \geq a$. Suppose now that $b^2 > a$, then there exists $h > 0$ such that $(b - h)^2 > a$, so that $b - h$ is an upper bound of $B$ that is smaller than $b$,
+    which is again a contradiction. From this we deduce that $b^2 = a$, so that any positive real number has at least one square root.
+
+  \item Let $b$ and $c$ be positive reals such that $b^2 = c^2$. Suppose that $0 < b < c$, then we have $0 < b^2 < c^2$, which is a contradiction.
+    Similarly if $0 < c < b$ we arrive at $0 < c^2 < b^2$, which is again a contradiction. Therefore $b = c$, and the square root of any positive real number is unique.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

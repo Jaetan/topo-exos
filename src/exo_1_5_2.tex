@@ -1,0 +1,102 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{1}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}\hfill
+
+  \begin{enumerate}[(a)]
+  \item Show that if $n > 1$ there is a bijective correspondence of
+    \begin{align*}
+      A_1 \times A_2 \times \dotsb \times A_n &&\text{with}&& \left( A_1 \times A_2 \times \dotsb \times A_{n - 1} \right) \times A_n
+    \end{align*}
+  \item Given the indexed family $\big\{ A_1, A_2, \dotsc \big\}$, let $B_i = A_{2 i - 1} \times A_{2 i}$ for each positive integer $i$.
+    Show that there is a bijective correspondence of $A_1 \times A_2 \times \dotsb$ with $B_1 \times B_2 \times \dotsb$.
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Let $n > 1$. If for some $i \leq n$, $A_i = \varnothing$, then $A_1 \times \dotsb \times A_n = \varnothing$.
+    If $i < n$, then $A_1 \times \dotsb \times A_{n - 1}$ is also empty, which implies that $\left( A_1 \times \dotsb \times A_{n - 1} \right) \times A_n$ is empty.
+    If $i = n$, then $\left ( A_1 \times \dotsb \times A_{n - 1} \right) \times A_n = \left( A_1 \times \dotsb \times A_{n - 1} \right) \times \varnothing = \varnothing$.
+
+    Let us then suppose that $\forall i, \; 1 \leq i \leq n, \; A_i \neq \varnothing$. Let
+    \begin{align*}
+      p_1 : A_1 \times \dotso \times A_{n - 1} \times A_n &\to A_1 \times \dotsb \times A_{n - 1} \\
+      (x_1, \dotsc, x_{n - 1}, x_n) &\mapsto (x_1, \dotsc, x_{n - 1}) \\
+      p_2 : A_1 \times \dotso \times A_{n - 1} \times A_n &\to A_n \\
+      (x_1, \dotsc, x_{n - 1}, x_n) &\mapsto x_n
+    \end{align*}
+    and define
+    \begin{align*}
+      q : A_1 \times \dotso \times A_n &\to (A_1 \times \dotso \times A_{n - 1}) \times A_n \\
+      x &\mapsto \big( p_1 (x), p_2 (x) \big)
+    \end{align*}
+
+    Let $x, y \in A_1 \times \dotso \times A_n$. If
+    \begin{align*}
+      q (x) &= q (y) \quad\text{then} \\
+      \big( p_1 (x), p_2 (x) \big) &= \big( p_1 (y), p_2 (y) \big)
+    \end{align*}
+    so $p_1 (x) = p_1 (y)$ and $p_2 (x) = p_2 (y)$ by definition of the cartesian product of 2 sets.
+    From $p_1 (x) = p_1 (y)$, we deduce that the first $n - 1$ coordinates of $x$ and $y$ are equal, and from $p_2 (x) = p_2 (y)$
+    we deduce that their $n$-th coordinates are also equal; so $x = y$ and $q$ is injective.
+
+    Let
+    \begin{equation*}
+      x = \big( (x_1, \dotsc, x_{n - 1}), x_n \big) \in ( A_1 \times \dotso \times A_{n - 1} ) \times A_n
+    \end{equation*}
+    Take $y = (x_1, \dotsc, x_n)$; we have
+    \begin{align*}
+      p_1 (y) &= (x_1, \dotsc, x_{n - 1}) \quad\text{and} \\
+      p_2 (y) &= x_n
+    \end{align*}
+    so that $q (y) = x$ and $q$ is surjective.
+    Therefore $A_1 \times \dotso \times A_{n - 1} \times A_n$ and $( A_1 \times \dotso \times A_{n - 1} ) \times A_n$ are in bijective correspondence to each other.
+    This result justifies reasoning by induction on the number of sets in a cartesian product with index set a subset of $\mathbb{Z}_+$.
+
+  \item For $A$ and $B$ nonempty sets, define
+    \begin{align*}
+      \pi_1 : A \times B &\to A &\pi_2 : A \times B &\to B \\
+      (x, y) &\mapsto x &(x, y) &\mapsto y
+    \end{align*}
+    We will use such functions for $A = A_{2 i - 1}$ and $B = A_{2 i}$, for all $i \in \mathbb{Z}_+$. Since the domain and range are different for each $i$,
+    we get two families of distinct functions $( \pi_{1, i} )$ and $( \pi_{2, i} )$ for $i \in \mathbb{Z}_+$. In order to keep notations simple in what follows,
+    we will abusively write $\pi_1$ (respectively $\pi_2$) when we actually mean $\pi_{1, i}$ (respectively $\pi_{2, i}$) for some $i$.
+    Let
+    \begin{align*}
+      \phi : B_1 \times B_2 \times \dotsb &\to A_1 \times A_2 \times \dotsb \\
+      ( x_1, x_2, \dotsc ) &\mapsto \big( \pi_1 (x_1), \pi_2 (x_1), \pi_1 (x_2), \pi_2 (x_2), \dotsc \big)
+    \end{align*}
+    and
+    \begin{align*}
+      \psi : A_1 \times A_2 \times \dotsb &\to B_1 \times B_2 \times \dotsb \\
+      (x_1, x_2, \dotsc) &\mapsto (y_1, y_2, \dotsc) \quad\text{ where }\quad y_i = ( x_{2 i - 1}, x_{2 i} )
+    \end{align*}
+    For all $i \in \mathbb{Z}_+$, $y_i = ( x_{2 i - 1}, x_{2 i} ) = \big( \pi_1 (y_i), \pi_2 (y_i) \big))$, so
+    \begin{align*}
+      \phi \circ \psi = i_A \quad\text{ with }\quad A = A_1 \times A_2 \times \dotsb \\
+      \psi \circ \phi = i_B \quad\text{ with }\quad B = B_1 \times B_2 \times \dotsb
+    \end{align*}
+    So $\phi$ and $\psi$ are bijective and inverse of each other. From this we deduce that $A_1 \times A_2 \times \dotsb$ and
+    $( A_1 \times A_2 ) \times ( A_3 \times A_4 ) \times \dotsb$ are in bijective relation to each other.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

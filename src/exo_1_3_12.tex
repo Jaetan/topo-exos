@@ -1,0 +1,91 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{11}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $\mathbb{Z}_+$ denote the set of positive integers. Consider the following order relations on $\mathbb{Z}_+ \times \mathbb{Z}_+:$
+  \begin{enumerate}[(i)]
+  \item the dictionary order
+  \item $(x_0, y_0) < (x_1, y_1)$ if either $x_0 - y_0 < x_1 - y_1$ or $x_0 - y_0 = x_1 - y_1$ and $y_0 < y_1$
+  \item $(x_0, y_0) < (x_1, y_1)$ if either $x_0 + y_0 < x_1 + y_1$ or $x_0 + y_0 = x_1 + y_1$ and $y_0 < y_1$
+  \end{enumerate}
+  In these order relations, which elements have immediate predecessors? Does the set have a smallest element?
+  Show that all three order types are different.
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(i)]
+
+  \item For the dictionary order, for all $x, y \in \mathbb{Z}_+$, the set $\{ (a, b) \in \mathbb{Z}_+ \times \mathbb{Z}_+ \mid (x, y) < (a, b) < (x, y + 1) \}$ is empty,
+    so every element of the form $(x, y + 1)$ has an immediate predecessor. Further, for all $z \in \mathbb{Z}_+$, we have $(x, z) < (x + 1, 1)$,
+    so elements of the form $(x + 1, 1)$ do not have an immediate predecessor. Last, for all $x, y \in \mathbb{Z}_+$ such that $x > 1$ or $y > 1$ we have $(1, 1) < (x, y)$,
+    so $(1, 1)$ does not have an immediate predecessor, and is the smallest element of $\mathbb{Z}_+ \times \mathbb{Z}_+$ for the dictionary order.
+
+    In summary:
+    \begin{itemize}
+    \item only elements of the form $(x, y + 1)$ have an immediate predecessor
+    \item there is a smallest element: $(1, 1)$
+    \end{itemize}
+
+  \item For this order relation, for all $x, y \in \mathbb{Z}_+$, the set $\{ (a, b) \in \mathbb{Z}_+ \times \mathbb{Z}_+ \mid (x, y) < (a, b) < (x + 1, y + 1) \}$ is empty,
+    so every element of the form $(x + 1, y + 1)$ has an immediate predecessor.
+
+    Let $y, z \in \mathbb{Z}_+$, and $c = 1 - z$. If $(c + y, y) < (1, z)$, then $1 \leq c + y$ and $y < z$,
+    which implies $1 \leq c + y < c + z = 1$. This last condition is impossible, so any element $(x, y) < (1, z)$ must verify $x - y < 1 - z$.
+    For any $k \in \mathbb{Z}_+$, we have $k - (z + k) = -z < 1 - z$, so that $(k, z + k) < (1, z)$, from which we deduce that $(1, z)$ does not have an immediate predecessor.
+
+    Let $c' = z - 1 \geq 0$, and consider the tuple $(y, c' + y)$. To have $(y, c' + y) < (z, 1)$, we need both $c' + y < 1$ and $1 \leq y$, so that $c' + y < y$, which is impossible.
+    So any $(x, y) < (z, 1)$ must verify $x - y < z - 1$. Since for all $k \in \mathbb{Z}_+$, we have $(z, k + 1) < (z, 1)$, we deduce that $(z, 1)$ does not have an immediate predecessor.
+
+    For all $x, y \in \mathbb{Z}_+$, we have $(x, y + 1) < (x, y)$, so that $\mathbb{Z}_+ \times \mathbb{Z}_+$ with this order does not have a smallest element.
+
+    In summary:
+    \begin{itemize}
+    \item only elements of the form $(x + 1, y + 1)$ have an immediate predecessor
+    \item there is no smallest element
+    \end{itemize}
+
+  \item First, note that if $(x_1, y_1)$ is the immediate successor of $(x_0, y_0)$, then $(x_0, y_0)$ is the immediate predecessor of $(x_1, y_1)$.
+    The immediate successor of $(1, 1)$ is $(2, 1)$. Let $x, y \in \mathbb{Z}_+$ with $x > 1$. The set $\{ (a, b) \mid (x, y) < (a, b) < (x - 1, y + 1) \}$ is empty, so that
+    $(x - 1, y + 1)$ is the immediate successor of $(x, y)$. For $x, y \in \mathbb{Z}_+$, if $(x, y) < (1, 1)$, then either $x + y < 2$ or $x + y = 2$ and $y < 1$.
+    Since we also must have $x \geq 1$ and $y \geq 1$, these conditions are impossible. We conclude that $(1, 1) \leq (x, y)$.
+
+    In summary:
+    \begin{itemize}
+    \item every element but $(1, 1)$ has an immediate predecessor
+    \item there is a smallest element: $(1, 1)$
+    \end{itemize}
+
+  \end{enumerate}
+
+  Let $f$ be an order-preserving bijective map from $\mathbb{Z}_+ \times \mathbb{Z}_+$ to $\mathbb{Z}_+ \times \mathbb{Z}_+$.
+  Since $f$ is bijective, we have, for all $a, b \in \mathbb{Z}_+ \times \mathbb{Z}_+$:
+  \begin{equation*}
+    f \left( \{ x \mid a < x < b \} \right) = \{ x \mid f(a) < x < f(b) \}
+  \end{equation*}
+  so that if either set is empty, then the other is empty too. From this we deduce that $f$ preserves the immediate predecessor property.
+  Similarly,
+  \begin{equation*}
+    f \left( \{ y \mid y > x \} \right) = \{ y \mid y > f (x)\}
+  \end{equation*}
+  so that $f$ preserves the smallest element property.
+  Since any two of the above order relations do not agree on the existence of a smallest element, or the existence of an immediate predecessor,
+  there cannot be an order-preserving bijection between them, and thus these three order relations induce different order types on $\mathbb{Z}_+ \times \mathbb{Z}_+$.
+
+\end{proof}
+
+\end{document}

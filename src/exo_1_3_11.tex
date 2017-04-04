@@ -1,0 +1,44 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{10}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Show that an element in an ordered set has at most one immediate successor and at most one immediate predecessor.
+  Show that a subset of an ordered set has at most one smallest element and at most one largest element.
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $A$ be an ordered set. If $A = \varnothing$, the results above are vacuously true, so we suppose $A$ is not empty.
+
+  Let $x \in A$ and suppose $b_0$ and $b_1$ are immediate successors of $x$.
+  If $b_0 \neq b_1$, then either $b_0 < b_1$ or $b_1 < b_0$. These cases are symmetric so we can assume for example that $b_0 < b_1$.
+  Then $b_0 \in \{ y \in A \mid x < y < b_1\}$, so that $b_1$ cannot be the immediate successor of $x$.
+  From the above we deduce that $b_0 = b_1$, so that the immediate successor is unique if it exists.
+
+  A similar proof shows that the immediate predecessor of an element is unique if it exists.
+
+  Let $A$ be an ordered set, $B \subset A$ and $s_0$ and $s_1$ two smallest elements of $B$ in $A$. Then we have $s_0 \in B$ and $s_1 \in B$.
+  Since $s_0$ (resp. $s_1$) is the smallest element of $B$ in $A$, we must have $s_0 \leq s_1$ (resp. $s_1 \leq s_0$).
+  If $s_0 < s_1$, then we cannot have $s_1 \leq s_0$; and similarly, $s_1 < s_0$ is also impossible. By comparability of the order relation on $A$,
+  if $s_0 \neq s_1$ then one of $s_0 < s_1$ or $s_1 < s_0$ must be true, though. We deduce that we cannot have $s_0 \neq s_1$ either,
+  and therefore the smallest element of $B$ must be unique.
+
+  A similar proof shows that the largest element of a subset of an ordered set is unique.
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,34 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{0}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Define two points $(x_0, y_0)$ and $(x_1, y_1)$ of the plane to be equivalent if $y_0 - x_0^2 = y_1 - x_1^2$.
+  Check that this is an equivalence relation and describe the equivalence classes.
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  Let us note this relation $\mathscr{R}$.
+  The reflexivity, symmetry, and transitivity of equality imply that $\mathscr{R}$ also has these properties.
+  Thus $\mathscr{R}$ is an equivalence relation.
+
+  For all $C \in \mathbb{R}$, $y - x^2 = C$ is a parabola with focus $(0, C + 1 / 4)$ and directrix $y = C - 1 / 4$.
+  So the equivalence classes are all parabolas with $C$ in the above equations varying over $\mathbb{R}$.
+
+\end{proof}
+
+\end{document}

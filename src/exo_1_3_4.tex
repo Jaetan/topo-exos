@@ -1,0 +1,46 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{3}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $f : A \to B$ be a surjective function. Let us define a relation on $A$ by setting
+  $a_0 \sim a_1$ if
+  \begin{equation*}
+    f (a_0) = f (a_1)
+  \end{equation*}
+  \begin{enumerate}[(a)]
+  \item Show that this is an equivalence relation
+  \item Let $A^*$ be the set of equivalence classes. Show there is a bijective correspondence of $A^*$ with $B$
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+  \item The fact that every $x \in A$ has a unique image by $f$, and that equality is an equivalence relation, imply that $\sim$ is an equivalence relation on $A$.
+  \item Let $x^* \in A^*$. By definition of $\sim$, for all $y, z \in x^*$, we have $f (y) = f (z)$. So the following definition uniquely associates an image to an element,
+    and is thus a function:
+    \begin{align*}
+      \phi : A^* &\to B \\
+      x^* &\mapsto f (x)
+    \end{align*}
+    The function $\phi$ is surjective: $f$ being surjective, $\forall y \in B, \quad \exists z \in A, \quad f (x) = y$. Since $\sim$ is an equivalence relation on $A$,
+   $x \sim x$, from which we deduce that $\phi (x^*) = y$, which is the surjectivity of $\phi$.
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

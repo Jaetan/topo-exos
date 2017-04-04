@@ -1,0 +1,65 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{7}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $X$ denote the two-element set $\{ 0, 1 \}$; let $\mathscr{B}$ be the set of \emph{countable}
+  subsets of $X^\omega$. Show that $X^\omega$ and $\mathscr{B}$ have the same cardinality.
+
+\end{exercise}
+
+\begin{proof}
+
+  Let
+  \begin{align*}
+    \phi : \mathscr{B} &\to X^\omega \\
+    B &\mapsto \begin{cases}
+      (0, 0, \dotsc) &\text{ if } B = \varnothing \\
+      \beta &\text{ for some } \beta \in B \text{ otherwise }
+    \end{cases}
+  \end{align*}
+  with the added rule that if $B_1$ and $B_2$ are elements of $\mathscr{B}$ such that $B_1 = B_2$, then we choose the same element
+  in $B_1$ and $B_2$ to be the value of $\phi (B_1) = \phi (B_2)$. This rule is necessary to make $\phi$ a function, and is possible
+  with the axiom of choice. For all $x \in X^\omega$, we have $\phi ( \{ x \}) = x$, so $\phi$ is surjective.
+
+  For all nonempty $B = \{ b_1, b_2, \dotsc \} \in \mathscr{B}$, we note $b_p = (b_{p, 1}, b_{p, 2}, \dotsc )$ for all $p \in \mathbb{Z}_+$.
+  Since $\mathbb{Z}_+ \times \mathbb{Z}_+$ is countable, let $\sigma : \mathbb{Z}_+ \to \mathbb{Z}_+ \times \mathbb{Z}_+$ be a bijection,
+  and let $\psi : X^\omega \to \mathscr{B}$ be defined by:
+  \begin{itemize}
+
+    \item $\psi \big( (0, 0, \dotsc) \big) = \varnothing$
+
+    \item Otherwise, let $x = (x_1, x_2, \dotsc) \in X^\omega$ and $S$ be the subset of $\mathbb{Z}_+$ of all integers $p$ such that,
+      for $a \geq p$, any $b$, and $\sigma (i) = (a, b)$, $x_i = 0$.
+      If $S$ is nonempty, it has a smallest element $n$. Let then $\psi (x) = \{ b_1, b_2, \dotsc, b_n \}$ with $b_{p, q} = x_i$ for $(p, q) = \sigma (i)$.
+      Since $\sigma$ is bijective, the $b_{p, q}$ are defined for all $q$ and all $p \leq n$, so each $b_p$ is an element of $X^\omega$ as expected.
+
+    \item Otherwise, if $S$ is empty, define $b_{p, q} = x_i$ for $\sigma (i) = (p, q)$ and let $\psi (x) = \{ b_1, b_2, \dotsc \}$.
+      There are countably many $x_i$, and $\sigma$ is bijective, so there are countably many $b_i$. As a consequence, $\psi (x)$ is an element of $\mathscr{B}$ as expected.
+
+  \end{itemize}
+  The function $\psi$ is surjective. Let $B \in \mathscr{B}$; if $B = \varnothing$, then $B = \psi \big( (0, 0, \dotsc) \big)$.
+  If $B = \{ b_1, b_2, \dotsc, b_n \}$, let $x = (x_1, x_2, \dotsc)$ with $x_i = b_{p, q}$ for $p \leq n$ and $\sigma (i) = (p, q)$ and $x_i = 0$ otherwise.
+  Then $\psi (x) = \{ b_1, b_2, \dotsc, b_n \}$. Finally, if $B = \{ b_1, b_2, \dotsc \}$ is countably infinite, let $x = (x_1, x_2, \dotsc)$ with $x_i = b_{p, q}$
+  for $\sigma (i) = (p, q)$. For such an $x$ we have $\psi (x) = B$.
+
+  Since the exists a surjection from $X^\omega$ to $\mathscr{B}$, there exists an injection from $\mathscr{B}$ to $X^\omega$.
+  And since there exists a surjection from $\mathscr{B}$ to $X^\omega$, there exists an injection from $X^\omega$ to $\mathscr{B}$.
+  Finally, since there exist injections both from $X^\omega$ to $\mathscr{B}$ and from $\mathscr{B}$ to $X^\omega$, there exists a bijection
+  from $\mathscr{B}$ to $X^\omega$, so that $\mathscr{B}$ and $X^\omega$ have the same cardinality (and in particular, $\mathscr{B}$ is uncountable).
+
+\end{proof}
+
+\end{document}

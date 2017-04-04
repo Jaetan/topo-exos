@@ -1,0 +1,45 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{3}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Prove by induction that given $n \in \mathbb{Z}_+$, every nonempty subset of $\{ 1, 2, \dotsc, n \}$ has a largest element
+  \item Explain why you cannot conclude from (a) that every nonempty subset of $\mathbb{Z}_+$ has a largest element
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{itemize}[(a)]
+
+  \item Let $A$ be the subset of $\mathbb{Z}_+$ such that $\forall n \in A$, every nonempty subset of $\{ 1, 2, \dotsc, n \}$ has a largest element.
+    Then $1 \in A$ since the only nonempty subset of $\{ 1 \}$ is itself, and $1$ is thus its largest element. Suppose that $n \in A$, and consider
+    a nonempty subset $A_0$ of $\{ 1, 2, \dotsc, n + 1 \}$. If $n + 1 \in A_0$, then it is the largest element of $A_0$.
+    Otherwise, $A_0 \cap \{ 1, 2, \dotsc, n \}$ is nonempty and $n \in A$, so that $A_0$ has a largest element.
+    By induction we deduce that $A = \mathbb{Z}_+$.
+
+  \item The previous point showed that every nonempty subset of $\mathbb{Z}_+$ that has an upper bound has a largest element.
+    There are nonempty subsets of $\mathbb{Z}_+$ that do not have an upper bound, for example $\mathbb{Z}_+$ itself, so the result would not hold
+    for any nonempty subset of $\mathbb{Z}_+$. \qedhere
+
+  \end{itemize}
+
+\end{proof}
+
+\end{document}

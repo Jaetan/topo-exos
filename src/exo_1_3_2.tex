@@ -1,0 +1,31 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{1}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $C$ be a relation on a set $A$. If $A_0 \subset A$, define the \emph{restriction} of $C$ to $A_0$ to be the relation $C \cap (A_0 \times A_0)$.
+  Show that the restriction of an equivalence relation is an equivalence relation.
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  Let $A_0 \subset A$ and $x, y, z \in A_0$. The reflexivity, symmetry and transitivity of the restriction of $C$ to $A_0$ come from considering
+  $x, y, z$ as elements of $A$, applying the corresponding property of $C$, and remarking that all the elements involved were in $A_0$. This implies
+  that the properties already hold in $A_0$.
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,55 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{4}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Which of the following subsets of $\mathbb{R}^\omega$ can be expressed as the cartesian product of subsets of $\mathbb{R}$?
+  \begin{enumerate}[(a)]
+  \item $\{ \mathbf{x} \mid x_i \text{ is an integer for all } i \}$
+  \item $\{ \mathbf{x} \mid x_i \geq i \text{ for all } i \}$
+  \item $\{ \mathbf{x} \mid x_i \text{ is an integer for all } i \geq 100 \}$
+  \item $\{ \mathbf{x} \mid x_2 = x_3 \}$
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+  
+  \begin{enumerate}[(a)]
+
+  \item Let $A = \{ \mathbf{x} \mid x_i \text{ is an integer for all } i \}$; then for all $i$, $x_i \in \mathbb{Z}_+$ so that $A \subset \mathbb{Z}_+^\omega$.
+    Conversely, for $x \in \mathbb{Z}_+^\omega$, $x_i$ is an integer by definition of $\mathbb{Z}_+^\omega$, so $A = \mathbb{Z}_+^\omega$.
+
+  \item Let $A = \{ \mathbf{x} \mid x_i \geq i \text{ for all } i \}$, and let $B = \prod_{i \in \mathbb{Z}_+} [i, {+\infty})$.
+    Then for all $i$ and $y \in [i, {+\infty})$, $y \geq i$, so we can take $x_i \in [i, {+\infty})$ to satisfy the condition in $A$. Therefore $B \subset A$.
+    Conversely, for all $\mathbf{x} \in A$ and all $i \in \mathbb{Z}_+$, we have $x_i \geq i$, so that $x_i \in [i, {+\infty})$, from which we conclude that $B = A$.
+
+  \item Let $A = \{ \mathbf{x} \mid x_i \text{ is an integer for all } i \geq 100 \}$, and let $B = \mathbb{R}^{99} \times \mathbb{Z}_+^\omega$.
+    For all $\mathbf{x} \in B$, $x_i$ is an integer if $i \geq 100$, so $B \subset A$.
+    Conversely, for all $\mathbf{x} \in A$, the first $99$ coordinates of $\mathbf{x}$ are only required to be real numbers, so that $\mathbf{x} \in B$, and $B = A$.
+
+  \item Let $A = \{ \mathbf{x} \mid x_2 = x_3 \}$, and suppose there exist $A_1, A_2, \dotsc$ subsets of $\mathbb{R}$ such that $A = A_1 \times A_2 \times \dotsb$.
+    For all $\mathbf{x} \in A$, we have $x_2 = x_3$, so that $A_2 = A_3$. Suppose that $A_2$ contains at least 2 elements $a$ and $b$.
+    Then the $\omega$-tuple $(x_1, a, b, x_4, \dotsc)$ is an element of $A_1 \times A_2 \times \dotsb$, but is not an element of $A$. So $A_2$ has at most 1 element.
+    Suppose there exists $a \in A_2$. Let $\mathbf{x} = ( x_1, a, a, x_4, \dotsc )$ and $\mathbf{y} = (x_1, a + 1, a + 1, x_4, \dotsc)$ for some $x_1, x_4, \dotsc$ elements of $\mathbb{R}$.
+    Then both $\mathbf{x}$ and $\mathbf{y}$ are elements of $A$, but $\mathbf{y}$ is not an element of $A_1 \times A_2 \times \dotsb$. So $A_2$ must be empty,
+    in which case (because of the axiom of choice), $A_1 \times A_2 \times \dotsb = \varnothing$. Last, note that $(0, 0, 0, \dotsc) \in A$ so $A \neq \varnothing$.
+    Therefore, $A \neq A_1 \times A_2 \times \dotsb$ for any subsets $A_1, A_2, \dotsc$ of $\mathbb{R}$.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

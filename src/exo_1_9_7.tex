@@ -1,0 +1,69 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{6}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $A$ and $B$ be two nonempty sets. If there is an injection of $B$ into $A$,
+  but no injection of $A$ into $B$, we say that $A$ has \emph{greater cardinality} than $B$.
+  \begin{enumerate}[(a)]
+
+  \item Conclude from Theorem 9.1 that every uncountable set has greater cardinality than $\mathbb{Z}_+$.
+  \item Show that if $A$ has greater cardinality than $B$, and $B$ has greater cardinality than $C$,
+    the $A$ has greater cardinality than $C$.
+  \item Find a sequence $A_1, A_2, \dotsc$ of infinite sets such that for each $n \in \mathbb{Z}_+$,
+    the set $A_{n + 1}$ has greater cardinality than $A_n$.
+  \item Find a set that for every $n$ has a greater cardinality than $A_n$.
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Let $A$ be an uncountable set. Since every finite set is countable, $A$ must be infinite.
+    From theorem 9.1, we deduce that there exists an injection $f : \mathbb{Z}_+ \to A$.
+    Since $A$ is uncountable, there is no injection from $A$ into $\mathbb{Z}_+$,
+    and therefore $A$ has greater cardinality than $\mathbb{Z}_+$.
+
+  \item Suppose that $A$ has greater cardinality than $B$ and $B$ has greater cardinality than $C$,
+    and let $f : B \to A$ and $g : C \to B$ be injections. Then $f \circ g$ is an injection of $C$ into $A$.
+    Suppose that there exists an injection $h : A \to C$, and let $h' = h | f ( B )$ and $f' : B \to f ( B )$, $x \mapsto f (x)$.
+    $f'$ is a bijection, so $h' \circ f' : B \to C$ is an injection. This is a contradiction with $B$ having greater cardinality than $C$,
+    so such an $h$ does not exist, and therefore $A$ has greater cardinality than $C$.
+
+  \item Define a sequence of sets by
+    \begin{align*}
+      A_1 &= \mathbb{Z}_+ \\
+      A_{n + 1} &= \mathscr{P} ( A_n ) &\text{ for all } n \in \mathbb{Z}_+
+    \end{align*}
+    For all $n$, we have $A_n \in A_{n + 1}$, so that $f_n : A_n \to A_{n + 1}$, $x \mapsto \{ x \}$ is an injection of $A_n$ into $A_{n + 1}$.
+    However, there is no injection of $\mathscr{P} ( A_n )$ into $A_n$, so $A_{n + 1}$ has greater cardinality than $A_n$.
+
+    \item Let
+    \begin{equation*}
+      A = \cup_{n \in \mathbb{Z}_+} A_n
+    \end{equation*}
+    For all $n \in \mathbb{Z}_+$, $A_n \subset A$, so the function $i_n : A_n \to A$, $x \mapsto x$ is an injection.
+    Suppose that there is an injection $h : A \to A_m$ for some $m \in \mathbb{Z}_+$. Then $h \circ i_{m + 1}$ is an injection
+    of $A_{m + 1}$ into $A_m$, which contradicts the fact that $A_{m + 1}$ has greater cardinality than $A_m$.
+    Therefore $A$ has greater cardinality than every $A_n$.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

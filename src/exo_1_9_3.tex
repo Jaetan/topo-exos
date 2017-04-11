@@ -1,0 +1,56 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{2}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Suppose that $A$ is a set and $\{ f_n \}_{n \in \mathbb{Z}_+}$ is a given indexed family of injective functions
+  \begin{equation*}
+    f_n : \{ 1, \dotsc, n \} \to A
+  \end{equation*}
+  Show that $A$ is infinite. Can you define an injective function $f : \mathbb{Z}_+ \to A$ without using the choice axiom?
+
+\end{exercise}
+
+\begin{proof}
+
+  For all $n \in \mathbb{Z}_+$, note $F_n = f_n ( S_{n + 1} )$.
+  Define $f$ recursively by
+  \begin{align*}
+    f (1) &= f_1 (1) \\
+    f (n + 1) &= f_{n + 1} (j) \\
+    &\text{ with } j = \min \big\{ i \in S_{n + 2} \mid f_{n + 1} (i) \notin \{ f (1), \dotsc, f (n) \} \big\}
+  \end{align*}
+  Let us verify that this defines an injective function.
+
+  For all $n \in \mathbb{Z}_+$, we note $G_n = \{ f (1), \dotsc, f (n) \} = f | S_{n + 1} ( S_{n + 1} )$.
+  Let $\mathscr{A}$ be the set of positive integers such that $f | S_{n + 1}$ is injective.
+  We have $1 \in \mathscr{A}$ since $f | \{ 1 \} = f_1$ is injective.
+  Suppose that $n \in \mathscr{A}$; the definition of $f$ gives $f (n + 1) \in F_{n + 1}$.
+  Since $f_{n + 1}$ is injective, the set $F_{n + 1}$ has $n + 1$ elements. From the inductive hypothesis, the set $G_n$ has
+  $n$ elements. Therefore there exists some $j \in S_{n + 2}$ such that $f_{n + 1} (j) \notin G_n$.
+  The set $B = \{ i \in S_{n + 2} \mid f_{n + 1} (i) \notin G_n \}$ is nonempty, and, as a subset of the well-ordered set $\mathbb{Z}_+$,
+  has a smallest element $j_0 = f (n + 1)$. From the above we have $f (n + 1) \notin \{ f (1), \dotsc, f (n) \}$, so that $f | S_{n + 2}$ is injective,
+  and $n + 1 \in \mathscr{A}$.
+  We deduce that $\mathscr{A}$ is inductive, and therefore $\mathscr{A} = \mathbb{Z}_+$.
+
+  Let $i, j \in \mathbb{Z}_+$ such that $i \neq j$. By switching the roles of $i$ and $j$ if needed, we can suppose that $i < j$.
+  The function $f|\{ 1, \dotsc, j \}$ is injective, so that $f (i) \neq f (j)$, and therefore $f$ is injective.
+
+  Since there exists an injection $f : \mathbb{Z}_+ \to A$, the set $A$ is infinite.
+  Moreover, the definition of $f$ does not use the axiom of choice.
+
+\end{proof}
+
+\end{document}

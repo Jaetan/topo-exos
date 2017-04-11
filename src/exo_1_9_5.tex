@@ -1,0 +1,65 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{4}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  \begin{enumerate}[(a)]
+
+  \item Use the choice axiom to show that if $f : A \to B$ is surjective, then $f$ has a right inverse $h : B \to A$.
+  \item Show that if $f : A \to B$ is injective and $A$ is not empty, then $f$ has a left inverse. Is the axiom of choice needed?
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Let $f : A \to B$ be a surjective function. Since $f$ is a function, $B$ is nonempty.
+    For all $b \in B$, $f^{-1} ( \{ b \} )$ is nonempty. Let $\mathscr{B} = \big\{ f^{-1} ( \{ b \} ), b \in B \big\}$; there exists a choice function
+    $c : \mathscr{B} \to \cup_{D \in \mathscr{B}} D$ such that for all $D \in \mathscr{B}$, $c (D) \in D$. Let
+    \begin{align*}
+      h : B &\to A \\
+      b &\mapsto c \left( f^{-1} \left( \{ b \} \right)\right)
+    \end{align*}
+    Let $x \in B$, we have $f \circ f^{-1} ( \{ x \} ) = \{ x \}$ since $f$ is surjective.
+    Since $h ( x ) \in f^{-1} ( \{ x \} )$, we have $f \circ h ( x ) \in f \circ f^{-1} ( \{ x \} ) = \{ x \}$, from which we deduce that
+    $f \circ h (x) = x$. The function $f$ has a right inverse $h$.
+
+  \item Let $f : A \to B$ be an injective function with $A \neq \varnothing$.
+    $f$ is surjective from $A$ to $f (A)$, and therefore $g : A \to f (A)$, $x \mapsto f (x)$ is a bijection.
+    Let $x \in A$ and define
+    \begin{align*}
+      h : B &\to A \\
+      y &\mapsto \begin{cases}
+        g^{-1} (y) &\text{ if } y \in f ( A ) \\
+        x &\text{ otherwise }
+      \end{cases}
+    \end{align*}
+    The function $h$ is a left inverse of $f$: let $z \in A$, we have
+    \begin{align*}
+      h \circ f ( z ) &= g^{-1} \big( f ( z ) \big) &\text{ since } f ( z ) \in f ( A ) \\
+      &= z &\text{ by definition of } g
+    \end{align*}
+    Note that defining $g$ does not require the axiom of choice. But to be able to define $k \circ f$ for some function $k$,
+    we need the range of $f$ to be equal to the domain of $k$. So to define $h$, we need to use the axiom of choice to pick a value for $x \in A$,
+    although that value is not used to compute the value of $h \circ f$ at some $z \in A$. This is consistent with the fact that a left inverse is not unique.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

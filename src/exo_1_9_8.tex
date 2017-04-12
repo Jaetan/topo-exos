@@ -1,0 +1,102 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{7}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Show that $\mathscr{P} ( \mathbb{Z}_+ )$ and $\mathbb{R}$ have the same cardinality.
+  [ \emph{Hint:} you may usr the fact that every real number has a decimal expansion, which is unique if
+  expansions that end in an infinite string of $9$s are forbidden. ]
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{description}
+
+    \item[Injection of $\mathbb{R}$ into $\mathscr{P} ( \mathbb{Z}_+ )$] \hspace{0pt}\\
+      For all $x \in [ 0, 1 ]$, we admit that $x$ has a unique proper base $2$ development noted $\left( 0 , x_1 x_2 \dotsc \right)_2$,
+      with $x_i \in \{ 0, 1 \}$ for all $i \in \mathbb{Z}_+$, and such that for all $i \in \mathbb{Z}_+$ there exists $j > i$ such that $x_j = 0$.
+      Let
+      \begin{align*}
+        \phi : ( 0, 1 ) &\to \mathscr{P} ( \mathbb{Z}_+ ) \\
+        x = \left( 0 , x_1, x_2 \dotsc \right)_2 &\mapsto \{ i \in \mathbb{Z}_+ \mid x_i = 1 \}
+      \end{align*}
+      The unicity of the proper base $2$ development of $x$ implies that if $x, y$ are elements of $( 0, 1 )$ such that $x \neq y$, then there exists $j \in \mathbb{Z}_+$
+      such that $x_j \neq y_j$; so that $j \notin \phi ( x ) \cap \phi ( y )$, from which we deduce that $\phi$ is injective.
+
+      Note that $\phi$ is not surjective: suppose that there exists $x = \left( 0, x_1, x_2 \dotsc \right)_2$ such that $\phi ( x ) = \mathbb{Z}_+$.
+      If $x_i = 0$ for some $i \in \mathbb{Z}_+$, then $i \notin \phi ( x ) = \mathbb{Z}_+$, which is a contradiction. Therefore $x_i = 1$ for all $i$,
+      so that $\left( 0 , x_1 x_2 \dotsc \right)_2$ is not a proper base $2$ development.
+
+      Let
+      \begin{align*} \label{def:bij_R_01}
+        \theta : \mathbb{R} &\to ( 0, 1 ) \\
+        x &\mapsto \frac{1}{2} + \frac{1}{\pi} \arctan \left( x \right)
+      \end{align*}
+      $\theta$ is a bijection, and thus $\phi \circ \theta$ is an injection of $\mathbb{R}$ into $\mathscr{P} ( \mathbb{Z}_+ )$.
+
+    \item[Injection of $\mathscr{P} ( \mathbb{Z}_+ )$ into $\mathbb{R}$] \hspace{0pt}\\
+      Let $X$ be a nonempty subset of $\mathbb{Z}_+$. For all $n \in \mathbb{Z}_+$, let
+      \begin{equation*}
+        S_n ( X ) = \sum_{i \in X \cap \{ 1, \dotsc, n \}} 2^{- i}
+      \end{equation*}
+      We have
+      \begin{equation*}
+        0 \leq S_n ( X ) \leq S_{n + 1} ( X ) \leq \sum_{i \in \{ 1, \dotsc, n + 1 \}} 2^{- i} \leq 1
+      \end{equation*}
+      so that the sequence $S_n ( X )$ converges to some real number $S ( X )$ in $[ 0, 1 ]$.
+      For all $n \in \mathbb{Z}_+$, let $Q_n = \{ i \in \mathbb{Z}_+ \mid i \geq n \}$, and
+      \begin{align*}
+        \psi : \mathscr{P} ( \mathbb{Z}_+ ) &\to \mathbb{R} \\
+        X &\mapsto \begin{cases}
+          0 &\text{ if } X = \varnothing \\
+          S ( X ) &\text{ if } Q_n \not\subset X \text{ for all } n \\
+          1 + S ( X ) &\text{ otherwise }
+        \end{cases}
+      \end{align*}
+      Let $X, Y$ be subsets of $\mathbb{Z}_+$ such that $X \neq Y$. Switching the roles of $X$ and $Y$ if necessary,
+      we can suppose that $X - Y \neq \varnothing$. Let $i \in X - Y$; if $Y = \varnothing$, then $\psi ( Y ) = 0 < 2^{- i} \leq \psi ( X )$,
+      so $\psi ( X ) \neq \psi ( Y )$. Otherwise, if there is some $n$ such that $Q_n \subset Y$, but for all $n$, $Q_n \not\subset X$, then
+      $\psi ( X ) \leq 1 < 1 + \sum_{i \in Q_n} 2^{- i} \leq \psi ( Y )$, so that $\psi ( X ) \neq \psi ( Y )$.
+      The same reasoning applies if $X$ contains some $Q_n$ but $Y$ does not contain any.
+
+      Otherwise, suppose that neither $X$ nor $Y$ contains any $Q_n$, and let $m = \min ( X - Y )$.
+      Switching the roles of $X$ and $Y$ if necessary, we can suppose that $x_m = 1$. For all $i < m$, we have $x_i = y_i$, so that
+      \begin{align*}
+        0 \leq \psi ( Y ) &< \sum_{i \in \{ 1, \dotsc, m - 1 \} \cap Y} 2^{- i} + \sum_{i > m} 2^{- i} &\text{ since } Q_{m + 1} \not\subset Y \\
+        &= \sum_{i \in \{ 1, \dotsc, m - 1 \} \cap X} + 2^{- m} &\text{ since } x_i = y_i \text{ for } i < m \\
+        &\leq \psi ( X )
+      \end{align*}
+      From this we deduce that $\psi ( X ) \neq \psi ( Y )$.
+
+      The last case to check is when there is some positive $n$ such that $Q_n \subset X$ and some $p$ such that $Q_p \subset Y$.
+      Again let $m = \min (X - Y)$, and suppose that $x_m = 1$, switching the roles of $X$ and $Y$ if necessary. Then
+      \begin{align*}
+        \psi ( Y ) &\leq 1 + \sum_{i \in \{ 1, \dotsc, m - 1 \} \cap Y} 2^{- i} + \sum_{i > m} 2^{- i} \\
+        &< 1 + \sum_{i \in \{ 1, \dotsc, m - 1 \} \cap X} 2^{- i} + 2^{- m} \\
+        &\leq \psi ( X )
+      \end{align*}
+      and we have $\psi ( X ) \neq \psi ( Y )$.
+
+      From the above, we deduce that $\psi$ is injective.
+
+  \end{description}
+
+  Since there exists an injection of $\mathbb{R}$ into $\mathscr{P} ( \mathbb{Z}_+ )$, and an injection of $\mathscr{P} ( \mathbb{Z}_+ )$ into $\mathbb{R}$,
+  there exists a bijection from $\mathscr{P} ( \mathbb{Z}_+ )$ to $\mathbb{R}$, so that they have the same cardinality.
+
+\end{proof}
+
+\end{document}

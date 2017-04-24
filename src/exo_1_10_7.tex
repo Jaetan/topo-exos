@@ -1,0 +1,82 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+\setlength{\parindent}{15pt}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{6}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem*{theorem}{Theorem}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $J$ be a well-ordered set. A subset $J_0$ of $J$ is said to be \emph{inductive} if for every $\alpha \in J$,
+  \begin{equation*}
+    ( S_\alpha \subset J_0 ) \implies \alpha \in J_0
+  \end{equation*}
+
+  \begin{theorem}
+    (The principle of transfinite induction). If $J$ is a well-ordered set and $J_0$ is an inductive subset of $J$, then $J_0 = J$.
+  \end{theorem}
+
+\end{exercise}
+
+\begin{proof}
+
+  Given an element $x \in J$, we denote by $x + 1$ the immediate successor of $x$, if it exists, and by $x - 1$ the
+  immediate predecessor of $x$, if it exists. Let $J_0$ be an inductive subset of $J$.
+
+  If $J = \varnothing$, then the only subset of $J$ is $J_0 = J = \varnothing$, which is inductive. Suppose then that $J$ is nonempty.
+  Since $J$ is well-ordered, it has a smallest element $m$.
+
+  Let $A = \{ x \in J \mid S_x \subset J_0 \}$. From the inductivity of $J_0$, we deduce that $A \subset J_0$.
+  Since $S_m = \varnothing \subset J_0$, we have $m \in A$ so $A$ is nonempty.
+  Let $x \in A$; for all $y < x$ we have $S_y \subset S_x \subset J_0$, and by inductivity of $J_0$, we conclude that $y \in A$, so
+  \begin{equation} \label{A_has_all_sections}
+    \forall x \in A, \quad S_x \subset A
+  \end{equation}
+
+  Let $x, y \in J$ such that $y < x$. From $S_y \subset S_x$, we deduce that $\cup_{y < x} \, S_y \subset S_x$. Conversely, let $z \in S_x$.
+  Suppose that $x$ does not have an immediate predecessor; then there exists $a \in J$ such that $z < a < x$, so that $z \in S_a \subset \cup_{y < x} \, S_y$.
+  Therefore
+  \begin{equation} \label{section_structure}
+    \forall x \in A, \quad S_x = \begin{cases}
+      S_{x - 1} \cup \{ x - 1 \} &\text{if } x - 1 \text{ exists} \\
+      \bigcup_{y < x} S_y &\text{otherwise}
+    \end{cases}
+  \end{equation}
+
+  Suppose that $J - A \neq \varnothing$ and let $M \in J - A$. If there exists $y \in A$ such that $y > M$, then \eqref{A_has_all_sections}
+  implies that $S_y \subset A$, so that $M \in A$, which is a contradiction. Therefore for all $y \in A$, we have $y < M$.
+  Let then $u$ be the least upper bound of $A$ in $J$.
+  \begin{itemize}
+
+  \item If $u$ has an immediate predecessor, then $u - 1 \in A$, for otherwise, we have $y < u - 1$ for all $y$ in $A$ which contradicts
+    the fact that $u$ is the least upper bound of $A$.
+
+    Since $u - 1 \in A$, then from \eqref{section_structure} we deduce that $S_u \subset J_0$, which implies that $u \in A$.
+
+  \item Otherwise, $u$ does not have an immediate predecessor. If $x \in S_u$, then there exists $y \in A$ such that $x < y < u$
+    (otherwise, $u$ would not be the least upper bound of $A$ in $J$), so that \eqref{section_structure} gives us $S_u = \cup_{x \in A} \, S_x$.
+    From this we deduce that $S_u \subset J_0$, and $u \in A$.
+
+  \end{itemize}
+
+  Since $u \in A$, then $u$ is not the largest element of $J$ (otherwise $J - A$ would be empty). Therefore $u$ has an immediate successor,
+  for which $S_{u + 1} = S_u \cup \{ u \} \subset J_0$, so that $u + 1 \in A$, contrary to the hypothesis that $u$ is an upper bound for $A$.
+
+  Therefore $J = A$, and since $A \subset J_0$, we conclude that $J_0 = J$.
+
+\end{proof}
+
+\end{document}

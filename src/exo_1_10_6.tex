@@ -1,0 +1,81 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{5}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $S_\Omega$ be the minimal uncountable well-ordered set.
+  \begin{enumerate}[(a)]
+  \item Show that $S_\Omega$ has no largest element.
+  \item Show that for every $\alpha \in S_\Omega$, the subset $\{ x | \alpha < x \}$ is uncountable.
+  \item Let $X_0$ be the subset of $S_\Omega$ consisting of all elements $x$ such that $x$ has no immediate predecessor.
+    Show that $X_0$ is uncountable.
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item Suppose $S_\Omega$ has a largest element $M$. Then the section $S_M$ is countable, and
+    the set $\bar{S}_M = S_M \cup \{ M \}$ is also countable. For all $x \in S_\Omega$, we have $x \leq M$,
+    so that $S_\Omega \subset \bar{S}_M$ is countable. This is a contradiction, so $S_\Omega$ does not have a largest element.
+
+  \item Let $\alpha \in S_\Omega$, and $\bar{S}_\alpha = S_\alpha \cup \{ \alpha \}$. Let $x \in S_\Omega$, $x$ is comparable with $\alpha$,
+    so that exactly one of the following conditions is true: $x = \alpha$, or $x < \alpha$, or $\alpha < x$. From this we deduce that
+    $S_\Omega = \bar{S}_\alpha \cup \{ x | \alpha < x \}$. As the finite union of countable sets, $\bar{S}_\alpha$ is countable.
+    Since $S_\Omega$ is uncountable, $\{ x | \alpha < x \}$ must also be uncountable.
+
+  \item Suppose that $X_0$ is countable, then it has an upper bound $m$ in $S_\Omega$. Since $S_\Omega$ does not have a largest element,
+    $m$ has an immediate successor $\alpha_1$. By induction over $n \in \mathbb{Z}_+$, we define a function
+    \begin{align*}
+      \alpha : \mathbb{Z}_+ &\to S_\Omega \\
+      n &\mapsto \begin{cases}
+        \alpha_1 &\text{if } n = 1 \\
+        \text{the immediate successor of } \alpha_{n - 1} &\text{otherwise}
+      \end{cases}
+    \end{align*}
+    Note that, since $S_\Omega$ does not have a largest element, the immediate successor of $\alpha_n$ exists for all $n \in \mathbb{Z}_+$,
+    so that the rule above defines a unique function $\alpha : \mathbb{Z}_+ \to S_\Omega$.
+    Let $A = \{ \alpha_n, n \in \mathbb{Z}_+ \}$, $\alpha$ is a surjection from $\mathbb{Z}_+$ onto $A$, so $A$ is a countable subset of $S_\Omega$.
+    Therefore $A$ has an upper bound in $S_\Omega$, and since $S_\Omega$ is a well-ordered set, $A$ has a least upper bound $u \in S_\Omega$
+    which verifies
+    \begin{equation} \label{u_greater_than_m}
+      m < \alpha_1 < \alpha_2 < \dotsb \leq u
+    \end{equation}
+
+    Suppose that there exists $p \in \mathbb{Z}_+$ such that $\alpha_p = u$. Then as the immediate successor of $\alpha_p$, $\alpha_{p + 1}$ must verify
+    $\alpha_{p + 1} > u$, which contradicts the fact that $u$ is an upper bound for $A$. Therefore
+    \begin{equation} \label{u_strict_upper_bound}
+      \forall n \in \mathbb{Z}_+, \quad \alpha_n < u.
+    \end{equation}
+
+    Suppose that $u$ has an immediate predecessor $v$.
+
+    If there exists $r \in \mathbb{Z}_+$ such that $v < \alpha_r$, then from \eqref{u_strict_upper_bound}, we deduce that $\alpha_r < u$,
+    which contradicts the fact that $v$ is the immediate predecessor of $u$. Therefore
+    \begin{equation*}
+      \forall n \in \mathbb{Z}_+, \quad \alpha_n \leq v
+    \end{equation*}
+    and this last proposition contradicts the fact that $u$ is the least upper bound of $A$.
+
+    From the above we deduce that $u$ does not have an immediate predecessor, which implies that $u \in X_0$, and therefore $u \leq m$.
+    This contradicts \eqref{u_greater_than_m}, so $X_0$ does not have an upper bound in $S_\Omega$ and is therefore an uncountable subset of $S_\Omega$.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

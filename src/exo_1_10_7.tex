@@ -33,49 +33,23 @@
 
 \begin{proof}
 
-  Given an element $x \in J$, we denote by $x + 1$ the immediate successor of $x$, if it exists, and by $x - 1$ the
-  immediate predecessor of $x$, if it exists. Let $J_0$ be an inductive subset of $J$.
+  Let $x \in J$. If $x$ has an immediate predecessor $y$, then $S_x = S_y \cup \{ y \}$.
+  Otherwise, let $A_x = \cup_{y < x} S_y$. If $x_0 \in S_x$, then there exists $y \in S_x$ such that $x_0 < y$,
+  since $x$ does not have an immediate predecessor. From this we deduce that $x_0 \in A_x$. Conversely, if $x_0 \in A_x$,
+  then there exists $y < x$ such that $x_0 \in S_y \subset S_x$. Therefore $A_x = S_x$.
 
-  If $J = \varnothing$, then the only subset of $J$ is $J_0 = J = \varnothing$, which is inductive. Suppose then that $J$ is nonempty.
-  Since $J$ is well-ordered, it has a smallest element $m$.
+  If $J = \varnothing$, then the only subset of $J$ is $J_0 = J = \varnothing$, which is inductive. Suppose then that $J \neq \varnothing$,
+  and that there exists $x \in J - J_0$. Since J is well-ordered, there exists a smallest such element $\alpha$.
 
-  Let $A = \{ x \in J \mid S_x \subset J_0 \}$. From the inductivity of $J_0$, we deduce that $A \subset J_0$.
-  Since $S_m = \varnothing \subset J_0$, we have $m \in A$ so $A$ is nonempty.
-  Let $x \in A$; for all $y < x$ we have $S_y \subset S_x \subset J_0$, and by inductivity of $J_0$, we conclude that $y \in A$, so
-  \begin{equation} \label{A_has_all_sections}
-    \forall x \in A, \quad S_x \subset A
-  \end{equation}
+  If $\alpha$ has an immediate predecessor $\beta$, then $S_\alpha = S_\beta \cup \{ \beta \}$. For all $x < \alpha$, we have
+  $x \in J_0$, so that $S_\beta \subset J_0$ and $\beta \in J_0$. Since $J_0$ is inductive, we deduce that $\alpha \in J_0$,
+  which is a contradiction.
 
-  Let $x, y \in J$ such that $y < x$. From $S_y \subset S_x$, we deduce that $\cup_{y < x} \, S_y \subset S_x$. Conversely, let $z \in S_x$.
-  Suppose that $x$ does not have an immediate predecessor; then there exists $a \in J$ such that $z < a < x$, so that $z \in S_a \subset \cup_{y < x} \, S_y$.
-  Therefore
-  \begin{equation} \label{section_structure}
-    \forall x \in A, \quad S_x = \begin{cases}
-      S_{x - 1} \cup \{ x - 1 \} &\text{if } x - 1 \text{ exists} \\
-      \bigcup_{y < x} S_y &\text{otherwise}
-    \end{cases}
-  \end{equation}
+  Suppose then that $\alpha$ does not have an immediate predecessor, then $S_\alpha = \cup_{x < \alpha} S_x$. For all $x < \alpha$, we have
+  $x \in J_0$ so that $\cup_{x < \alpha} S_x \subset J_0$, and, from the inductivity of $J_0$, $\alpha \in J_0$, which is again
+  a contradiction.
 
-  Suppose that $J - A \neq \varnothing$ and let $M \in J - A$. If there exists $y \in A$ such that $y > M$, then \eqref{A_has_all_sections}
-  implies that $S_y \subset A$, so that $M \in A$, which is a contradiction. Therefore for all $y \in A$, we have $y < M$.
-  Let then $u$ be the least upper bound of $A$ in $J$.
-  \begin{itemize}
-
-  \item If $u$ has an immediate predecessor, then $u - 1 \in A$, for otherwise, we have $y < u - 1$ for all $y$ in $A$ which contradicts
-    the fact that $u$ is the least upper bound of $A$.
-
-    Since $u - 1 \in A$, then from \eqref{section_structure} we deduce that $S_u \subset J_0$, which implies that $u \in A$.
-
-  \item Otherwise, $u$ does not have an immediate predecessor. If $x \in S_u$, then there exists $y \in A$ such that $x < y < u$
-    (otherwise, $u$ would not be the least upper bound of $A$ in $J$), so that \eqref{section_structure} gives us $S_u = \cup_{x \in A} \, S_x$.
-    From this we deduce that $S_u \subset J_0$, and $u \in A$.
-
-  \end{itemize}
-
-  Since $u \in A$, then $u$ is not the largest element of $J$ (otherwise $J - A$ would be empty). Therefore $u$ has an immediate successor,
-  for which $S_{u + 1} = S_u \cup \{ u \} \subset J_0$, so that $u + 1 \in A$, contrary to the hypothesis that $u$ is an upper bound for $A$.
-
-  Therefore $J = A$, and since $A \subset J_0$, we conclude that $J_0 = J$.
+  Therefore such an $\alpha$ does not exist. From this we conclude that $J_0 = J$.
 
 \end{proof}
 

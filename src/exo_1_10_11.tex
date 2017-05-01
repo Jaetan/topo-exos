@@ -1,0 +1,54 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+\setlength{\parindent}{15pt}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{10}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $A$ and $B$ be two sets. Using the well-ordering theorem, prove that either they have the same cardinality,
+  or one has cardinality greater than the other. [\emph{Hint:} if there is no surjection $f : A \to B$, apply
+  the preceding exercise.]
+
+\end{exercise}
+
+\begin{proof}
+
+  If there is a bijection from $A$ to $B$, then they have the same cardinality. Suppose therefore that there is
+  no such bijection.
+
+  From the well-ordering theorem, there exist order relations such that $A$ and $B$ are well-ordered. Let us consider
+  $A$ and $B$ as well-ordered sets.
+
+  If there is a surjection from a section of $A$ onto $B$, then using the axiom of choice we can define an injection
+  of $B$ into $A$. If there also exists an injection of $A$ into $B$, then there exists a bijection between $A$ and $B$,
+  which is contrary to our hypothesis. Therefore there is no injection of $A$ into $B$, and $A$ has greater cardinality than $B$.
+
+  Suppose there is no surjection from a section of $A$ onto $B$. Using the previous exercise, we can define a function
+  $h : A \to B$ such that
+  \begin{equation} \label{eq:induction}
+    \forall x \in A, \quad h ( x ) = \min ( B - h ( S_x ) )
+  \end{equation}
+  Let $J$ be the subset of $A$ such that $h|J$ is injective, and suppose that there exists $x \in A - J$.
+  Since $A$ is well-ordered, there is a smallest such element $\beta$.
+
+  From \eqref{eq:induction} we deduce that $h ( \beta ) \notin h ( S_\beta )$, so that $\beta \in J$, which is a contradiction.
+  Therefore $J = A$ and $h$ is injective.
+
+  If there also exists an injection from $B$ into $A$, then there exists a bijection between $A$ and $B$, which is contrary to
+  our hypothesis. Therefore there is no such injection, and $B$ has greater cardinality than $A$.
+
+\end{proof}
+
+\end{document}

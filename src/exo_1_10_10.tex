@@ -1,0 +1,153 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{9}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem*{theorem}{Theorem}
+
+\begin{document}
+
+\begin{exercise}
+
+  \begin{theorem}
+
+    Let $J$ and $C$ be well-ordered sets; assume that there is no surjective function
+    mapping a section of $J$ onto $C$. Then there exists a unique function $h : J \to C$
+    satisfying the equation:
+    \begin{equation} \label{eq:induction}
+      h ( x ) = \text{smallest of } [ C - h ( S_x ) ]
+    \end{equation}
+    for each $x \in J$, where $S_x$ is the section of $J$ by $x$. \\
+    \emph{Proof.}
+    \begin{enumerate}[(a)]
+
+    \item If $h$ and $k$ map sections of $J$, or all of $J$, into $C$ and satisfy \eqref{eq:induction}
+      for all $x$ in their respective domains, show that $h ( x ) = k ( x )$ for all $x$ in both domains.
+
+    \item If there exists a function $h : S_\alpha \to C$ satisfying \eqref{eq:induction}, show that there is a function
+      $k : S_\alpha \cup \{ \alpha \} \to C$ satisfying \eqref{eq:induction}.
+
+    \item If $K \subset J$ and for all $\alpha \in K$ there exists a function $h_\alpha : S_\alpha \to C$ satisfying \eqref{eq:induction},
+      show that there exists a function
+      \begin{equation*}
+        k : \bigcup_{\alpha \in K} S_\alpha \to C
+      \end{equation*}
+      satisfying \eqref{eq:induction}.
+
+    \item Show by transfinite induction that for every $\beta \in J$, there exists a function $h_\beta : S_\beta \to C$ satisfying \eqref{eq:induction}.
+      [\emph{Hint:} If $\beta$ has an immediate predecessor $\alpha$, then $S_\beta = S_\alpha \cup \{ \alpha \}$. If not, $S_\beta$ is the union
+      of all $S_\alpha$ with $\alpha < \beta$.]
+
+    \item Prove the theorem.
+
+    \end{enumerate}
+
+  \end{theorem}
+
+\end{exercise}
+
+\begin{proof} ~\\
+
+  If $C = \varnothing$, there is no function from $J$ to $C$, so we assume that $C$ is nonempty.
+
+  \begin{enumerate}[(a)]
+
+  \item \label{lemma:unicity}
+    Let $\mathscr{D}_h$ and $\mathscr{D}_k$ be the respective domains of $h$ and $k$,
+    and suppose there exists and element $x \in \mathscr{D}_h \cap \mathscr{D}_k$ such that $h ( x ) \neq k ( x )$.
+    Since $J$ is well-ordered, there exists a smallest such element $m$. For all $x < m$, we have $h ( x ) = k ( x )$,
+    so that $h ( S_m ) = k ( S_m )$. Since there is no surjection of $J$ onto $C$, the set $C - h ( S_m )$ is nonempty,
+    and, as a subset of the well-ordered set $C$, has a smallest element $x_0$, which is also the smallest element of $C - k ( S_m )$.
+    From \eqref{eq:induction}, we deduce that $h ( m ) = x_0 = k ( m )$, which contradicts the existence of $m$.
+
+    Therefore, for all $x \in \mathscr{D}_h \cap \mathscr{D}_k$ we have $h ( x ) = k ( x )$.
+
+  \item \label{lemma:inductive_case}
+    Since there is no surjection from $J$ onto $C$ and $S_\alpha \subset J$, $h$ is not surjective and therefore
+    $C - h ( S_\alpha )$ is a nonempty subset of the well-ordered set $C$. From this we deduce that the smallest element $m$
+    of $C - h ( S_\alpha )$ exists. Let
+    \begin{align*}
+      k : S_\alpha \cup \{ \alpha \} &\to C \\
+      x &\mapsto \begin{cases}
+        h ( x ) &\text{if } x \in S_\alpha \\
+        m &\text{otherwise}
+      \end{cases}
+    \end{align*}
+    For all $x \in S_\alpha$, $h ( x ) = k ( x )$, so $C - k ( S_\alpha ) = C - h ( S_\alpha )$ and $k$ satisfies \eqref{eq:induction}
+    on $S_\alpha$. Since $m = k ( \alpha )$ is the smallest element of $C - k ( S_\alpha )$, we conclude that $k$
+    satisfies \eqref{eq:induction} on $S_\alpha \cup \{ \alpha \}$.
+
+  \item \label{lemma:limit_case}
+    Let $R \subset \cup_{\alpha \in K} S_\alpha \times C$ consist of all the tuples $\left( x, h_\alpha ( x ) \right)$
+    for $\alpha \in K$ and $x \in S_\alpha$. Then $R$ is the rule of a function: let $x \in \cup_{\alpha \in K} S_\alpha$, there
+    exists $\beta \in K$ such that $x \in S_\beta$, and for all $\gamma \in K$ such that $\beta < \gamma$,
+    we deduce from point \ref{lemma:unicity} that $h_\beta = h_\gamma$ on $S_\beta$. Therefore there is a unique element $(a, b) \in R$
+    such that $a = x$. Let
+    \begin{align*}
+      k : \bigcup_{\alpha \in K} S_\alpha &\to C \\
+      x &\mapsto h_\alpha ( x ) \quad\text{for } x \in S_\alpha
+    \end{align*}
+    The function $k$ satisfies \eqref{eq:induction}: let $x \in \cup_{\alpha \in K} S_\alpha$, there exists $\alpha \in K$ such that
+    $x \in S_\alpha$. The function $h_\alpha$ satisfies \eqref{eq:induction} on its domain $S_\alpha$, so that
+    \begin{equation*}
+      k ( x ) = h_\alpha ( x )= \min \left( C - h_\alpha \left( S_x \right) \right) = \min \left( C - k \left( S_x \right) \right)
+    \end{equation*}
+    The last equality comes from the fact that $x \in S_\alpha$ implies $x < \alpha$, so that for all $y \in S_x$ we have
+    $k ( y ) = h_x ( y ) = h_\alpha ( y )$.
+
+  \item \label{lemma:transfinite_induction}
+    Let $J_0$ be the subset of $J$ such that for all $\beta \in J_0$, there exists a function $h_\beta : S_\beta \to C$
+    which satisfies \eqref{eq:induction}.
+    Suppose that $J - J_0$ is nonempty and let $\beta$ be its smallest element.
+
+    If $\beta$ has an immediate predecessor $\alpha$, then $\alpha \in J_0$. There exists a function $h_\alpha : S_\alpha \to C$
+    satisfying \eqref{eq:induction}, and from point \ref{lemma:inductive_case}, we deduce that there exists a function $h_\beta$
+    from $S_\beta = S_\alpha \cup \{ \alpha \}$ to $C$ satisfying \eqref{eq:induction}, which is a contradiction with the definition
+    of $\beta$.
+
+    Therefore $\beta$ does not have an immediate predecessor. For all $x < \beta$, we have $S_x \subset J_0$, and since
+    $S_\beta = \cup_{x < \beta} S_x$, we deduce from \ref{lemma:limit_case} that $\beta \in J_0$, again a contradiction.
+
+    Therefore $\beta$ does not exist, and for all $\alpha \in J$, there exists $h_\alpha : S_\alpha \to C$ which satisfies \eqref{eq:induction}.
+
+  \item
+    Suppose that $J$ has a largest element $M$, then $J = S_M \cup \{ M \}$. From \ref{lemma:transfinite_induction}, we deduce
+    the existence of a function $h_M : S_M \to C$ that satisfies \eqref{eq:induction}. Then from \ref{lemma:inductive_case},
+    we deduce the existence of a function $h : J \to C$ which satisfies \eqref{eq:induction}.
+
+    Suppose otherwise that $J$ does not have a largest element. For all $\alpha \in J$, we deduce from \ref{lemma:transfinite_induction}
+    the existence of a function $h_\alpha : S_\alpha \to C$ satisfying \eqref{eq:induction}.
+    Let $x \in J$; since $J$ does not have a largest element, there exists $y \in J$ such that $x < y$. From this we deduce that
+    $J = \cup_{x \in J} S_x$.
+
+    Let $R$ the subset of $\cup_{x \in J} S_x \times C$ consisting of all the tuples $\left( y, h_x ( y ) \right)$ for $x \in J$ and $y \in S_x$,
+    and let $\alpha \in J$. There exists $\beta \in J$ such that $\alpha < \beta$, so $\alpha \in S_\beta$; from \ref{lemma:transfinite_induction}
+    we deduce the existence of $h_\alpha : S_\alpha \to C$ and $h_\beta : S_\beta \to C$ satisfying \eqref{eq:induction}.
+    Then from \ref{lemma:unicity}, we deduce that for all $x \in S_\alpha$, $h_\alpha ( x ) = h_\beta ( x )$, so that there is only
+    one tuple $( a, b ) \in R$ such that $a = x$. Let $h : J \to C$ be the function with rule $R$. Then $h$ satisfies \eqref{eq:induction}:
+    let $x \in J$, there exists $\alpha > x$. We have:
+    \begin{align*}
+      h ( x ) &= h_\alpha ( x ) \\
+      &= \min \big( C - h_\alpha ( S_x ) \big) &\text{since } h_\alpha \text{ satisfies \eqref{eq:induction} } \\
+      &= \min \big( C - h ( S_x ) \big) &\text{ since } h_\alpha = h \text{ on } S_x
+    \end{align*}
+
+    Suppose that there are 2 functions $h$ and $k$ from $J$ to $C$ that satisfy $\eqref{eq:induction}$, and suppose that there exists $x \in J$
+    such that $h ( x ) = k ( x )$. Let $\alpha \in J$ be the smallest such element; we have $h ( y ) = k ( y )$ for all
+    $y \in S_x$. From \eqref{eq:induction} we deduce that $h ( x ) = k ( x )$, which is a contradiction with the existence of $x$.
+    Therefore such an $x$ does not exist and $h$ is unique.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

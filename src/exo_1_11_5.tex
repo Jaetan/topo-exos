@@ -1,0 +1,45 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+\setlength{\parindent}{15pt}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{4}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem*{lemma}{Lemma}
+
+\begin{document}
+
+\begin{exercise}
+
+  Show that Zorn's lemma implies the following:
+
+\end{exercise}
+
+~\\
+\begin{lemma}[Kuratowski]
+  Let $\mathscr{A}$ be a collection of sets. Suppose that for every subcollection
+  $\mathscr{B}$ of $\mathscr{A}$ that is simply ordered by proper inclusion, the union of the
+  elements of $\mathscr{B}$ belongs to $\mathscr{A}$. Then $\mathscr{A}$ has an element that is
+  properly contained in no other element of $\mathscr{A}$.
+\end{lemma}
+
+\begin{proof}
+
+  For all $\mathscr{B}$ subcollection of $\mathscr{A}$ that is simply ordered by proper inclusion,
+  the set $B = \cup_{b \in \mathscr{B}} \,b$ is an upper bound of $\mathscr{B}$ in $\mathscr{A}$.
+  Zorn's lemma gives us the existence of a maximal element $M \in \mathscr{A}$. Since $M$ is maximal,
+  for all $A \in \mathscr{A}$ such that $A \neq M$, we have $A \subset M$. Therefore $M$ is not
+  a proper subset of any other element of $\mathscr{A}$.
+
+\end{proof}
+
+\end{document}

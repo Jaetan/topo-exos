@@ -1,0 +1,71 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+\setlength{\parindent}{15pt}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{2}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\newcounter{examplecounter}
+\setcounter{examplecounter}{0}
+\theoremstyle{plain}
+\newtheorem{example}[examplecounter]{Example}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $A$ be a set with a strict partial order $\prec$; let $x \in A$. Suppose that we wish to find
+  a maximal simply ordered subset $B$ of $A$ that contains $x$. One plausible way of attempting to
+  define $B$ is to let $B$ equal the set of all those elements of $A$ that are \emph{comparable} with $x$;
+  \begin{equation*}
+    B ~ \{ y \mid y \in A \text{ and either} x \prec y \text{ or } y \prec x \}
+  \end{equation*}
+  But this will not always work. In which if Examples 1 and 2 will this procedure succeed and in which
+  will it not?
+
+\end{exercise}
+
+~\\
+\begin{example}
+  If $\mathscr{A}$ is any collection of sets, the relation ''is a proper subset of'' is a strict partial order on $\mathscr{A}$.
+  Suppose that $\mathscr{A}$ is the collection of of all circular regions (interiors of circles) in the plane. One maximal
+  simply ordered subcollection consists of all the circular regions with center at the origin. Another maximal simply ordered
+  subcollection consists of all circular regions bounded by circles tangent from the right to the $y$-axis at the origin.
+\end{example}
+
+~\\
+\begin{example}
+  If $( x_0, y_0 )$ and $( x_1, y_1 )$ are two points of the plane $\mathbb{R}^2$, define
+  \begin{equation*}
+    ( x_0, y_0 ) \prec ( x_1, y_1 )
+  \end{equation*}
+  if $y_0 = y_1$ and $x_0 < x_1$. This is a partial ordering of $\mathbb{R}^2$ under which two points are comparable only if
+  they lie on the same horizontal line. The maximal simply ordered sets are the horizontal lines in $\mathbb{R}^2$.
+\end{example}
+
+\begin{proof}\hfill
+
+  \begin{itemize}
+
+  \item Let $\mathscr{C}_1, \mathscr{C}_2, \mathscr{C}$ be circular regions in the plane, such that $\mathscr{C}_1 \subset \mathscr{C}$,
+    $\mathscr{C}_2 \subset \mathscr{C}$, and $\mathscr{C}_1 \cap \mathscr{C}_2 = \varnothing$. Let $x = \mathscr{C}$, we have
+    $\mathscr{C}_1 \in B$ and $\mathscr{C}_2 \in B$, but $\mathscr{C}_1$ and $\mathscr{C}_2$ are not comparable by strict inclusion.
+    Then $B$ is not simply ordered, so the procedure fails in this example.
+
+  \item Let $( x_0, y_0 )$ be a point in $\mathbb{R}^2$. The only points comparable to $( x_0, y_0 )$ are those on the line
+    $y = y_0$, which is a maximal simply ordered set for $\prec$. Therefore $B = \{ ( x, y ) \in \mathbb{R}^2 \mid y = y_0 \}$ is
+    a maximal simply ordered set containing $( x_0, y_0 )$ in this case.
+
+  \end{itemize}
+
+\end{proof}
+
+\end{document}

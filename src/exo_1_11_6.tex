@@ -1,0 +1,57 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+\setlength{\parindent}{15pt}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{5}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem*{lemma}{Lemma}
+
+\begin{document}
+
+\begin{exercise}
+
+  A collection $\mathscr{A}$ of subsets of a set $X$ is said to be of \emph{finite type}
+  provided that a subset $B$ of $X$ belongs to $\mathscr{A}$ if and only if every finite
+  subset of $B$ belongs to $\mathscr{A}$.
+  Show that the Kuratowski lemma implies the following:
+
+\end{exercise}
+
+~\\
+\begin{lemma}[Tukey, 1940]
+  Let $\mathscr{A}$ be a collection of sets. If $\mathscr{A}$ is of finite type, then
+  $\mathscr{A}$ has an element that is properly contained in no other element of $\mathscr{A}$.
+\end{lemma}
+
+\begin{proof}
+
+  Let $\mathscr{A}$ be a collection of sets of finite type, and let $\mathscr{B}$ be
+  a subcollection of $\mathscr{A}$ that is simply ordered by proper inclusion.
+  For all $B \in \mathscr{B}$, $B \in \mathscr{A}$, and $\mathscr{A}$ is of finite type,
+  so every finite subset of $B$ is an element of $\mathscr{A}$.
+
+  Let $U = \cup_{b \in \mathscr{B}} \,b$, and let $C$ be a finite subset of $U$.
+  If $C$ is empty, then $C$ is a subset of $\mathscr{A}$. Otherwise, $C = \{ c_1, \dotsc, c_n \}$,
+  and for all $i \in \{ 1, \dotsc, n \}$, there exists $B_i \in \mathscr{B}$ such that $c_i \in B_i$.
+  As a subset of the simply ordered set $\mathscr{B}$, the set $\{ B_1, \dotsc, B_n \}$ is simply ordered.
+  Since it is also finite, it has a largest element $B_m$. For all $i \in \{ 1, \dotsc, n \}$,
+  we have $B_i \subset B_m$. From this we deduce that $C$ is a finite subset of $B_m$,
+  and hence an element of $\mathscr{A}$.
+
+  Every finite subset of the set $U$ is an element of $\mathscr{A}$, and $\mathscr{A}$ is of finite type,
+  so $U \in \mathscr{A}$. We can therefore apply Kuratowski's lemma and conclude that there exists
+  and element of $\mathscr{A}$ that is properly contained in no other element of $\mathscr{A}$.
+
+\end{proof}
+
+\end{document}

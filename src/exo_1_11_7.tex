@@ -1,0 +1,41 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+\setlength{\parindent}{15pt}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{6}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Show that the Tukey lemma implies the Hausdorff maximum principle. [\emph{Hint:} if
+  $\prec$ is a strict partial order on $A$, let $\mathscr{A}$ be the collection of all
+  subsets of $A$ that are simply ordered by $\prec$. Show that $\mathscr{A}$ is of
+  finite type.]
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $\mathscr{A}$ be the collection of all subsets of $A$ that are simply ordered by $\prec$,
+  let $B \in \mathscr{A}$, and let $C$ be a finite subset of $B$.
+  As a subset of a simply ordered set , $C$ is simply ordered, (elements of $C$ are comparable
+  as elements of $B$) and therefore $C \in \mathscr{A}$.
+  From this we deduce that $\mathscr{A}$ is of finite type, and, from the Tukey lemma,
+  there exists $M \in \mathscr{A}$ such that no element of $A$ properly contains $M$.
+  The element $M$ is a simply ordered subset of $A$ such that for all $B \in \mathscr{A}$,
+  $M \subset B \Rightarrow M = B$, and therefore $M$ is maximal in the sense of Hausdorff's
+  maximum principle.
+
+\end{proof}
+
+\end{document}

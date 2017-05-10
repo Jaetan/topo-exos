@@ -1,0 +1,80 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+\setlength{\parindent}{15pt}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{7}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  A typical use of Zorn's lemma in algebra is the proof that every vector space
+  has a basis. Recall that is $A$ is a subset of the vector space $V$, we say
+  a vector belongs to the \emph{span} of $A$ if it equals a finite linear combination
+  of elements of $A$. The set $A$ is \emph{independent} if the only finite linear
+  combination of elements of $A$ that equals the zero vector is the trivial one having
+  all coefficients zero. If $A$ is independent and if every vector in $V$ belongs to
+  the span of $A$, then $A$ is a \emph{basis} for $V$.
+  \begin{enumerate}[(a)]
+
+  \item If $A$ is independent and $v \in V$ does not belong to the span of $A$,
+    show that $A \cup \{ v \}$ is independent.
+
+  \item Show the collection of all independents sets in $V$ has a maximal element.
+
+  \item Show that $V$ has a basis.
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof} \hfill
+
+  If the only vector in $V$ is the zero vector, then $V$ does not have a basis. Therefore we
+  suppose here that $V$ has at least one nonzero vector.
+
+  \begin{enumerate}[(a)]
+
+  \item Suppose that $A$ is an independent set of vectors of $V$. Suppose that $v \in V$
+    is not in the span of $A$. and suppose that for some linear combination $c$ of vectors of $A$
+    and some scalar $\alpha$, we have $\alpha \cdot v + c = 0$. If $\alpha = 0$, then $c = 0$,
+    and since $A$ is independent, every coefficient in $c$ is also $0$; from this we deduce that
+    $A \cup \{ v \}$ is independent. Otherwise, the inverse $\alpha^{-1}$ exists and we have
+    $v = - \alpha^{-1} \cdot c$, a linear combination of vectors of $A$, so that $v$ is in the span
+    of $A$, contrary to the hypothesis. Therefore $A \cup \{ v \}$ is independent.
+
+  \item Let $\mathscr{A}$ be the set of all independent sets of vectors of $V$. Proper inclusion
+    is a strict partial order on $\mathscr{A}$, so from the maximum principle, there exists a subset
+    $M$ of $\mathscr{A}$ that is simply ordered and maximal. Let $U = \cup_{m \in M} \,m$,
+    and let $v$ be a linear combination of vectors $v_1, \dotsc, v_n$ in $U$.
+    For all $i$, there exists $V_i \in M$ such that $v_i \in V_i$. The finite set $\{ V_1, \dotsc, V_n \}$,
+    as a subset of the linearly ordered set $M$, is linearly ordered; therefore it has
+    a maximal element $V_m$. For all $i \in \{ 1, \dotsc, n \}$, we have $v_i \in V_m$. As an element
+    of $\mathscr{A}$, $V_m$ is independent. From this we conclude that all coefficients in the
+    linear combination $v$ are zero, and therefore $U$ is independent.
+
+    For all $m \in M$, we have $m \subset U$. Suppose that there exists $W \in \mathscr{A}$
+    such that $U \subset W$. Then for all $m \in M$, we also have $m \subset W$, so that $M \cup W$
+    is simply ordered by proper inclusion and strictly contains $M$, contrary to the fact that
+    $M$ is maximal for proper inclusion. Therefore $U$ is a maximal element of $\mathscr{A}$.
+
+  \item Let $U$ be the element defined in the above point, and let $v \in V$. Suppose that $v$ is
+    not in the span of $U$; then the set $U \cup \{ v \}$ is independent. For all $B \subset U$,
+    we have $B \subset U \cup \{ v \}$, so $U \cup \{ v \}$ is simply ordered, and properly contains $U$,
+    contrary to the fact that $U$ is a maximal element of $\mathscr{A}$.
+    Therefore $v$ is in the span of $U$. Since $U$ is independent, we deduce that $U$ is a basis for $V$.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

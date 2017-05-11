@@ -1,0 +1,180 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{0}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem*{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+\begin{exercise}
+
+  \begin{theorem}[General principle of recursive definition]
+    Let $J$ be a well-ordered set; let $C$ be a set.
+    Let $\mathscr{F}$ be the set of all functions mapping sections of $J$ into $C$. Given a function
+    $\rho : \mathscr{F} \to C$, there exists a unique function $h : J \to C$ such that
+    $h ( \alpha ) = \rho ( h | S_\alpha )$ for each $\alpha \in J$.
+
+  \end{theorem}
+  [\emph{Hint:} Follow the pattern outlined in exercise 10 of \S 10.]
+
+\end{exercise}
+
+\begin{proof}
+
+  For future reference in the proof, the property we wish to have a function $f : J \to C$ satisfy is
+  \begin{equation} \label{eq:induction}
+    \forall \alpha \in J, \quad h ( \alpha ) = \rho ( f | S_\alpha )
+  \end{equation}
+
+  The existence of a function $f : J \to C$ implies that $C$ is nonempty.
+  Furthermore, if $J$ is empty, then there is a unique function from $J$ to $C$, and it vacuously
+  verifies \eqref{eq:induction}. Therefore we assume in the rest of the proof that $J$ is nonempty.
+
+\begin{lemma} \label{lemma:unicity}
+
+  If $h$ and $k$ map sections of $J$ into $C$ and satisfy \eqref{eq:induction}
+  for all $\alpha$ in their respective domains, then that $h ( x ) = k ( x )$ for all $x$ in both domains.
+
+\end{lemma}
+
+\begin{proof}
+
+  Let $\mathscr{D}_h$ (resp. $\mathscr{D}_k$) be the domain of $h$ (resp. of $k$). The set $\mathscr{D}_h \cap \mathscr{D}_k$,
+  as the intersection of two sections of $J$, is equal to one of these sections. Possibly switching the roles
+  of $h$ and $k$, we can suppose that $\mathscr{D}_h \subset \mathscr{D}_k$.
+  Let $\mathscr{A}$ be the subset of $\mathscr{D}_h$ such that for all $\alpha \in \mathscr{A}$, $h ( \alpha ) \neq k ( \alpha )$.
+  If $\mathscr{A}$ is nonempty, then, as a subset of the well-ordered set $J$, it has a smallest element $\beta$.
+  For all $\alpha < \beta$, $\alpha$ is an element of the section $\mathscr{D}_h$ and $h ( \alpha ) = k ( \alpha )$,
+  so that $h | S_\beta = k | S_\beta$. Since $h$ and $k$ satisfy \eqref{eq:induction}, we deduce that
+  $h ( \beta ) = \rho ( h | S_\beta ) = \rho ( k | S_\beta ) = k ( \beta )$, which contradicts the existence of $\beta$.
+  Therefore for all $\alpha \in \mathscr{D}_h$, we have $h ( \alpha ) = k ( \alpha )$.
+
+\end{proof}
+
+\begin{lemma} \label{lemma:inductive_step}
+
+  If there exists a function $h : S_\alpha \to C$ which satisfies \eqref{eq:induction}, then there exists a function
+  $k : S_\alpha \cup \{ \alpha \} \to C$ which satisfies \eqref{eq:induction}.
+
+\end{lemma}
+
+\begin{proof}
+
+  Let $\alpha \in J$ and suppose there exists $h : S_\alpha \to C$ satisfying \eqref{eq:induction}. Let
+  \begin{align*} \label{eq:induction}
+    k : S_\alpha \cup \{ \alpha \} &\to C \\
+    x &\mapsto \begin{cases}
+      h ( x ) &\text{if } x \in S_\alpha \\
+      \rho ( h ) &\text{otherwise}
+    \end{cases}
+  \end{align*}
+  For all $x \in S_\alpha$, $k ( x ) = h ( x )$, so that for all $y \in S_x$, $h | S_x = k | S_x$. Since $h$ satisfies \eqref{eq:induction},
+  we have $k ( x ) = h ( x ) = \rho ( h | S_x ) = \rho ( k | S_x )$. Thus $k$ satisfies \eqref{eq:induction} on $S_\alpha$.
+  Moreover, $k ( \alpha ) = \rho ( h ) = \rho ( k | S_\alpha )$, so $k$ satisfies \eqref{eq:induction} on $S_\alpha \cup \{ \alpha \}$.
+
+\end{proof}
+
+\begin{lemma} \label{lemma:limit_case}
+
+  If $K \subset J$ and for all $\alpha \in K$, there exists a function $h_\alpha : S_\alpha \to C$ satisfying \eqref{eq:induction},
+  there exists a function
+  \begin{align*}
+    k : \bigcup_{\alpha \in K} \,S_\alpha &\to C
+  \end{align*}
+  satisfying \eqref{eq:induction}.
+
+\end{lemma}
+
+\begin{proof}
+
+  Let $I = \cup_{\alpha \in K} \,S_\alpha$. If $K$ is empty or has only one element, then $I$ is empty and there is no function
+  from $I$ to $C$. Therefore $K$ has at least two elements.
+
+  Let $R$ be the subset of $I \times C$ containing all the tuples $( x, h_\alpha ( x ) )$ for all $\alpha \in K$ and all $x \in S_\alpha$.
+  Let $\alpha, \beta \in K$ such that $\alpha < \beta$; we have $S_\alpha \subset S_\beta$, and from \cref{lemma:unicity},
+  $h_\beta | S_\alpha = h_\alpha$. From this we deduce that for all $x \in I$, there is a unique $y \in C$ such that $( x, y ) \in R$.
+  Therefore $R$ is the rule of a function $k : I \to C$.
+
+  Let $x \in I$, there exists $\alpha \in K$ such that $x \in S_\alpha$. The function $h_\alpha$ satisfies \eqref{eq:induction} on its domain $S_\alpha$,
+  so $k ( x ) = h_\alpha ( x ) = \rho ( h_\alpha | S_x )$. For all $y \in S_x$, $h_\alpha ( y )$ is the unique element of $R$ with $y$ as its
+  first coordinate, so $h_\alpha ( y ) = k ( y )$. From this we deduce that $h_\alpha | S_x = k | S_x$, and therefore $k$ satisfies \eqref{eq:induction}.
+
+\end{proof}
+
+\begin{lemma} \label{lemma:transfinite_induction}
+
+  For all $\beta \in J$, there exists a function $h_\beta : S_\beta \to C$ satisfying \eqref{eq:induction}.
+
+\end{lemma}
+
+\begin{proof}
+
+  Let $J_0$ be the subset of $J$ such that for all $\alpha \in J_0$, there exists a function $h_\alpha : S_\alpha \to C$ satisfying \eqref{eq:induction}.
+  Since $J$ is nonempty and well-ordered, it has a smallest element $m$, and $S_m = \varnothing$.
+  There is only one function from $\varnothing$ to $C$, and it vacuously satisfies \eqref{eq:induction},
+  so $S_m \subset J_0$, $m \in J_0$ and $J_0$ is nonempty.
+
+  Suppose that for some $\beta \in J$, we have $S_\beta \subset J_0$.
+  \begin{itemize}
+
+  \item If $\beta$ has an immediate predecessor $\alpha$, then $\alpha \in S_\beta$, so that $\alpha \in J_0$.
+    Therefore there exists a function $h_\alpha : S_\alpha \to C$ satisfying \eqref{eq:induction}. The fact that
+    $\alpha$ is the immediate predecessor of $\beta$ implies that $S_\beta = S_\alpha \cup \{ \alpha \}$.
+    From \cref{lemma:inductive_step} we deduce that there exists a function $h_\beta : S_\beta \to C$ satisfying \eqref{eq:induction}.
+    Therefore $\beta \in J_0$.
+
+  \item Otherwise, $\beta$ does not have an immediate predecessor, and thus $S_\beta = \cup_{\alpha < \beta} \,S_\alpha$.
+    For all $\alpha \in J$ such that $\alpha < \beta$, we have $\alpha \in S_\beta$ and therefore $\alpha \in J_0$.
+    From this we deduce that there exists a function $h_\alpha : S_\alpha \to C$ satisfying \eqref{eq:induction}.
+    We are within the hypotheses of \cref{lemma:limit_case}, and can conclude to the existence of a function $h_\beta : S_\beta \to C$
+    satsifying \eqref{eq:induction}. From this we deduce that $\beta \in J_0$.
+
+  \end{itemize}
+  The above shows that $J_0$ is an inductive subset of the well-ordered set $J$, and therefore $J_0 = J$.
+
+\end{proof}
+
+If $J$ has a largest element $M$, then $J = S_M \cup \{ M \}$. From \cref{lemma:transfinite_induction}, we deduce the existence
+of $h_M : S_M \to C$ satisfying \eqref{eq:induction}; and from \cref{lemma:inductive_step}, we deduce the existence of
+a function $h : J \to C$ satisfying \eqref{eq:induction}.
+
+Otherwise, $J = \cup_{\alpha \in J} \,S_\alpha$: for all $\alpha \in J$, $S_\alpha \subset J$, so that $\cup_{\alpha \in J} \,S_\alpha \subset J$.
+Conversely, for all $\alpha \in J$, there exists $\beta \in J$ such that $\alpha < \beta$, since $J$ does not have a largest element.
+From this we deduce that $\alpha \in S_\beta$ and finally $J \subset \cup_{\alpha \in J} \,S_\alpha$.
+
+For all $\alpha \in J$, we deduce from \cref{lemma:transfinite_induction} the existence of a function
+$h_\alpha : S_\alpha \to C$ satisfying \eqref{eq:induction}. Let then $R$ be the subset of the cartesian product $J \times C$
+containing all the tuples $( x, h_\alpha (x) )$ for all $\alpha \in J$ and all $x \in S_x$. From \cref{lemma:unicity},
+we deduce that, for all $\alpha, \beta \in J$ such that $\alpha < \beta$, $h_\beta | S_\alpha = h_\alpha$.
+The set $R$ is therefore the rule of a function $h : J \to C$.
+
+Let $\alpha \in J$. For all $x \in S_\alpha$, $( x, h_\alpha (x) )$ is the unique tuple in $R$ with $x$ as its first coordinate,
+so that $h_\alpha | S_x = h | S_x$. Furthermore, since $h_\alpha$ satisfies \eqref{eq:induction} on $S_\alpha$, we have
+\begin{equation*}
+  h ( x ) = h_\alpha ( x ) = \rho ( h_\alpha | S_x ) = \rho ( h | S_x )
+\end{equation*}
+so that the function $h : J \to C$ satisfies \eqref{eq:induction}.
+
+Suppose that $h, k : J \to C$ both satisfy \eqref{eq:induction}, and let $\mathscr{A}$ be the subset of $J$ such that
+for all $\alpha \in \mathscr{A}$, $h ( \alpha ) \neq k ( \alpha )$. If $\mathscr{A}$ is nonempty, then it has a smallest element $\beta$.
+The functions $h$ and $k$ are both defined on the section $S_\beta$, and for all $\alpha \in S_\beta$, $h ( \alpha ) = k ( \alpha )$.
+From this we deduce that $h | S_\beta = k | S_\beta$, and, since $h$ and $k$ satisfy \eqref{eq:induction} on $S_\beta$, we have
+$h ( \beta ) = \rho ( h | S_\beta ) = \rho ( k | S_\beta ) = k ( \beta )$, which contradicts the existence of $\beta$.
+Therefore the function $h$ defined in the preceding paragraph is unique.
+
+\end{proof}
+
+\end{document}

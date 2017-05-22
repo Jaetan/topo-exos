@@ -1,0 +1,192 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+\usepackage{bm}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{1}
+\newtheorem{exercise}[excounter]{Exercise}
+\newtheorem{lemma}{Lemma}
+
+\makeatletter
+\def\btagform@#1{\maketag@@@{\textbf{(\ignorespaces#1\unskip\@@italiccorr)}}}
+\newcommand{\beqref}[1]{\textup{\btagform@{\ref{#1}}}}
+\makeatother
+
+\begin{document}
+
+\begin{exercise}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item\label{point:a} Let $J$ and $E$ be well-ordered sets; let $h : J \to E$. Show the following two statements
+    are equivalent:
+    \begin{enumerate}[(i)]
+
+      \item \label{it:order_preserving} $h$ is order-preserving and its image is $E$ or a section of $E$.
+
+      \item \label{it:smallest} $h ( \alpha ) = \text{smallest of } [ E - h ( S_\alpha ) ]$ for all $\alpha$.
+
+    \end{enumerate}
+    [\emph{Hint:} Show that each of these conditions implies that $h ( S_\alpha )$ is a section of $E$;
+    conclude that it must be the section by $h ( \alpha )$.]
+
+  \item If $E$ is a well-ordered set, show that no section of $E$ has the order type of $E$, nor
+    do two different sections of $E$ have the same order type. [\emph{Hint:} Given $J$, there is
+    at most one order-preserving map of $J$ into $E$ whose image is $E$ or a section of $E$.]
+
+  \end{enumerate}
+
+\end{exercise}
+
+\bigskip
+\begin{lemma}\label{lemma:section_structure}
+  Let $W$ be a nonempty well-ordered set, and let $\alpha \in W$. If $\alpha$ has an immediate successor
+  $\beta$, then $S_\alpha \cup \{ \alpha \} = S_\beta$. Otherwise, $\alpha = \max W$ and $S_\alpha \cup \{ \alpha \} = W$.
+\end{lemma}
+
+\begin{proof}
+  If $\alpha = \max W$, then for all $x \in W$, either $x = \alpha$ or $x < \alpha$, and thus $W = S_\alpha \cup \{ \alpha \}$.
+  Otherwise, since $\alpha$ is not the largest element of $W$, it has an immediate successor $\beta$, and
+  $S_\alpha \cup \{ \alpha \} \subset S_\beta$. Conversely, for all $x \in S_\beta$, if $x > \alpha$, then
+  $\alpha < x < \beta$, so that $\beta$ is not the immediate successor of $\alpha$, a contradiction. Therefore
+  either $x < \alpha$ or $x = \alpha$, and $S_\beta \subset S_\alpha \cup \{ \alpha \}$.
+\end{proof}
+
+\bigskip
+\begin{lemma}\label{lemma:union_of_sections}
+  Let $W$ be a well-ordered set, and let $I$ be a subset of $W$. Then $\cup_{\alpha \in I} \,S_\alpha$ is
+  either $W$ or a section of $W$.
+\end{lemma}
+
+\begin{proof}
+  Let $U = \cup_{\alpha \in I} \,S_\alpha$.
+
+  Suppose that $U$ has un upper bound $\beta \in W$, and let $m$ be the smallest such upper bound.
+  We have $U \subset S_m$. Suppose there exists $x \in S_m - U$. If there exists $\alpha \in I$
+  such that $x < \alpha$, then $x \in S_\alpha \subset U$, a contradiction; therefore $x$ is an upper bound
+  for $U$ in $W$, since $m$ is the smallest such upper bound, we have $x > m$ or $x = m$,
+  which contradicts $x \in S_m$. Therefore $U = S_m$.
+
+  Otherwise, $U$ does not have an upper bound in $W$. Let $x \in W$, there exists $\alpha \in I$ such
+  that $x \in S_\alpha$, so that $W \subset U$, and $U = W$.
+\end{proof}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item
+    If $J$ is empty, then there is only one function from $J$ to $E$ and it vacuously satisfies both
+    conditions. In the rest of the proof, we suppose then that $J$ is nonempty. We will show that both
+    propositions are equivalent to
+    \begin{equation} \label{eq:h_eq_S_h}
+      \forall \alpha \in J, \quad h ( S_\alpha ) = S_{ h ( \alpha ) }
+    \end{equation}
+
+    \begin{description}
+
+    \item [\ref{it:order_preserving} $\bm{\implies}$ \beqref{eq:h_eq_S_h}]~\\
+      Suppose that \ref{it:order_preserving} holds. Let $\alpha \in J$; for all $\beta \in J$
+      such that $\beta < \alpha$, we have $h ( \beta ) < h ( \alpha )$, so $h ( \beta ) \in S_{ h ( \alpha ) }$.
+      Conversely, for all $\beta > \alpha$, $h ( \beta ) > h ( \alpha )$, so $h ( \beta ) \notin S_{ h ( \alpha ) }$.
+      Therefore
+      \begin{equation} \label{eq:h_in_Sh}
+        \forall \beta \in J, \quad\beta < \alpha \iff h ( \beta ) \in S_{ h ( \alpha ) }
+      \end{equation}
+      Suppose that $h ( S_\alpha ) \neq S_{ h ( \alpha ) }$, and let $z \in S_{ h ( \alpha ) } - h ( S_\alpha )$.
+      If there exists $x \in J$ such that $h ( x ) = z$, then from \eqref{eq:h_in_Sh} we deduce that $x < \alpha$,
+      so that $h ( x ) = z \in h ( S_\alpha )$, which is absurd. Therefore $z \notin h ( J )$.
+
+      \begin{itemize}
+
+      \item if $h ( J ) = E$, then from the above $z \notin E$, which is absurd.
+
+      \item otherwise, $h ( J ) = S_m$ for some $m \in E$, and since $h ( \alpha ) \in S_m$,
+        we have $h ( \alpha ) < m < z$. This contradicts the fact that $z \in S_{ h ( \alpha ) }$.
+
+      \end{itemize}
+      Therefore $z$ does not exist, and we conclude that \eqref{eq:h_eq_S_h} is true.
+
+    \item [\beqref{eq:h_eq_S_h} $\bm{\implies}$ \ref{it:order_preserving}]~\\
+      Suppose that \eqref{eq:h_eq_S_h} holds. For all $x, y \in J$ such that $x < y$, we have $x \in S_y$ and therefore
+      $h ( x ) \in h ( S_y ) = S_{ h ( y ) }$. From this we deduce that $h ( x ) < h ( y )$, so $h$ is increasing.
+
+      Suppose that $h ( J ) \neq E$, and let $m$ be the smallest element of $E - h ( J )$. If there exists $z \in J$ such that
+      $h ( z ) > m$, then $m \in S_{ h ( z ) } = h ( S_z )$, contradicting the existence of $m$. Therefore for all $z \in J$,
+      $h ( z ) \in S_m$, and for all $y \in S_m$, there exists $x \in J$ such that $h ( x ) = y$ by definition of $m$.
+      From this we conclude that $h ( J ) = S_m$, so that \eqref{eq:h_eq_S_h} $\implies$ \ref{it:order_preserving}.
+
+    \item [\beqref{eq:h_eq_S_h} $\bm{\implies}$ \ref{it:smallest}]~\\
+      Let $\alpha \in J$, from \eqref{eq:h_eq_S_h} we have $h ( \alpha ) \notin h ( S_\alpha )$. For all $y \in E$,
+      $y < h ( \alpha )$ implies $y \in h ( S_\alpha )$, so $h ( \alpha )$ is the smallest element of $E - h ( S_\alpha )$,
+      and \eqref{eq:h_eq_S_h} $\implies$ \ref{it:smallest}.
+
+    \item [\ref{it:smallest} $\bm{\implies}$ \beqref{eq:h_eq_S_h}]~\\
+      Suppose that condition \ref{it:smallest} holds, and let $J_0$ be the subset of $J$ such that for all $\alpha \in J_0$,
+      $h ( S_\alpha ) = S_{ h ( \alpha ) }$. For all $\beta \in J$ such that $S_\beta \subset J_0$:
+      \begin{itemize}
+
+      \item If $\beta$ has an immediate predecessor $u$, then $S_\beta = S_u \cup \{ u \} \subset J_0$, and $u \in J_0$.
+        Furthermore,
+        \begin{equation*}
+          h ( S_\beta ) = h ( S_u \cup \{ u \} ) = h ( S_u ) \cup \{ h ( u ) \} = S_{ h ( u ) } \cup \{ h ( u ) \}
+        \end{equation*}
+        Since $h ( \beta ) \in E - h ( S_\beta )$, we do not have $h ( S_\beta ) = E$, and from \cref{lemma:section_structure}
+        we deduce that $h ( u )$ has an immediate successor $s$ in $E$. Since
+        $h ( \beta ) = \min \big( E - h ( S_\beta ) \big) = \min \{ x \in E \mid x > h ( u ) \}$,
+        we deduce that $s = h ( \beta )$, and $h ( S_\beta ) = S_{ h ( \beta ) }$, so that $\beta \in J_0$.
+
+      \item If $\beta$ does not have an immediate predecessor, then $S_\beta = \cup_{\alpha < \beta} \,S_\alpha$. Since $S_\beta \in J_0$,
+        we have $\alpha \in J_0$ for all $\alpha < \beta$, and
+        \begin{equation*}
+          h ( S_\beta ) = h \left( \bigcup_{\alpha < \beta} \,S_\alpha \right) = \bigcup_{\alpha < \beta} \,h ( S_\alpha ) = \mathscr{S}
+        \end{equation*}
+
+        From \cref{lemma:union_of_sections}, we deduce that $\mathscr{S}$ is either $E$ or a section of $E$. And since
+        $h ( \beta ) \in E - h ( S_\beta )$ exists, $\mathscr{S} = S_m$ for some $m \in E$. The element $m$ is the smallest
+        upper bound for $h ( S_\beta )$ in $E$, and therefore $m = \beta$, and $\beta \in J_0$.
+
+      \end{itemize}
+      From the above, we deduce that $J_0$ is an inductive subset of $J$, and therefore $J_0 = J$.
+
+    \end{description}
+
+  \item If $E = \varnothing$, then for all $J$ section of $E$ there is no function from $J$ to $E$, so $J$ cannot have the
+    same order type as $E$.
+
+    Suppose therefore that $E$ is nonempty and let $J$ be a section of $E$. From \cref{point:a}, we deduce that
+    the recursive definition in \ref{it:smallest} gives a unique order-preserving function $h : J \to E$ whose image is
+    either $E$ or a section of $E$.
+
+    Suppose that $h ( J ) = S_m$ for some $m \in E$, then $m \notin h ( J )$ and therefore $h$ is not bijective.
+    Otherwise, $h ( J ) = E$, so that $h$ is bijective. As a section of $E$, $J = S_\alpha$ for some $\alpha \in E$.
+    Then there exists $\beta < \alpha$ such that $h ( \beta ) = \alpha$. And since $\beta \in S_\alpha$, from \eqref{eq:h_eq_S_h}
+    we deduce that $h ( \beta ) \in h ( S_\alpha ) = S_{ h ( \alpha ) }$, which implies $h ( \beta ) < h ( \alpha )$,
+    a contradiction. Therefore $h$ is not bijective.
+
+    From the above, we conclude that there is no order-preserving bijection from a section of $E$ to $E$, so that
+    every section of $E$ has an order type different from that of $E$.
+
+    Let $S_\alpha$ and $S_\beta$ for $\alpha, \beta \in E$ be two distinct sections of $E$. Since $E$ is well-ordered,
+    the elements $\alpha$ and $\beta$ are comparable. Swapping the roles of $\alpha$ and $\beta$, we can suppose that
+    $\alpha < \beta$. Then $S_\alpha \subset S_\beta$ and $S_\alpha = \{ x \in E \mid x < \alpha \} = \{ x \in S_\beta \mid x < \alpha \}$,
+    and therefore $S_\alpha$ is a section of $S_\beta$.
+
+    From \cref{point:a} we deduce that there is a unique order-preserving function $h : S_\alpha \to S_\beta$, defined as in
+    \ref{it:smallest}, and that for this function $h ( S_\alpha )$ is either $S_\beta$ or a section of $S_\beta$.
+    As a subset of the well-ordered set $E$, $S_\beta$ is well-ordered, and we can apply the previous reasoning on $J$
+    and $E$ to deduce that $S_\alpha$ and $S_\beta$ have different order types.\qedhere
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

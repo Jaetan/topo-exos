@@ -68,6 +68,7 @@
 
 \begin{proof}
   Let $U = \cup_{\alpha \in I} \,S_\alpha$.
+  If $W = \varnothing$, then $U = \varnothing = W$. Let us suppose then that $W \neq \varnothing$.
 
   Suppose that $U$ has un upper bound $\beta \in W$, and let $m$ be the smallest such upper bound.
   We have $U \subset S_m$. Suppose there exists $x \in S_m - U$. If there exists $\alpha \in I$
@@ -160,38 +161,26 @@
     \end{description}
 
   \item If $E = \varnothing$, then for all $J$ section of $E$ there is no function from $J$ to $E$, so $J$ cannot have the
-    same order type as $E$.
+    same order type as $E$. Suppose therefore that $E \neq \varnothing$.
+
+    Suppose that $h, k : J \to E$ both satisfy \ref{it:order_preserving}. From \ref{point:a} we deduce that $h$ and $k$ both satisfy \ref{it:smallest}.
+    Suppose that there exists $\alpha \in J$ such that $h ( \alpha ) \neq k ( \alpha )$; let $m$ be the smallest such element of $J$.
+    For all $\beta < m$, $h ( \beta ) = k ( \beta )$, so $h ( S_m ) = k ( S_m )$. From this we deduce that
+    \begin{equation*}
+      h ( m ) = \min \big( E - h ( S_m ) \big) = \min \big( E - k ( S_m ) \big) = k ( m )
+    \end{equation*}
+    which contradicts the existence of $m$. Therefore $h = k$, and there is at most one order-preserving function from $J$ to $E$
+    whose image is $E$ or a section of $E$.
 
     \bigskip
     \begin{lemma}\label{lemma:section_order_type}
-
-      Let $E$ be a nonempty well-ordered set, and let $J$ be a section of $E$. Then $J$ and $E$ have different order types.
-
+      Let $J$ be a section of $E$; then $J$ and $E$ do not have the same order type.
     \end{lemma}
 
     \begin{proof}
-      For all functions $h : J \to E$ that satisfy \ref{it:order_preserving}, we deduce from \ref{point:a} that $h$ is defined
-      by \ref{it:smallest}. This recursive definition yields a unique function, and therefore if $h$ exists, it is unique.
-      Conversely, the formula in \ref{it:smallest} is a well-formed definition of a function $h : J \to E$, and by \ref{point:a},
-      this function satisfies \ref{it:order_preserving}.
-
-      From this we conclude that there exists a unique function $h : J \to E$ that satisfies \ref{it:order_preserving}.
-
-      The function $h$ is not bijective:
-    \begin{itemize}
-
-      \item suppose that $h ( J ) = S_m$ for some $m \in E$, then $m \notin h ( J )$ and therefore $h$ is not bijective.
-
-      \item otherwise, $h ( J ) = E$, so that $h$ is bijective. As a section of $E$, $J = S_\alpha$ for some $\alpha \in E$.
-        Then there exists $\beta < \alpha$ such that $h ( \beta ) = \alpha$. And since $\beta \in S_\alpha$, from \eqref{eq:h_eq_S_h}
-        we deduce that $h ( \beta ) \in h ( S_\alpha ) = S_{ h ( \alpha ) }$, which implies $h ( \beta ) < h ( \alpha )$,
-        a contradiction.
-
-    \end{itemize}
-
-    From the above, we conclude that there is no order-preserving bijection from a section of $E$ to $E$, so that
-    every section of $E$ has an order type different from that of $E$.
-
+      As a section of $E$, $J = S_\alpha$ for some $\alpha \in E$. Suppose that there exists an order-preserving bijection $f : J \to E$,
+      then $f$ satisfies the properties shown in \ref{point:a}. From this we deduce that $E = f ( S_\alpha ) = S_{ f ( \alpha ) }$, which
+      contradicts the fact that $f ( \alpha ) \in E$. Therefore, $f$ does not exist, and $J$ does not have the same order type as $E$.
     \end{proof}
 
     Let $S_\alpha$ and $S_\beta$ for $\alpha, \beta \in E$ be two different sections of $E$. Since $E$ is well-ordered,
@@ -199,8 +188,7 @@
     $\alpha < \beta$. Then $S_\alpha \subset S_\beta$ and $S_\alpha = \{ x \in E \mid x < \alpha \} = \{ x \in S_\beta \mid x < \alpha \}$
     is a section of $S_\beta$.
 
-    By applying \cref{lemma:section_order_type} to $S_\alpha$ and $S_\beta$, we deduce that different sections of $E$ have
-    different order types.
+    By applying \cref{lemma:section_order_type}, we deduce that $S_\alpha$ and $S_\beta$ have different order types.
 
   \end{enumerate}
 

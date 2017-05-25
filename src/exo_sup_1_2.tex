@@ -72,7 +72,7 @@
   Suppose that $U$ has un upper bound $\beta \in W$, and let $m$ be the smallest such upper bound.
   We have $U \subset S_m$. Suppose there exists $x \in S_m - U$. If there exists $\alpha \in I$
   such that $x < \alpha$, then $x \in S_\alpha \subset U$, a contradiction; therefore $x$ is an upper bound
-  for $U$ in $W$, since $m$ is the smallest such upper bound, we have $x > m$ or $x = m$,
+  for $U$ in $W$. Since $m$ is the smallest such upper bound, we have $x > m$ or $x = m$,
   which contradicts $x \in S_m$. Therefore $U = S_m$.
 
   Otherwise, $U$ does not have an upper bound in $W$. Let $x \in W$, there exists $\alpha \in I$ such
@@ -139,9 +139,9 @@
         \begin{equation*}
           h ( S_\beta ) = h ( S_u \cup \{ u \} ) = h ( S_u ) \cup \{ h ( u ) \} = S_{ h ( u ) } \cup \{ h ( u ) \}
         \end{equation*}
-        Since $h ( \beta ) \in E - h ( S_\beta )$, we do not have $h ( S_\beta ) = E$, and from \cref{lemma:section_structure}
-        we deduce that $h ( u )$ has an immediate successor $s$ in $E$. Since
-        $h ( \beta ) = \min \big( E - h ( S_\beta ) \big) = \min \{ x \in E \mid x > h ( u ) \}$,
+        since $u \in J_0$. And since $h ( \beta )$ exists for all $\beta \in J$ and is an element of $E - h ( S_\beta )$,
+        we do not have $h ( S_\beta ) = E$, and from \cref{lemma:section_structure} we deduce that $h ( u )$ has
+        an immediate successor $s$ in $E$. Since $h ( \beta ) = \min \big( E - h ( S_\beta ) \big) = \min \{ x \in E \mid x > h ( u ) \}$,
         we deduce that $s = h ( \beta )$, and $h ( S_\beta ) = S_{ h ( \beta ) }$, so that $\beta \in J_0$.
 
       \item If $\beta$ does not have an immediate predecessor, then $S_\beta = \cup_{\alpha < \beta} \,S_\alpha$. Since $S_\beta \subset J_0$,
@@ -151,8 +151,8 @@
         \end{equation*}
 
         From \cref{lemma:union_of_sections}, we deduce that $\mathscr{S}$ is either $E$ or a section of $E$. And since
-        $h ( \beta ) \in E - h ( S_\beta )$ exists, $\mathscr{S} = S_m$ for some $m \in E$. The element $m$ is the smallest
-        upper bound for $h ( S_\beta )$ in $E$, and therefore $m = \beta$, and $\beta \in J_0$.
+        $h ( \beta ) \in E - h ( S_\beta )$ exists for all $\beta \in J$, $\mathscr{S} = S_m$ for some $m \in E$. The element $m$ is the smallest
+        upper bound for $h ( S_\beta )$ in $E$, and therefore $m = h ( \beta )$, and $\beta \in J_0$.
 
       \end{itemize}
       From the above, we deduce that $J_0$ is an inductive subset of $J$, and therefore $J_0 = J$.
@@ -162,28 +162,45 @@
   \item If $E = \varnothing$, then for all $J$ section of $E$ there is no function from $J$ to $E$, so $J$ cannot have the
     same order type as $E$.
 
-    Suppose therefore that $E$ is nonempty and let $J$ be a section of $E$. From \cref{point:a}, we deduce that
-    the recursive definition in \ref{it:smallest} gives a unique order-preserving function $h : J \to E$ whose image is
-    either $E$ or a section of $E$.
+    \bigskip
+    \begin{lemma}\label{lemma:section_order_type}
 
-    Suppose that $h ( J ) = S_m$ for some $m \in E$, then $m \notin h ( J )$ and therefore $h$ is not bijective.
-    Otherwise, $h ( J ) = E$, so that $h$ is bijective. As a section of $E$, $J = S_\alpha$ for some $\alpha \in E$.
-    Then there exists $\beta < \alpha$ such that $h ( \beta ) = \alpha$. And since $\beta \in S_\alpha$, from \eqref{eq:h_eq_S_h}
-    we deduce that $h ( \beta ) \in h ( S_\alpha ) = S_{ h ( \alpha ) }$, which implies $h ( \beta ) < h ( \alpha )$,
-    a contradiction. Therefore $h$ is not bijective.
+      Let $E$ be a nonempty well-ordered set, and let $J$ be a section of $E$. Then $J$ and $E$ have different order types.
+
+    \end{lemma}
+
+    \begin{proof}
+      For all functions $h : J \to E$ that satisfy \ref{it:order_preserving}, we deduce from \ref{point:a} that $h$ is defined
+      by \ref{it:smallest}. This recursive definition yields a unique function, and therefore if $h$ exists, it is unique.
+      Conversely, the formula in \ref{it:smallest} is a well-formed definition of a function $h : J \to E$, and by \ref{point:a},
+      this function satisfies \ref{it:order_preserving}.
+
+      From this we conclude that there exists a unique function $h : J \to E$ that satisfies \ref{it:order_preserving}.
+
+      The function $h$ is not bijective:
+    \begin{itemize}
+
+      \item suppose that $h ( J ) = S_m$ for some $m \in E$, then $m \notin h ( J )$ and therefore $h$ is not bijective.
+
+      \item otherwise, $h ( J ) = E$, so that $h$ is bijective. As a section of $E$, $J = S_\alpha$ for some $\alpha \in E$.
+        Then there exists $\beta < \alpha$ such that $h ( \beta ) = \alpha$. And since $\beta \in S_\alpha$, from \eqref{eq:h_eq_S_h}
+        we deduce that $h ( \beta ) \in h ( S_\alpha ) = S_{ h ( \alpha ) }$, which implies $h ( \beta ) < h ( \alpha )$,
+        a contradiction.
+
+    \end{itemize}
 
     From the above, we conclude that there is no order-preserving bijection from a section of $E$ to $E$, so that
     every section of $E$ has an order type different from that of $E$.
 
-    Let $S_\alpha$ and $S_\beta$ for $\alpha, \beta \in E$ be two distinct sections of $E$. Since $E$ is well-ordered,
-    the elements $\alpha$ and $\beta$ are comparable. Swapping the roles of $\alpha$ and $\beta$, we can suppose that
-    $\alpha < \beta$. Then $S_\alpha \subset S_\beta$ and $S_\alpha = \{ x \in E \mid x < \alpha \} = \{ x \in S_\beta \mid x < \alpha \}$,
-    and therefore $S_\alpha$ is a section of $S_\beta$.
+    \end{proof}
 
-    From \cref{point:a} we deduce that there is a unique order-preserving function $h : S_\alpha \to S_\beta$, defined as in
-    \ref{it:smallest}, and that for this function $h ( S_\alpha )$ is either $S_\beta$ or a section of $S_\beta$.
-    As a subset of the well-ordered set $E$, $S_\beta$ is well-ordered, and we can apply the previous reasoning on $J$
-    and $E$ to deduce that $S_\alpha$ and $S_\beta$ have different order types.\qedhere
+    Let $S_\alpha$ and $S_\beta$ for $\alpha, \beta \in E$ be two different sections of $E$. Since $E$ is well-ordered,
+    the elements $\alpha$ and $\beta$ are comparable. Swapping the roles of $\alpha$ and $\beta$, we can suppose that
+    $\alpha < \beta$. Then $S_\alpha \subset S_\beta$ and $S_\alpha = \{ x \in E \mid x < \alpha \} = \{ x \in S_\beta \mid x < \alpha \}$
+    is a section of $S_\beta$.
+
+    By applying \cref{lemma:section_order_type} to $S_\alpha$ and $S_\beta$, we deduce that different sections of $E$ have
+    different order types.
 
   \end{enumerate}
 

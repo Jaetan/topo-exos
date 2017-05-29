@@ -1,0 +1,82 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{2}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $J$ and $E$ be well-ordered sets; suppose there is an order-preserving map $k : J \to E$.
+  Using Exercises 1 and 2, show that $J$ has the order type of $E$ or a section of $E$. [\emph{Hint:}
+    choose $e_0 \in E$. Define $h : J \to E$ by the recursion formula
+    \begin{equation*}
+      h ( \alpha ) = \text{smallest } \big( E - h ( S_\alpha ) \big) \quad\text{if } h ( S_\alpha ) \neq E,
+    \end{equation*}
+    and $h ( \alpha ) = e_0$ otherwise. Show that $h ( \alpha ) \leq k ( \alpha )$ for all $\alpha$;
+  conclude that $h ( S_\alpha ) \neq E$ for all $\alpha$.]
+
+\end{exercise}
+
+\begin{proof}
+
+  The existence of $k$ implies that $E$ is nonempty. If $J$ is empty, then there is no bijection between $J$ and $E$
+  or a section of $E$. Therefore we suppose that $J$ is nonempty. Suppose that $k : J \to E$ is an order-preserving map,
+  and let $e_0 \in E$.
+
+  Let $\mathscr{F}$ be the set of all functions mapping sections of $J$ into $E$. For all $f \in \mathscr{F}$, let $S_\alpha$
+  for some $\alpha$ in $J$, be the domain of $f$. Let
+  \begin{align*}
+    \rho : \mathscr{F} &\to E \\
+    f &\mapsto \begin{cases}
+      \min \big( E - f ( S_\alpha )  \big) &\text{if } f ( S_\alpha ) \neq E \\
+      e_0 &\text{otherwise}
+    \end{cases}
+  \end{align*}
+  From exercise 1 (general principle of recursive definition), the function $\rho$ above defines a unique function $h : J \to E$
+  such that
+  \begin{equation*}
+    \forall \alpha \in J, \quad h ( \alpha ) = \rho ( h | S_\alpha )
+    = \begin{cases}
+      \min \big( E - h ( S_\alpha ) \big) &\text{if } h ( S_\alpha ) \neq E \\
+      e_0 &\text{otherwise}
+    \end{cases}
+  \end{equation*}
+
+  Let $J_0$ be the set of elements $\alpha$ of $J$ such that $h ( \alpha ) \leq k ( \alpha )$. Suppose that $S_\beta \subset J_0$
+  for some $\beta \in J$. For all $\alpha \in S_\beta$, we have $h ( \alpha ) \leq k ( \alpha ) < k ( \beta )$, so $k ( \beta )$
+  is an upper bound for $h ( S_\beta )$, and therefore an element of $E - h ( S_\beta )$. Since $h ( \beta )$ is the smallest
+  element of $E - h ( S_\beta )$, we deduce that $h ( \beta ) \leq k ( \beta )$. Therefore $\beta \in J_0$, so $J_0$ is an inductive
+  subset of $J$; thus $J_0 = J$, and
+  \begin{equation*}
+    \forall \alpha \in J, \quad h ( \alpha ) \leq k ( \alpha )
+  \end{equation*}
+
+  Suppose that there exists $\alpha \in J$ such that $h ( S_\alpha ) = E$. Since $k ( \alpha ) \in E$, we deduce that
+  there exists $\beta \in S_\alpha$ such that $h ( \beta ) = k ( \alpha )$. From this, we get
+  \begin{equation*}
+    k ( \alpha ) = h ( \beta ) \leq k ( \beta ) < k ( \alpha )
+  \end{equation*}
+  This is a contradiction, so for all $\alpha \in J$, $h ( S_\alpha ) \neq E$.
+
+  From the above we deduce that $h$ is defined by:
+  \begin{equation*}
+    \forall \alpha \in J, \quad h ( \alpha ) = \min \big( E - h ( S_\alpha ) \big)
+  \end{equation*}
+  We are therefore in the hypotheses of exercise 2, and conclude that $h$ is order-preserving and its image is $E$ or a section of $E$.
+  As an order-preserving map, $h$ is injective, and therefore a bijection from $J$ to $h ( J )$. Thus $J$ has the order type of
+  either $E$ or a section of $E$.
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,175 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+\usepackage{tikz-cd}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{3}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Use exercises 1-3 to prove the following:
+  \begin{enumerate}[(a)]
+
+  \item If $A$ and $B$ are well-ordered sets, then exactly one of the following three conditions hold:
+    $A$ and $B$ have the same order type, or $A$ has the order type of a section of $B$, or $B$ has the order type
+    of a section of $A$. [\emph{Hint:} Form a well-ordered set containing both $A$ and $B$, as in exercise 8 of \S 10;
+    then apply the preceding exercise.]
+
+  \item Suppose that $A$ and $B$ are well-ordered sets that are uncountable, such that every section of $A$ and of $B$
+    is countable. Show that $A$ and $B$ have the same order type.
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+    \item\label{point:a}
+      If $A$ is empty, then either $B$ is also empty and $A = B$, or $B$ is nonempty and $A$ is equal to a section of $B$.
+      If $B$ is empty, then we switch the roles of $A$ and $B$ in the previous sentence and find that either $B = A$ or
+      $B$ is equal to a section of $A$. Therefore we suppose in the rest of the proof that $A$ and $B$ are both nonempty.
+  
+      The sets $A' = A \times \{ 1 \}$ and $B' = B \times \{ 2 \}$ are disjoint and well-ordered for the relations:
+      \begin{align*}
+        \forall ( x, 1 ), ( y, 1 ) \in A', &\quad ( x, 1 ) \prec_A ( y, 1 ) \iff x <_A y \\
+        \forall ( x, 2 ), ( y, 2 ) \in B', &\quad ( x, 2 ) \prec_B ( y, 2 ) \iff x <_B y
+      \end{align*}
+      where $<_A$ (resp. $<_B$) is the order relation on $A$ (resp. $B$).
+
+      Let $E = A' \cup B'$, and define an order relation $\prec$ on $E$ by: $x \prec y$ if and only if one of the following
+      conditions holds:
+      \begin{itemize}
+        \item $x, y \in A'$ and $x \prec_A y$
+        \item $x, y \in B'$ and $x \prec_B y$
+        \item $x \in A'$ and $y \in B'$
+      \end{itemize}
+      for all $x, y \in E$.
+      From exercise 8 of section \S 10, the set $E$ is well-ordered by $\prec$.
+
+      Let $g : B' \to E$, $\alpha \mapsto \alpha$. The function $g$ preserves the order: for all $\alpha, \beta \in B'$,
+      we have
+      \begin{equation*}
+        \alpha \prec_B \beta \iff
+        g ( \alpha ) \prec_B g ( \beta ) \iff
+        g ( \alpha ) \prec g ( \beta )
+      \end{equation*}
+      Then from exercise 3, we deduce that $B'$ has the order type of $E$ or a section of $E$.
+
+      Similarly, let $f : A' \to E$, $\alpha \to \alpha$. The function $f$ is also order-preserving, and therefore
+      $A'$ has the order type of $E$ or a section of $E$. To find the relation between the order types of $A$ and $B$,
+      we need to examine the following cases:
+      \begin{itemize}
+
+      \item if $A'$ and $B'$ have the same order type as $E$, then there exist increasing bijections $\varphi : A' \to E$
+        and $\psi : B' \to E$. The bijection $\psi^{-1} \circ \varphi : A' \to B'$ is also increasing, so that $A'$ and
+        $B'$ have the same order type. The function $f$ below
+        \begin{equation*}
+          \begin{tikzcd}[column sep = huge]
+            A' \arrow{r}{\psi^{-1} \circ \varphi}
+               & B' \arrow{d}{( y, 2 ) \mapsto y} \\
+               A \arrow{r}{f}
+                 \arrow{u}{x \mapsto ( x, 1 )}
+               & B
+          \end{tikzcd}
+        \end{equation*}
+        is the composition of 3 order-preserving bijections, and therefore an order-preserving bijection itself.
+        Therefore $f$ is an order-preserving bijection, and $A$ and $B$ have the same order type.
+
+      \item if $A'$ has the order type of a section of $E$, and $B'$ that of $E$, then there exist increasing bijections
+        $\varphi : A' \to S_\alpha$ for some $\alpha$ in $E$, and $\psi : B' \to E$. The subset $\psi^{-1} ( S_\alpha )$ of $B'$
+        satisfies
+        \begin{equation*}
+          \forall \beta \in S_\alpha, \quad \psi^{-1} ( \beta ) \prec_B \psi^{-1} ( \alpha )
+        \end{equation*}
+        since $\psi^{-1}$ is order-preserving, and is therefore a subset of $S_{ \psi^{-1} ( \alpha ) }$. Conversely,
+        \begin{equation*}
+          \forall \beta \in S_{\psi^{-1} ( \alpha )}, \quad \psi ( \beta ) \prec \psi \circ \psi^{-1} ( \alpha ) = \alpha
+        \end{equation*}
+        since $\psi$ is order-preserving. From this we deduce that
+        \begin{equation*}
+          \psi^{-1} ( S_\alpha ) = S_{\psi^{-1} ( \alpha )}
+        \end{equation*}
+        so that $A'$ has the order type of a section of $B'$. Let $\theta : A' \to S_\beta$ for $\beta \in B'$ be an
+        order-preserving bijection. The function $f$ below
+        \begin{equation*}
+          \begin{tikzcd}[column sep = huge]
+            A' \arrow{r}{\theta}
+            & S_\beta \arrow{d}{\pi : ( y, 2 ) \mapsto y} \\
+            A \arrow{r}{f}
+              \arrow{u}{x \mapsto ( x, 1 )}
+            & \pi ( S_\beta ) \subset B
+          \end{tikzcd}
+        \end{equation*}
+        is the composition of order-preserving bijections, and is therefore an order-preserving bijection. From this
+        we deduce that
+        \begin{equation*}
+          \pi ( S_\beta ) = S_{\pi ( \beta )}
+        \end{equation*}
+        so that $A$ has the order type of a section of $B$. By switching the roles of $A$ and $B$ in the reasoning above,
+        we deduce that if $A'$ has the order type of $E$ and $B'$ that of a section of $E$, then $B$ has the order type
+        of a section of $A$.
+
+      \item otherwise, both $A'$ and $B'$ have the order type of a section of $E$. Let $\alpha, \beta \in E$ be such that
+        there exist order-preserving bijections $\varphi : A' \to S_\alpha$ and $\psi : B' \to S_\beta$, and suppose that $\alpha \prec \beta$.
+        Then $S_\alpha$ is a section of $S_\beta$, and we have the following diagram:
+        \begin{equation}\label{dia:sections}
+          \begin{tikzcd}[column sep = large]
+            A'
+               \arrow{r}{\varphi}
+            & S_\alpha
+               \arrow{r}{i \colon x \mapsto x}
+            & S_\beta
+               \arrow{r}{\psi^{-1}}
+            & B'
+               \arrow{d}{( y, 2 ) \mapsto y} \\
+            A
+               \arrow{u}{x \mapsto ( x, 1 )}
+               \arrow[to = 2-4, "f"]
+            & & & B
+          \end{tikzcd}
+        \end{equation}
+        The function $f$, as the composition of order-preserving functions, is order-preserving. We deduce from exercice 3
+        that $A$ has the order type of $B$ or a section of $B$. Since $\alpha \prec \beta$, the function $i$ in \eqref{dia:sections}
+        is not bijective. Besides $i$, the functions on the top and sides of the diagram are bijective; from this we deduce that
+        $f$ is not bijective, and its image is not $B$. Therefore $A$ has the order type of a section of $B$.
+
+        If $\beta \prec \alpha$, then by switching the roles of $A$ and $B$ above, we deduce that $B$ has the order type of
+        a section of $A$.
+
+        If $\alpha = \beta$, then $i$ is a bijection, and so is $f$ as the composition of bijections. In that case, we deduce
+        that $A$ has the order type of $B$.
+
+      \item Since $A$ and $B$ are well-ordered, we know from point \ref{point:a} that one of the following cases is true:
+        \begin{itemize}
+
+          \item $A$ and $B$ have the same order type: the result is then trivially true.
+
+          \item $A$ has the order type of a section of $B$: then there exists an order-preserving bijection $\varphi \colon A \to S_\alpha$
+            for some $\alpha \in B$. Since $S_\alpha$ is countable, we deduce that $A$ is also countable, contrary to the hypothesis.
+            Therefore $A$ does not have the order type of a section of $B$.
+
+          \item $B$ has the order type of a section of $A$: by switching the roles of $A$ and $B$ in the previous point, we deduce
+            that this case si also impossible.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,162 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{4}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $X$ be a set; let $\mathscr{A}$ be the collection of all pairs $( A, < )$ where $A$ is
+  a subset of $X$ and $<$ is a well-ordering of $A$. Define
+  \begin{equation*}
+    ( A, < ) \prec ( A', <' )
+  \end{equation*}
+  if $( A, < )$ \emph{equals} a section of $(A', <')$.
+  \begin{enumerate}[(a)]
+
+    \item Show that $\prec$ is a strict partial order on $\mathscr{A}$.
+
+    \item Let $\mathscr{B}$ be a subcollection of $\mathscr{A}$ that is simply ordered by $\prec$.
+      Define $B'$ to be the union of the sets $B$, for all $( B, < )$ in $\mathscr{B}$; and define
+      $<'$ to be the union of the relations $<$, for all $( B, < )$ in $\mathscr{B}$. Show that
+      $( B', <' )$ is a well-ordered set.
+
+  \end{enumerate}
+
+\end{exercise}
+
+\begin{proof}\hfill
+
+  \begin{enumerate}[(a)]
+
+  \item For all $( A, <_A ), ( B, <_B ) \in \mathscr{A}$ such that $( A, <_A ) \prec ( B, <_B )$,
+    there exists $\beta \in B$ such that $( A, <_A ) = ( S_\beta, <_B )$, so that $B \neq \varnothing$.
+
+    \bigskip
+    \begin{lemma}\label{lemma:order_equivalence}
+      Let $( A, <_A ), ( B, <_B ) \in \mathscr{A}$ such that $( A, <_A ) \prec ( B, <_B )$.
+      For all $x, y \in A$, $x <_A y$ if and only if $x <_B y$.
+    \end{lemma}
+
+    \begin{proof}
+
+      Let $J$ be the set of elements $y \in A$ such that
+      \begin{equation*}
+        \forall x \in A, \quad x <_A y \iff x <_B y
+      \end{equation*}
+      Suppose that for some $\alpha \in A$, we have $S_\alpha \subset J$.
+      \begin{itemize}
+
+      \item If $\alpha$ has an immediate predecessor $u$ in $( A, <_A )$, then $S_\alpha = S_u \cup \{ u \}$.
+        Suppose that $u >_B \alpha$. Since $u \in J$, we also have $u >_A \alpha$, which is a contradiction.
+        Therefore $u <_B \alpha$. For all $x \in ( S_u, <_A )$, we have $x <_A u <_A \alpha$, and, since $u \in J$,
+        $x <_B u <_B \alpha$. From this we deduce that $\alpha \in J$.
+
+      \item If $\alpha$ does not have an immediate predecessor in $( A, <_A )$, then $S_\alpha = \cup_{\beta <_A \alpha} \,S_\beta$.
+        Suppose that there exist $x \in ( S_\alpha, <_A )$ such that $\alpha <_B x$. There exists $\beta \in ( S_\alpha, <_A )$
+        such that $x \in ( S_\beta, <_A )$, and since $( S_\alpha, <_A ) \in J$, we deduce that $x <_B \beta <_B \alpha$,
+        a contradiction. Therefore $\alpha \in J$.
+
+      \end{itemize}
+      From the above, we conclude that the set $J$ is an inductive subset of the well-ordered set $( A, <_A )$,
+      and $J = A$.
+
+    \end{proof}
+
+    The relation $\prec$ is a strict partial order on $\mathscr{A}$:
+
+    \begin{description}
+
+    \item [Non-reflexivity] \hspace{0pt}\\
+      For all nonempty subsets $A$ of $X$, $A$ has the order type of itself, and therefore, from exercise 4,
+      it does not have the order type of one of its sections. Therefore the relation $( A, <_A ) \prec ( A, <_A )$
+      never holds. Moreover, if $A$ is empty, then it does not have any section, and again $( A, <_A ) \prec ( A, <_A )$
+      does not hold.
+
+    \item [Transitivity] \hspace{0pt}\\
+      Suppose that for some $( A, <_A ), ( B, <_B ), ( C, <_C ) \in \mathscr{A}$, we have $( A, <_A ) \prec ( B, <_B ) \prec ( C, <_C )$.
+      Then there exist $\beta \in B$ and $\gamma \in C$ such that $( A, <_A ) = ( S_\beta, <_B )$ and $( B, <_B ) = ( S_\gamma, <_C )$.
+      From \cref{lemma:order_equivalence}, we deduce that for all $x, y \in A$,
+      \begin{equation}\label{eq:increasing}
+        x <_A y \iff x <_B y \iff x <_C y
+      \end{equation}
+      so that $( A, <_A ) = ( S_\beta, <_B ) = ( S_\beta, <_C )$ is a section of $( C, <_C )$ and $( A, <_A ) \prec ( C, <_C )$.
+
+    \end{description}
+
+  \item If $B'$ has at most one element, then it is well-ordered. Otherwise,
+    let us show that $<'$ is a linear order on $B'$.
+    \begin{description}
+
+    \item [Comparability] \hspace{0pt}\\
+      Let $x, y$ be distinct elements of $B'$; there exist $B_1, B_2 \in \mathscr{B}$
+      such that $x \in B_1$ and $y \in B_2$. If $B_1 = B_2$, then $x$ and $y$ are
+      comparable by $<_{B_1}$, and thus by $<'$. Otherwise,  since $\mathscr{B}$ is
+      linearly ordered, we have either $( B_1, <_{B_1} ) \prec ( B_2, <_{B_2} )$ or
+      $( B_2, <_{B_2} ) \prec ( B_1, <_{B_1} )$.
+
+      In the first case, $( B_1, <_{B_1} )$ is a section of $( B_2,<_{B_2} )$, and therefore $x \in B_2$.
+      $B_2$ being well-ordered, $x$ and $y$ are comparable by $<_{B_2}$. If $x <_{B_2} y$, then
+      $( x, y ) \in \text{\em} <_{B_2} \text{\em} \subset \text{\em} <'$, so that $x <' y$.
+      Otherwise, $y <_{B_2} x$, so that $y <' x$.
+
+      By switching the roles of $B_1$ and $B_2$, we deduce also, in the second case, that $x <' y$ or $y <' x$.
+
+      Conversely, suppose that we have both $x <' y$ and $y <' x$. Then there exist $<_{B_1}$
+      and $<_{B_2}$ such that $x <_{B_1} y$ and $y <_{B_2} x$. If $B_1 = B_2$, then we have both
+      $x <_{B_1} y$ and $y <_{B_1} x$, which is absurd. Otherwise, since $\mathscr{B}$ is linearly
+      ordered, then $( B_1, <_{B_1} ) \prec ( B_2, <_{B_2} )$ (resp. $( B_2, <_{B_2} ) \prec ( B_1, <_{B_1} )$),
+      so that $x <_{B_2} y$ (resp. $y <_{B_1} x$), a contradiction.
+
+      Therefore either $x <' y$ or $y <' x$.
+
+    \item [Non-reflexivity] \hspace{0pt}\\
+      Suppose that $x <' x$ for some $x \in B'$, there exists $<_{C}$ such that $x <_{C} x$, which is
+      impossible since $C$ is well-ordered.
+
+    \item [Transitivity] \hspace{0pt}\\
+      For all $x, y, z \in B'$ such that $x <' y <' z$, there exist $B_1, B_2 \in \mathscr{B}$
+      such that $x <_{B_1} y$ and $y <_{B_2} z$. If $B_1 = B_2$, then $x <_{B_1} <_{B_1} z$.
+      Otherwise, $B_1$ and $B_2$ are comparable for $\prec$, so that either $x <_{B_1} y <_{B_1} z$
+      or $x <_{B_2} y <_{B_2} z$. The transitivity of $<_{B_1}$ and $<_{B_2}$ then leads to either
+      $x <_{B_1} z$ or $x <_{B_2} z$, which in turn implies that $x <' z$.
+
+    \end{description}
+    In particular, we have the following result: for all $C \in \mathscr{B}$, and for all $x, y \in C$,
+    \begin{equation*}
+      x <_C y \iff x <' y
+    \end{equation*}
+
+    Let us now prove that $B'$ is well-ordered by $<'$. Let C be a nonempty subset of $B'$,
+    and let $x \in C$. There exists $D_x \in \mathscr{B}$ such that $x \in D_x$. The set $C \cap D_x$
+    is a nonempty subset of the well-ordered set $( D_x, <' )$, and therefore has a smallest element
+    $x_0$.
+
+    For all $y \in C$, there exists $D_y \in \mathscr{B}$ such that $y \in D_y$.
+    If $( D_y, <' ) \preceq ( D_x, <' )$, then $D_y \cap C \subset D_x \cap C$, so that $x_0 \leq' y$.
+    Otherwise, $( D_x, <' ) \preceq ( D_y, <' )$. If $y \in D_x$, then $y \in D_x \cap C$ and thus
+    $x_0 \leq' y$. Otherwise, for all $z \in D_x$, $z <' y$ since $D_x$ is a section of $D_y$, and
+    thus $x_0 <' y$.
+
+    From the above, we conclude that $x_0$ is the smallest element of $C$, and therefore $C$
+    is well-ordered.
+
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

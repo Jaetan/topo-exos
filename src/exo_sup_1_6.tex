@@ -1,0 +1,106 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{5}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem*{theorem}{Theorem}
+
+\begin{document}
+
+\begin{exercise}
+
+Use exercises 1 and 5 to prove the following:
+
+\bigskip
+\begin{theorem}
+  The maximum principle is equivalent to the well-ordering theorem.
+\end{theorem}
+
+\end{exercise}
+
+\begin{proof}
+
+Suppose that the maximum principle holds. If $X$ has at most one element, then it is vacuously well-ordered.
+Otherwise, $X$ has at least 2 elements $x$ and $y$. The subset $\{ x \}$ (resp. $\{ x, y \}$) of $X$ is
+well-ordered by the relation $\varnothing$ (resp. $\{ ( x, y ) \}$), so the collection $\mathscr{A}$ of
+exercise 5 and the relation $\prec$ are well-defined and $\mathscr{A}$ is nonempty.
+There exists a maximal chain $C$ in $\mathscr{A}$ that is linearly ordered by $\prec$. Suppose that
+there exists $x_0 \in X$ such that for all $A \in C$, $x_0 \notin A$. For all $A \in C$, define a
+relation $<_{A}'$ by
+\begin{align*}
+    \forall y \in A, \quad x_0 <_{A}' y \\
+    \forall x, y \in A, x <_{A}' y \iff x <_{A} y
+\end{align*}
+where $<_{A}$ is the order relation on $A$, as in the hypotheses from exercise 5. The set
+$A' = \{x_0\} \cup A$ is well-ordered by $<_{A}'$, and if $A, B \in \mathscr{A}$
+satisfy $( A, <_{A} ) \prec ( B, <_{B} )$, then $( A', <_{A}' ) \prec ( B', <_{B}' )$ (since
+$x_0$ is the smallest element of $( A', <_{A}' )$ and of $( B', <_{B}' )$). Thus by
+adding the set $\{ x_0 \}$ to the family $C$, we create a new family $C'$ that
+is linearly ordered by $\prec$, and strictly contains $C$. This contradicts the hypothesis
+that $C$ is maximal; therefore $x_0 \in B'$ (as defined in exercise 5), from which we conclude
+that $B' = X$.
+
+Therefore the order relation $<'$ from exercise 5 makes $X$ well-ordered, so that the maximum principle
+implies the well-order theorem.
+
+\bigskip
+Suppose now that the well-ordering theorem holds, and let $X$ be a set. If $X$ has at most one element,
+then the only strict partial order on $X$ is $\varnothing$, and the maximum principle holds vacuously.
+
+Otherwise, let $\prec$ be a strict partial order on $X$, and let $<$ be a well-order on $X$.
+For all $\alpha \in X$, let $S_\alpha = \{ \beta \in X \mid \beta < \alpha \}$.
+
+Define a relation $\mathscr{R}$ on $X$ by
+\begin{equation*}
+    x \mathscr{R} y \iff x \prec y \text{ or } y \prec x
+\end{equation*}
+and, for all $A \subset X$,
+\begin{equation*}
+    \mathscr{R} (A) = \{ y \in X \mid x \mathscr{R} y \text{ for all } x \in A \}
+\end{equation*}
+
+Let $x_0$ be an element of $X$, and let $C = \{ 0, 1 \}$. With the notations
+from exercise 1, define
+\begin{align*}
+    \rho \colon \mathscr{F} &\to C \\
+    (f \colon S_\alpha \to C) &\mapsto \begin{cases}
+        0 & \text{if } \alpha = x_0 \\
+        0 & \text{if } \alpha \in \mathscr{R} \left( \{ x_0 \} \cup f^{-1} \left( \{ 0 \} \right) \right) \\
+        1 & \text{otherwise}
+    \end{cases}
+\end{align*}
+and
+\begin{align*}
+    h \colon X &\to C \\
+    \alpha &\mapsto \rho ( h | S_{\alpha} )
+\end{align*}
+From exercise 1 we know that $h$ is well-defined and unique. We have $h ( x_0 ) = 0$,
+so $H = h^{-1} ( \{ 0 \} )$ is nonempty. The set $H$ is simply ordered by $\prec$: this
+is trivial if $H$ has only one element. Otherwise let $\alpha, \beta \in h^{-1} ( \{ 0 \} )$
+be distinct elements of $H$ such that that $\alpha < \beta$. If either of them equals $x_0$,
+then they are comparable by definition of $h$. Otherwise, $\beta$ is comparable with every
+element of $( h | S_\beta )^{-1} ( \{ 0 \} ) = h^{-1} ( \{ 0 \} ) \cap S_\beta$, which contains
+$\alpha$. The same reasoning holds in the case $\beta < \alpha$.
+
+The set $H$ is maximal for $\prec$. Suppose that there exists $B \subset X$ that is simply
+ordered by $\prec$ and strictly contains $H$, and let $\alpha$ be the smallest
+element of $B - H$ for $<$. Then $S_\alpha \subset H$; furthermore, $\alpha \mathscr{R} x_0$
+since $x_0 \in B$. We also have $\alpha \in \mathscr{R} \left( \{ x_0 \} \cup \left( H \cap S_\alpha \right) \right)$.
+From this we deduce that $h ( \alpha ) = 0$, a contradiction.
+
+From the above we conclude that the well-ordering theorem implies the maximum principle.
+
+\end{proof}
+
+\end{document}

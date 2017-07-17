@@ -1,0 +1,222 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{6}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\theoremstyle{plain}
+\newtheorem*{theorem}{Theorem}
+
+\begin{document}
+
+\begin{exercise}
+
+  Use exercises 1-5 to prove the following:
+  
+  \bigskip
+  \begin{theorem}
+    The axiom of choice is equivalent to the well-ordering theorem.
+  \end{theorem}
+
+\end{exercise}
+
+\begin{proof}
+
+  Let$X$ be a set; let $c$ be a fixed choice function for the nonempty subsets of $X$. If $T$ is
+  a subset of $X$ and $<$ is a relation on $T$, we say that $( T, < )$ is a \emph{tower} in $X$ if
+  $<$ is a well-ordering of $T$ and if for each $x \in T$,
+  \begin{equation*}
+    x = c \left( X - S_x \left( T \right) \right)
+  \end{equation*}
+  where $S_x ( T )$ is the section of $T$ by $x$.
+  \begin{enumerate}[(a)]
+
+  \item Left$( T_1 , <_1 )$ and $( T_2, <_2 )$ be two towers on $X$. Show that either these two ordered sets
+    are the same, or one equals a section of the other. (\emph{Hint:} Switching indices if necessary, we can
+    assume that $h \colon T_1 \to T_2$ is order-preserving and and $h ( T_1 )$ is either $T_2$ or a section of $T_2$.
+    Use Exercise 2 to show that $h ( x ) = x$ for all $x$.)
+
+  \item If $( T, < )$ is a tower in $X$ and $T \neq X$, show that there is a tower in $X$ of which $( T, < )$
+    is a section.
+
+  \item Let $\{ ( T_k, <_k ) \mid k \in K \}$ be the collection of all towers in $X$. Let
+    \begin{equation*}
+      T = \bigcup_{k \in K} T_k \quad\text{and}\quad < = \bigcup_{k \in K} ( <_k )
+    \end{equation*}
+    Show that $( T, < )$ is a tower in $X$. Conclude that $T = X$.
+
+  \end{enumerate}
+
+\end{proof}
+
+\begin{proof}\hspace{0pt} \\
+
+  First, if $X$ is empty, it is vacuously well-ordered; and the choice function $c$ is not defined since there
+  are no nonempty subsets of $X$. Therefore we consider only nonempty sets.
+
+  \begin{enumerate}[(a)]
+
+  \item\label{point:a} Since $( T_1, <_1 )$ and $( T_2, <_2 )$ are well-ordered sets, either
+    they have the same order type, or one of them has the order type of a section of the other.
+    Switching the roles of $T_1$ and $T_2$ if necessary, we can suppose that $( T_1, <_1 )$
+    has the order type of $( T_2, <_2 )$ or a section of $( T_2, <_2 )$, so that there exists
+    an order-preserving map $h \colon T_1 \to T_2$ whose image is $( T_2, <_2 )$ or a section
+    of $( T_2, <_2 )$.
+
+    From exercise 2, we know that there is at most one such map, and that it satisfies the following
+    properties for all $x \in T_1$:
+    \begin{align*}
+        h ( x ) &= \min \big\{ T_2 - h \big( S_x ( T_1 ) \big) \big\} \\
+        h \big( S_x ( T_1 ) \big) &= S_{ h ( x ) } ( T_2 ) \\
+    \end{align*}
+
+    Let $J = \{ x \in T_1 \mid h ( x ) = x \}$, and suppose that $S_\alpha ( T_1 ) \subset J$
+    for some $\alpha \in T_1$. For all $y \in J$, we have, since $h \colon T_1 \to h ( T_1 )$ is bijective:
+    \begin{equation} \label{ eq:identity }
+        x <_1 y \iff x = h ( x ) <_2 h ( y ) = y
+    \end{equation}
+    for all $x \in J$, so that $S_y ( T_1 ) = S_y ( T_2 )$. Two cases arise:
+    \begin{itemize}
+
+    \item If $\alpha$ has a direct predecessor $u \in T_1$, then $S_\alpha ( T_1 ) = \{ u \} \cup S_u ( T_1 )$,
+      $h ( u ) = u$ and
+      \begin{align*}
+        h \big( S_\alpha ( T_1 ) \big) &= h \big( \{ u \} \cup S_u ( T_1 ) \big) \\
+        &= h ( \{ u \} ) \cup h \big( S_u ( T_1 ) \big) \\
+        &= \{ u \} \cup S_u ( T_2 ) \\
+        &= \{ u \} \cup S_u ( T_1 ) \\
+        &= S_\alpha ( T_1 )
+      \end{align*}
+      from which we deduce that $h ( \alpha ) = \alpha$, so that $\alpha \in J$.
+
+    \item If $\alpha$ does not have a direct predecessor, then
+      the section $S_\alpha ( T_1 )$ equals $\cup_{ \beta <_1 \alpha } \, S_\beta ( T_1 )$, and for all
+      $\beta <_1 \alpha$ we have $h ( \beta ) = \beta$. Therefore
+      \begin{align*}
+        h \left( S_\alpha \left( T_1 \right) \right) &= h \left( \bigcup_{ \beta <_1 \alpha } \, S_\beta ( T_1 ) \right) \\
+        &= \bigcup_{ \beta <_1 \alpha } \, h \left( S_\beta ( T_1 ) \right) \\
+        &= \bigcup_{ \beta <_1 \alpha } \, S_{ h ( \beta ) } ( T_2 ) \\
+        &= \bigcup_{ \beta <_1 } \, S_\beta ( T_1 ) \\
+        &= S_\alpha ( T_1 )
+      \end{align*}
+      and $h ( \alpha ) = \alpha$. Thus $\alpha \in J$.
+
+    \end{itemize}
+
+    From the above we conclude that $( J, <_1 )$ is an inductive subset of $( T_1, <_1 )$, and
+    thus equals $( T_1, <_1 )$. The equation \eqref{ eq:identity } holds then for all $x, y \in ( T_1, <_1 )$.
+    This implies that $( T_1, <_1 )$ is equal to $( T_2, <_2 )$ or a section of $( T_2, <_2 )$.
+
+  \item\label{point:b} If $( T, < )$ is a tower in $X$ and $X - T \neq \varnothing$, then
+    $c ( X - T ) = x_0 \in X - T$. Let $T_0 = T \cup \{ x_0 \}$ and let $<_0$ be the relation on $T_0$
+    defined by
+    \begin{align*}
+      \text{for all } x, y \in T, &\quad x < y \iff x <_0 y \\
+      \text{for all } x \in T, &\quad x <_0 x_0
+    \end{align*}
+    With these definitions, $( T_0, <_0 )$ is a tower in $X$, and
+    \begin{align*}
+      h_0 \colon T &\to S_{ x_0 } ( T_0 ) \\
+      x &\mapsto x
+    \end{align*}
+    is an order-preserving bijection. Therefore $( T_0, <_0 )$ is a tower in $X$ of which $( T, < )$
+    is a section.
+
+  \item For all $x \in T$, there exists $k \in K$ such that $x \in ( T_k, <_k )$, and we have $x = c ( X - T_k )$.
+    For all $l \in K$, we know from \cref{point:a} that one of the three following cases is true:
+    \begin{itemize}
+
+    \item $( T_l, <_l ) = (T_k, <_k)$, in which case $x = c ( X - T_k ) = c ( X - T_l )$
+
+    \item $( T_l, <_l )$ is a section of $( T_k, <_k )$, in which case $x = c ( X - T_k )$ as an element of $( T_k, <_k )$,
+      and $x = c ( X - T_l )$ as an element of $( T_l, <_l )$; so that we again have $c ( X - T_k ) = c ( X - T_l )$.
+
+    \item $( T_k, <_k )$ is a section of $( T_l, <_l )$, in which case we exchange the roles of $k$ and $l$ in the above
+      and arrive again at $c ( X - T_k ) = c ( X - T_l ) = x$.
+
+    \end{itemize}
+
+  \item First, let us show that $<$ is a simple order on $T$. For all $x, y$ different
+    elements of $T$, there exist $j, k \in K$ such that $x \in ( T_j, <_j )$ and $y \in ( T_k, <_k )$.
+    If $( T_j, <_j ) = ( T_k, <_k )$, then $x$ and $y$ are comparable by $<_j$, and thus
+    by $<$. Otherwise, assume that $( T_j, <_j )$ is a section of $( T_k, <_k )$; then
+    $x \in ( T_k, <_k )$ and $x, y$ are comparable as elements of $( T_k, <_k )$. They
+    are therefore comparable by $<$. Otherwise, $( T_k, <_k )$ is a section of $( T_j, <_j )$,
+    and the same reasoning leads to the comparability of $x$ and $y$ by $<$.
+
+    Furthermore, suppose that both $x < y$ and $y < x$. Then there are $j, k \in K$ such
+    that $x <_j y$ and $y <_k y$. The towers $( T_j, <_j )$ and $( T_k, <_k )$ are either
+    equal, or one is a section of the other; this leads to either $x <_j y$ and $y <_j x$,
+    or $x <_k y$ and $y <_k x$, which are both impossible. So exactly one of $x < y$ or
+    $y < x$ is true.
+
+    Suppose that there exists $x \in ( T, < )$ such that $x < x$. Then there exists $k \in K$
+    such that $x <_k x$. Since $<_k$ is defined on $T_k$, we have $x \in T_k$. And since
+    $( T_k, <_k )$ is well-ordered, we cannot have $x <_k x$. From this we deduce that
+    $<$ is nonreflexive.
+
+    Let $x, y, z \in T$ such that $x <y$ and $y < z$; there exist $j, k \in K$ such that
+    $x <_j y$ and $y <_k z$. Thus $x, y \in T_j$ and $y, z \in T_k$. The towers $( T_j, <_j )$
+    and $( T_k, <_k )$ are either equal, or one is a section of the other; this leads to either
+    $x <_j y <_j z$ or $x <_k y <_k z$, and, from the transitivity of $<_j$ and $<_k$, to
+    $x <_j z$ or $x <_k z$, both implying $x < z$.
+
+    The relation $<$ is a well-order on $T$. Let $A$ be a nonempty subset of $T$, and let
+    $x \in A$; there exists $k \in K$ such that $x \in T_k$. The set $T_k \cap A$ is nonempty
+    and is well-ordered by $<_k$, so has a smallest element $m$. Then $m$ is also the smallest
+    element of $A$ for $<$. Suppose instead that there exists $y \in A$ satisfying $y < m$;
+    there exists $j \in K$ such that $y \in T_j$. If $( T_j, <_j ) = ( T_k, <_k )$, then $y$
+    and $m$ are comparable by $<_k$, so that $m <_k y$, which implies that we also have $m < y$.
+    But this is impossible since $<$ is a simple order on $T$.
+
+    Suppose then that $( T_j, <_j )$ is a section of $( T_k, <_k )$; then we have $y <_j m$, which
+    implies $y <_k m$, and the latter is impossible. Otherwise $( T_k, <_k )$ is a section of
+    $( T_j, <_j )$, so that $y <_j m$, and since $<_k$ and $<_j$ are equal on $( T_k, <_k )$,
+    we find again that $y <_k m$, which is absurd.
+
+    Let us now show that for all $x \in T$ we have $x = c \big( X - S_x ( T ) \big)$.
+    Let $x \in T$, there exists $k \in K$ such that $x \in T_k$. For all $y \in S_x ( T )$,
+    there exists $j \in K$ such that $y \in T_j$; we have then $y <_j x$. If $T_j = T_k$,
+    then $y <_k x$. Otherwise, if $( T_j, <_j )$ is a section of $( T_k, <_k )$, then
+    $y <_j x$ implies $y <_k x$; and if $( T_k, <_k )$ is a section of $( T_j, <_j )$,
+    then $<_j$ and $<_k$ agree on $T_k$, and $y <_k x$.
+
+    From this we deduce that $S_x ( T ) = S_x ( T_k )$ (the inclusion from right to left
+    comes from $T_k \subset T$). Since $x = c \big( X - S_x ( T_k ) \big)$, we find
+    that $x = c \left( X - S_x ( T ) \right)$.
+
+    All the above conditions make $T$ a tower in $X$. If $T \neq X$, then there exists
+    a tower $( T', <' )$ in $X$ of which $( T, < )$ is a section. Since $T$ is the union
+    of all towers in $X$, there exists some $n \in K$ such that $( T', <' ) = ( T_n, <_n )$,
+    and then we have $( T_n, <_n ) \subset ( T, < )$. $( T, < )$ is thus a section of
+    one of its subsets, which is impossible since it is nonempty (for example, $( \{ c ( X ) \}, < )$ is
+    a tower in $X$). Therefore $T = X$; $X$ is then well-ordered by $<$, and thus the axiom of choice
+    implies the well-ordering theorem.
+
+    Conversely, suppose that the well-ordering theorem holds, and let $\mathscr{A}$ be a collection
+    of disjoint nonempty sets. Let $<$ be a well-ordering of the set $X = \cup_{A \in \mathscr{A}} \, A$,
+    and let
+    \begin{align*}
+      c \colon \mathscr{A} &\to X \\
+      A &\mapsto \text{smallest element of } A \text{ for } <
+    \end{align*}
+    Since for all $A \in \mathscr{A}$, $A$ is nonempty and well-ordered by $<$ (as a subset of
+    the well-ordered set $( X, < )$), $c ( A )$ exists. If $A, B$ are distinct elements
+    of $\mathscr{A}$, then $A \cap B = \varnothing$ and therefore $c ( A ) \neq c ( B )$.
+    $c$ is then a choice function on $\mathscr{A}$, and the well-ordering theorem implies
+    the axiom of choice. \qedhere
+    
+  \end{enumerate}
+
+\end{proof}
+
+\end{document}

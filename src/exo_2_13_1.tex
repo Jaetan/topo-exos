@@ -1,0 +1,37 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{0}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+  Let $X$ be a topological space; let $A$ be a subset of$X$. Suppose that for each $x \in A$ there is
+  an open set $U$ containing $x$ such that $U \subset A$. Show that $A$ is open in $X$.
+
+\end{exercise}
+
+\begin{proof}
+
+  For each $x \in A$, there exists an open set $U_x$ containing $x$ and such that $U_x \subset A$.
+  From this we deduce that $\cup_{x \in A} \, U_x \subset A$. Conversely, for all $x \in A$, $\{ x \} \subset U_x$,
+  so $A = \cup_{x \in A} \, \{ x \} \subset \cup_{x \in A} \, U_x$, and finally
+  \begin{equation*}
+    A = \bigcup_{x \in A} \, U_x
+  \end{equation*}
+  The set $A$ is an union of open sets, and therefore an open set itself.
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,82 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{3}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\newcounter{examplecounter}
+\setcounter{examplecounter}{3}
+\theoremstyle{plain}
+\newtheorem{example}[examplecounter]{Example}
+
+\begin{document}
+
+\begin{exercise}
+
+  Show that the collection $\mathscr{T}_c$ given in example 4 of \S 12 is a topology on the set $X$.
+  Is the collection
+  \begin{equation*}
+    \mathscr{T}_\infty = \{ U \mid X - U \text{ is infinite or empty or all of } X \}
+  \end{equation*}
+  a topology on $X$?
+
+\end{exercise}
+
+\bigskip
+\begin{example}
+  Let $X$ be a set; let $\mathscr{T}_c$ be the collection of all subsets $U$ of $X$ such that $X - U$
+  is either countable or is all of $X$. Then $\mathscr{T}_c$ is a topology on $X$.
+\end{example}
+  
+\begin{proof}
+
+  Let us show that $\mathscr{T}_c$ satisfies the definition of a topology.
+
+  \begin{enumerate}[(a)]
+
+  \item $X - X = \varnothing$, which is countable, so $X \in \mathscr{T}_c$.
+
+  \item $X - \varnothing = X$, which is all of $X$, so $\varnothing \in \mathscr{T}_c$.
+
+  \item For all nonempty family $\{ U_\alpha \}_{ \alpha \in J }$ of elements of $X$, we have
+    \begin{equation*}
+      X - \bigcup_{ \alpha \in J } \, U_\alpha = \bigcap_{ \alpha \in J } \, ( X - U_\alpha )
+    \end{equation*}
+    and the latter is countable as a subset of $X - U_\alpha$ for all $\alpha \in J$. Thus the
+    union $\cup_{\alpha \in J} \, U_\alpha$ is also an element of $X$.
+
+  \item For all finite set $\{ U_1, \dotsc , U_n \}$ of elements of $X$, we have
+    \begin{equation*}
+      \bigcap_{k = 1}^n \, ( X - U_k ) = X - \bigcup_{k = 1}^n \, U_k
+    \end{equation*}
+    From the previous point, the union $\cup_{k = 1}^n \, U_k$ of elements of $X$ is
+    an element $U$ of $X$, and so $X - U$ is either countable or equal to $X$. Thus
+    the finite intersection $\cap_{k = 1}^n \, U_k$ is an element of $X$.
+
+  \end{enumerate}
+
+  The family $\mathscr{T}_\infty = \{ U \in X \mid X - U \text{ is infinite or empty or all of } X \}$ is
+  not in general a topology on $X$: let $X = \mathbb{R}$, the family
+  \begin{equation*}
+    F = \{ ( {- \infty}, - 1 / n ) \cup ( 1 / n, {+ \infty} ), n \in \mathbb{Z}_+ \}
+  \end{equation*}
+  satisfies $X - U$ is infinite for all $U \in F$ and is therefore a subset of $\mathscr{T}_\infty$.
+  However,
+  \begin{equation*}
+    \bigcap_{U \in F} \, ( X - U ) = \bigcap_{k = 1}^\infty \, [ - \frac{1}{k}, \frac{1}{k} ] = \{ 0 \}
+  \end{equation*}
+  which is not infinite, not empty, and not equal to $\mathbb{R}$, so $\cup_{U \in F} \, U$ is not an
+  element of $\mathscr{T}_\infty$.
+
+\end{proof}
+
+\end{document}

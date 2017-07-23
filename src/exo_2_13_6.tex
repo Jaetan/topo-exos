@@ -1,0 +1,40 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+
+\theoremstyle{definition}
+\newcounter{excounter}
+\setcounter{excounter}{5}
+\newtheorem{exercise}[excounter]{Exercise}
+
+\begin{document}
+
+\begin{exercise}
+
+Show that the topologies of $\mathbb{R}_\ell$ and $\mathbb{R}_K$ are not comparable.
+
+\end{exercise}
+
+\begin{proof}
+
+  Let $x = 0$ and $B = ( {-1}, 1 ) - K$; suppose that there exists $B' = [ a, b )$ containing $x$ such that $B' \subset B$.
+  If there exists $n \in \mathbb{Z}_+$ such that $b > 1 / n$, then $1 / ( n + 1 )$ is in $B'$ but not in $B$, which
+  contradicts $B' \subset B$. Therefore $b < 1 / n$ for all $n$; but this implies that $b \leq 0$, so that $0 \notin B'$,
+  contrary to our hypothesis. Thus the topology of $\mathbb{R}_\ell$ is not finer than that of $\mathbb{R}_K$.
+
+  Consider now $B' = [ 0, 1 )$ and suppose that there exists $B \in \mathbb{R}_K$ containing $x$ and included in $B'$.
+  The set $B$ has a greatest lower bound $a$. Since $0 \in B$ we have $a \leq 0$, and since $B \subset B'$ we have $a \geq 0$.
+  Therefore $B = ( 0, b )$ or $( 0, b ) - K$ for some real $b \geq 0$; but this implies that $0 \notin B$, contrary to
+  hypothesis. Therefore the topology of $\mathbb{R}_K$ is not finer than that of $\mathbb{R}_\ell$.
+
+  From the above we conclude that these two topologies are not comparable.
+
+\end{proof}
+
+\end{document}
